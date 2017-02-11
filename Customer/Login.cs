@@ -22,7 +22,7 @@ namespace Customer
         {
             if (dt.pinExists(txtboxLogin.Text))
             {
-                string[] customer = dt.retrieveCustomerProfile(txtboxLogin.Text);
+                string[] customer = dt.getCustomerProfile(txtboxLogin.Text);
                 MessageBox.Show("Welcome, " + customer[1]); //gets FirstName
             }
             else

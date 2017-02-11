@@ -94,7 +94,7 @@ namespace Customer
             return false; //PIN already in use
         }
 
-        public string[] retrieveCustomerProfile(string PIN)
+        public string[] getCustomerProfile(string PIN)
         {
             if (!pinExists(PIN)) return null;
 
@@ -117,6 +117,8 @@ namespace Customer
 
             return customerProfile;
         }
+
+
 
        
 
