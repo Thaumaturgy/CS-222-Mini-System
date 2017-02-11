@@ -192,14 +192,48 @@ namespace Customer
             int rowsAffected = com.ExecuteNonQuery();
             conn.Close();
             Console.Write(q);
+
             if (rowsAffected > 0) return true;
             return false;
         }
 
-        
+        public bool canAddAccount(int customerID, double moneyLent)
+        {
+            if (getTotalBalance(customerID) + moneyLent > 20000) return false;
+            //paid half
+            return false;
+        }
+
+        public double getTotalBalance(int customerID)
+        {
+            string q = "SELECT SUM(moneyLent) from account WHERE customerID = " + customerID + ";";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            double totalBalance = double.Parse(dt.Rows[0][0].ToString());
+
+            return totalBalance;
+        }
+
+        public bool addAccount(int customerID, double moneyLent, string entryDate, int status, double interest)
+        {
+            //yyyy-mm-dd
 
 
-       
+        }
+
+
+
+
+
+
+
+
+
 
 
 
