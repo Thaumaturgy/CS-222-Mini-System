@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Customer
 {
-    public partial class Form1 : Form
+    public partial class Admin : Form
     {
-        public Form1()
+        public Admin()
         {
             InitializeComponent();
+        }
+
+        private void btnMgtCustomers_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

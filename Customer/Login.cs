@@ -32,6 +32,8 @@ namespace Customer
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Admin Panel Shows up here");
+            Admin admin = new Admin();
+            admin.Show();
         }
     }
 }

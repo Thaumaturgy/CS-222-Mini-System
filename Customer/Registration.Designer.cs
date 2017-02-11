@@ -1,6 +1,6 @@
 ﻿namespace Customer
 {
-    partial class Form1
+    partial class Registration
     {
         /// <summary>
         /// Required designer variable.

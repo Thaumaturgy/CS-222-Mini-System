@@ -79,7 +79,7 @@ namespace Customer
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
-                    return false;
+                    return false; //is this line needded?
                 }
                 finally
                 {
@@ -94,8 +94,15 @@ namespace Customer
             return false; //PIN already in use
         }
 
-        public string[] getCustomerProfile(string PIN)
+        public int getCustomerID(string PIN)
         {
+            if (!pinExists(PIN))
+                return -1;
+            return int.Parse(getCustomerProfile(PIN)[0]);
+        }
+
+        public string[] getCustomerProfile(string PIN) //highly discouraged from using index [0] as it contains ID as string
+        { 
             if (!pinExists(PIN)) return null;
 
             string q = "SELECT * from customer WHERE pinNumber = '" + PIN + "';";
@@ -118,6 +125,78 @@ namespace Customer
             return customerProfile;
         }
 
+        public bool addCard(string cardNumber, string bank)
+        {
+            if (!cardExists(cardNumber)){
+                string q = "INSERT INTO card(cardNumber, bank) VALUES ('" + cardNumber + "','" + bank + "');";
+                conn.Open();
+                MySqlCommand com = new MySqlCommand(q, conn);
+                int rowsAffected = com.ExecuteNonQuery();
+                conn.Close();
+                Console.Write(q);
+                if (rowsAffected > 0) return true;
+            }
+            return false;
+        }
+
+        public bool cardExists(string cardNumber)
+        {
+            conn.Open();
+            MySqlCommand com = new MySqlCommand("SELECT cardID from card WHERE cardNumber = '" + cardNumber + "';", conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+            if (dt.Rows.Count > 0)
+                return true;
+            return false;
+        }
+
+        public int getCardID(string cardNumber)
+        {
+            if (!cardExists(cardNumber))
+                return -1; //bad coding style actually. Gah. it's the easy way tho.
+
+            return int.Parse(getCardDetails(cardNumber)[0]);
+        }
+
+        public string[] getCardDetails(string cardNumber) //highly discouraged from using index [0] as it contains ID as string
+        {
+            if (cardExists(cardNumber)) return null;
+
+            string q = "SELECT * from card WHERE cardNumber = '" + cardNumber + "';";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            string[] cardDetails = new string[dt.Columns.Count];
+            for (int i = 0; i < cardDetails.Length; i++)
+            {
+                cardDetails[i] = dt.Rows[0][i].ToString();
+            }
+
+            foreach (string s in cardDetails)
+                Console.Write(s + " ");
+
+            return cardDetails;
+        }
+
+        public bool addAccountCard(int accID, int cardID)
+        {
+            String q = "INSERT INTO account_card(accID, cID) VALUES (" + accID + "," + cardID + ");";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            int rowsAffected = com.ExecuteNonQuery();
+            conn.Close();
+            Console.Write(q);
+            if (rowsAffected > 0) return true;
+            return false;
+        }
+
+        
 
 
        
