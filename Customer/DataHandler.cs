@@ -350,6 +350,22 @@ namespace Customer
             return dt;
         }
 
+        public DataTable getAllAccountsByCustomerDataTable(string customerPIN)
+        {
+            string q = "SELECT accountID, account.customerID, moneyLent, entryDate, status, interest FROM "
+                + "account JOIN customer ON account.customerID = customer.customerID WHERE pinNumber = '" + customerPIN + "';";
+
+           // string q = "SELECT * from account WHERE pinNumber = '" + customerPIN + "';";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            return dt;
+        }
+
 
         public DataTable getAllCustomersDataTable()
         { //REMOVE HH:MM:SS from Date Object When selecting!!!
