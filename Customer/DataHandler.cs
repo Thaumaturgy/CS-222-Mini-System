@@ -300,6 +300,27 @@ namespace Customer
             return rowsAffected > 0;
         }
 
+        public string[] getAccountDetails(int accountID)
+        {
+            string q = "SELECT * from account WHERE accountID = '" + accountID + "';";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            string[] accountDetails = new string[dt.Columns.Count];
+            for (int i = 0; i < accountDetails.Length; i++)
+            {
+                accountDetails[i] = dt.Rows[0][i].ToString();
+            }
+
+            /*foreach (string s in accountDetails)
+                Console.Write(s + " ");*/
+
+            return accountDetails;
+        }
         public string[,] getAllAccountsByCustomer(int customerID) //WEIRD 2D Array. Watch out!
         {
             DataTable dt = getAllAccountsByCustomerDataTable(customerID);
@@ -356,6 +377,80 @@ namespace Customer
             return dt.Rows.Count;
 
         }
+
+        public double getInterestAmount(int accountID)
+        {
+            string[] accDetails = getAccountDetails(accountID);
+            DateTime entryDate = getEntryDate(accountID);
+            int monthsElapsed = ((DateTime.Now.Year - entryDate.Year) * 12 + DateTime.Now.Subtract(entryDate).Days) / 30; //Approximation
+            Console.WriteLine("months elapsed: " + monthsElapsed);
+            double interestAmount = monthsElapsed * double.Parse(accDetails[5]) * double.Parse(accDetails[2]);
+
+            return interestAmount;
+
+        }
+
+        public DateTime getEntryDate(int accountID)
+        {
+            string[] accDetails = getAccountDetails(accountID);
+            Console.WriteLine(accDetails[3]);
+            //Weird Date format? dd/mm/yyyy??? WEIRD
+            int day = int.Parse(accDetails[3].Substring(0, 2));
+            Console.WriteLine("Day: " + day);
+
+            int month = int.Parse(accDetails[3].Substring(3, 2));
+            Console.WriteLine("Month: " + month);
+            
+            int year = int.Parse(accDetails[3].Substring(6, 4));
+            Console.WriteLine("Year: " + year);
+            DateTime entryDate = new DateTime(year, month, day);
+
+            return entryDate;
+        }
+
+
+        public DataTable getAllPaymentsByAccountDataTable(int accountID)
+        {
+            string q = "SELECT paymentAmount, paymentDate from payment WHERE accountID = " + accountID + ";";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            return dt;
+        }
+
+        public double getTotalPayment(int accountID)
+        {
+            string q = "SELECT SUM(paymentAmount) from payment WHERE accountID = " + accountID + ";";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            Console.WriteLine("DT ROW " + dt.Rows[0][0].ToString() + "ROW COUNT: "+ dt.Rows.Count);
+            double total = 0;
+            if (dt.Rows[0][0].ToString().Length == 0)
+                total = 0;
+            else
+                total = double.Parse(dt.Rows[0][0].ToString());
+
+            /*try
+            {
+                
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }*/
+            Console.WriteLine(total);
+            return total;
+        }
+
+
 
 
 

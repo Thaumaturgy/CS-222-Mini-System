@@ -15,6 +15,7 @@ namespace Customer
         DataHandler dh = new DataHandler("localhost", "boombroom", "root", "root");
 
         int customerID;
+        //bool isAdmin; //PIVOTAL PARAMETER!
         public CustomerProfile(int customerID)
         {
             this.customerID = customerID;
@@ -32,12 +33,6 @@ namespace Customer
             dt.Columns.Add("Money Lent");
             dt.Columns.Add("Entry Date");
             dt.Columns.Add("Status");
-            /*dt.Columns.Add("Home Address");
-            dt.Columns.Add("Job Description");
-            dt.Columns.Add("Working Address");
-            dt.Columns.Add("Telephone Number");
-            dt.Columns.Add("Phone Number");
-            dt.Columns.Add("PIN");*/
 
 
             Console.WriteLine(temp.Rows[0][3].GetType());
@@ -46,17 +41,50 @@ namespace Customer
                 DataRow dr = dt.NewRow();
                 dr[0] = temp.Rows[i][0];
                 dr[1] = temp.Rows[i][2];
-                dr[2] = ((DateTime)temp.Rows[i][3]).ToString("MM-dd-yyyy"); ;
+                dr[2] = ((DateTime)temp.Rows[i][3]).ToString("MM-dd-yyyy");
                 dr[3] = temp.Rows[i][4];
 
                 dt.Rows.Add(dr);
             }
 
             dgvAccounts.DataSource = dt;
+            dgvAccounts.Columns[0].Visible = false; //Hide accountID
             dgvAccounts.Sort(dgvAccounts.Columns[3], ListSortDirection.Ascending);
 
         }
 
+        private void dgvAccounts_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            int accountID = int.Parse(dgvAccounts.Rows[e.RowIndex].Cells[0].Value.ToString());
+            Console.WriteLine(accountID);
+            refreshAccountProfile(accountID);
+            
+        }
 
+        private void refreshAccountProfile(int accountID)
+        {
+            
+            string[] accountDetails = dh.getAccountDetails(accountID);
+            if (accountDetails[4] == "Paid")
+                panelBreakdown.Visible = false;
+            else
+                panelBreakdown.Visible = true;
+
+            lblEntryDate.Text = "Entry Date: " + dh.getEntryDate(accountID).ToString("MM-dd-yyyy");
+            lblInterestRate.Text = "Interest Rate: " + accountDetails[5];
+            lblMoneyLent.Text = "Money Lent: " + accountDetails[2];
+            lblStatus.Text = "Status: " + accountDetails[4];
+            lblInterest.Text = "Interest: " + dh.getInterestAmount(accountID);
+            lblTotalLoan.Text = "Total Loan: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]));
+            lblAmountPaid.Text = "Amount Paid: " + dh.getTotalPayment(accountID);
+            lblAmountRemaining.Text = "Amount Remaining: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPayment(accountID));
+
+
+        }
+
+        private void lblRemainingLoan_Click(object sender, EventArgs e)
+        {
+            lblInterest.Text = "Remaining Loan: "+ dh.getInterestAmount(11);
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Customer
     public partial class CustomerMgt : Form
     {
         DataHandler dh = new DataHandler("localhost", "boombroom", "root", "root");
+        string customerPIN;
         public CustomerMgt()
         {
             InitializeComponent();
@@ -40,13 +41,13 @@ namespace Customer
 
             DataTable dt = new DataTable();
             dt.Columns.Add("Name");
-            dt.Columns.Add("Gender");
+            /*dt.Columns.Add("Gender");
             dt.Columns.Add("Civil Status");
             dt.Columns.Add("Birth Date");
             dt.Columns.Add("Home Address");
             dt.Columns.Add("Job Description");
             dt.Columns.Add("Working Address");
-            dt.Columns.Add("Telephone Number");
+            dt.Columns.Add("Telephone Number");*/
             dt.Columns.Add("Phone Number");
             dt.Columns.Add("PIN");
 
@@ -56,15 +57,15 @@ namespace Customer
             {
                 DataRow dr = dt.NewRow();
                 dr[0] = temp.Rows[i][1] +"  "+ temp.Rows[i][2];
-                dr[1] = temp.Rows[i][3];
+                /*dr[1] = temp.Rows[i][3];
                 dr[2] = temp.Rows[i][4];
                 dr[3] = temp.Rows[i][5];
                 dr[4] = temp.Rows[i][6];
                 dr[5] = temp.Rows[i][7];
                 dr[6] = temp.Rows[i][8];
-                dr[7] = temp.Rows[i][9];
-                dr[8] = temp.Rows[i][10];
-                dr[9] = temp.Rows[i][11];
+                dr[7] = temp.Rows[i][9];*/
+                dr[1] = temp.Rows[i][10];
+                dr[2] = temp.Rows[i][11];
 
                 dt.Rows.Add(dr);
                 
@@ -81,19 +82,28 @@ namespace Customer
 
         private void dgvCustomers_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
+
             btnMgtAcc.Enabled = true;
+            customerPIN = dgvCustomers.Rows[e.RowIndex].Cells[2].Value.ToString();
             label1.Text = "Viewing customer: " + dgvCustomers.Rows[e.RowIndex].Cells[0].Value;
         }
 
-        private void dgvCustomers_RowEnter(object sender, DataGridViewCellEventArgs e)
+
+        private void btnMgtAcc_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void loadCustomerDetails(int customerID)
+        {
+            string[] customerProfile = dh.getCustomerProfile(customerPIN);
             
             
         }
 
-        private void dgvCustomers_SelectionChanged(object sender, EventArgs e)
+        private void tabPagePersonalDetails_Enter(object sender, EventArgs e)
         {
-           
+
         }
     }
 }
