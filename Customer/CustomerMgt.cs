@@ -153,5 +153,12 @@ namespace Customer
             refreshAccountProfile(accountID);
 
         }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Registration regis = new Registration();
+            regis.Show();
+        }
     }
 }

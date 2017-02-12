@@ -66,6 +66,8 @@
             this.lblAmountPaid = new System.Windows.Forms.Label();
             this.lblTotalLoan = new System.Windows.Forms.Label();
             this.lblInterest = new System.Windows.Forms.Label();
+            this.btnAddAccount = new System.Windows.Forms.Button();
+            this.btnPayLoan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.tabCustomer.SuspendLayout();
             this.tabPagePersonalDetails.SuspendLayout();
@@ -101,6 +103,7 @@
             this.btnAddCustomer.TabIndex = 2;
             this.btnAddCustomer.Text = "Add Customer";
             this.btnAddCustomer.UseVisualStyleBackColor = true;
+            this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
             // 
             // label1
             // 
@@ -373,6 +376,7 @@
             // 
             // tabPageAccounts
             // 
+            this.tabPageAccounts.Controls.Add(this.btnAddAccount);
             this.tabPageAccounts.Controls.Add(this.panelBreakdown);
             this.tabPageAccounts.Controls.Add(this.dgvAccounts);
             this.tabPageAccounts.Location = new System.Drawing.Point(4, 25);
@@ -404,6 +408,7 @@
             // panelBreakdown
             // 
             this.panelBreakdown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBreakdown.Controls.Add(this.btnPayLoan);
             this.panelBreakdown.Controls.Add(this.label2);
             this.panelBreakdown.Controls.Add(this.lblMoneyLent);
             this.panelBreakdown.Controls.Add(this.lblAmountRemaining);
@@ -470,6 +475,24 @@
             this.lblInterest.TabIndex = 1;
             this.lblInterest.Text = "Interest:";
             // 
+            // btnAddAccount
+            // 
+            this.btnAddAccount.Location = new System.Drawing.Point(6, 6);
+            this.btnAddAccount.Name = "btnAddAccount";
+            this.btnAddAccount.Size = new System.Drawing.Size(108, 33);
+            this.btnAddAccount.TabIndex = 5;
+            this.btnAddAccount.Text = "Add Account";
+            this.btnAddAccount.UseVisualStyleBackColor = true;
+            // 
+            // btnPayLoan
+            // 
+            this.btnPayLoan.Location = new System.Drawing.Point(325, 41);
+            this.btnPayLoan.Name = "btnPayLoan";
+            this.btnPayLoan.Size = new System.Drawing.Size(97, 43);
+            this.btnPayLoan.TabIndex = 4;
+            this.btnPayLoan.Text = "Pay Loan";
+            this.btnPayLoan.UseVisualStyleBackColor = true;
+            // 
             // CustomerMgt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -535,5 +558,7 @@
         private System.Windows.Forms.Label lblAmountPaid;
         private System.Windows.Forms.Label lblTotalLoan;
         private System.Windows.Forms.Label lblInterest;
+        private System.Windows.Forms.Button btnAddAccount;
+        private System.Windows.Forms.Button btnPayLoan;
     }
 }
