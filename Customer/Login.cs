@@ -12,7 +12,7 @@ namespace Customer
 {
     public partial class Login : Form
     {
-        DataHandler dt = new DataHandler("localhost", "BoomBroom", "root", "root");
+        DataHandler dh = new DataHandler("localhost", "BoomBroom", "root", "root");
         public Login()
         {
             InitializeComponent();
@@ -20,10 +20,13 @@ namespace Customer
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (dt.pinExists(txtboxLogin.Text))
+            if (dh.pinExists(txtboxLogin.Text))
             {
-                string[] customer = dt.getCustomerProfile(txtboxLogin.Text);
+                string[] customer = dh.getCustomerProfile(txtboxLogin.Text);
                 MessageBox.Show("Welcome, " + customer[1]); //gets FirstName
+                this.Hide();
+                CustomerProfile cp = new CustomerProfile(dh.getCustomerID(txtboxLogin.Text));
+                cp.Show();
             }
             else
                 MessageBox.Show("Who are you?");
@@ -32,8 +35,14 @@ namespace Customer
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Admin Panel Shows up here");
-            Admin admin = new Admin();
-            admin.Show();
+            CustomerMgt cm = new CustomerMgt();
+            cm.Show();
+            this.Hide();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

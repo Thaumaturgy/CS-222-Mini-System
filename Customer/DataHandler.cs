@@ -101,6 +101,7 @@ namespace Customer
             return int.Parse(getCustomerProfile(PIN)[0]);
         }
 
+
         public string[] getCustomerProfile(string PIN) //highly discouraged from using index [0] as it contains ID as string
         { 
             if (!pinExists(PIN)) return null;
@@ -200,13 +201,15 @@ namespace Customer
         public bool canAddAccount(int customerID, double moneyLent)
         {
             if (getTotalBalance(customerID) + moneyLent > 20000) return false;
+
+
             //paid half
             return false;
         }
 
-        public double getTotalBalance(int customerID)
+        /*public int numberOfAccounts(int customerID)
         {
-            string q = "SELECT SUM(moneyLent) from account WHERE customerID = " + customerID + ";";
+            string q = "SELECT COUNT(accountID) from account WHERE customerID = " + customerID + ";";
             conn.Open();
             MySqlCommand com = new MySqlCommand(q, conn);
             MySqlDataAdapter adp = new MySqlDataAdapter(com);
@@ -214,17 +217,146 @@ namespace Customer
             adp.Fill(dt);
             conn.Close();
 
-            double totalBalance = double.Parse(dt.Rows[0][0].ToString());
+
+        }*/
+
+        public double getTotalBalance(int customerID)
+        {
+            //ASSUMES AN ACCOUNT EXISTS FOR CUSTOMER! -CAUGHT
+
+            string q = "SELECT SUM(moneyLent) from account WHERE customerID = " + customerID + " AND status = 'Active';";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            double totalBalance;
+            try
+            {
+                totalBalance = double.Parse(dt.Rows[0][0].ToString());
+            }catch(Exception ex)
+            {
+                Console.WriteLine("Total Balance Exception: " + ex.ToString());
+                totalBalance = 0;
+            }
 
             return totalBalance;
         }
 
-        public bool addAccount(int customerID, double moneyLent, string entryDate, int status, double interest)
+        public bool accountExists(int accountID)
+        {
+            string q = "SELECT accountID from account WHERE accountID = " + accountID + ";";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            return dt.Rows.Count > 0;
+        }
+
+        public bool addAccount(int customerID, double moneyLent, string entryDate, string status, double interest)
         {
             //yyyy-mm-dd
 
+            String q = "INSERT INTO account(customerID, moneyLent, entryDate, status, interest) VALUES " +
+                    "(" + customerID  + ", " + moneyLent + ", '" + entryDate + "', '" + status + "', " + interest + ");";
+
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            int rowsAffected = com.ExecuteNonQuery();
+            conn.Close();
+            Console.Write(q);
+
+            return rowsAffected > 0;
+        }
+
+        public bool updateAccountStatus(int accountID, string status)
+        {
+            string q = "UPDATE account SET status = '" + status + "' WHERE accountID = " + accountID + ";";
+
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            int rowsAffected = 0;
+
+            try
+            {
+                rowsAffected = com.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false; //is this line needded?
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected > 0;
+        }
+
+        public string[,] getAllAccountsByCustomer(int customerID) //WEIRD 2D Array. Watch out!
+        {
+            DataTable dt = getAllAccountsByCustomerDataTable(customerID);
+
+            Console.WriteLine("Customer " + customerID + " has n accounts: " + dt.Rows.Count);
+
+            string[,] allAccounts = new string[dt.Rows.Count, dt.Columns.Count] ;
+            for(int i = 0; i < dt.Rows.Count; i++)
+            {
+                for (int j = 0; j < dt.Columns.Count; j++)
+                    allAccounts[i,j] = dt.Rows[i][j].ToString();
+            }
+
+            return allAccounts;
+        }
+        
+        public DataTable getAllAccountsByCustomerDataTable(int customerID)
+        {
+            string q = "SELECT * from account WHERE customerID = " + customerID + ";";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            return dt;
+        }
+
+
+        public DataTable getAllCustomersDataTable()
+        { //REMOVE HH:MM:SS from Date Object When selecting!!!
+            string q = "SELECT * from customer;";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            return dt;
+        }
+
+        public int numberOfActiveAccounts(int customerID)
+        {
+            string q = "SELECT * from account WHERE customerID = " + customerID + " AND status = 'Active';";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            return dt.Rows.Count;
 
         }
+
 
 
 

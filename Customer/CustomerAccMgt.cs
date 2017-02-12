@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace Customer
 {
-    public partial class Registration : Form
+    public partial class CustomerAccMgt : Form
     {
-        public Registration()
+        public CustomerAccMgt()
         {
             InitializeComponent();
         }
 
-        private void Registration_Load(object sender, EventArgs e)
+        private void CustomerAccMgt_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

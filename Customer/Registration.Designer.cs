@@ -256,7 +256,7 @@
             this.label8.TabIndex = 6;
             this.label8.Text = "Customer Registration Form";
             // 
-            // Form1
+            // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -282,8 +282,9 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.txtboxHomeAddress);
             this.Controls.Add(this.textBox1);
-            this.Name = "Form1";
+            this.Name = "Registration";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Registration_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
