@@ -25,17 +25,23 @@ namespace Customer
         private void CustomerProfile_Load(object sender, EventArgs e)
         {
             //dataGridView1.DataSource;
+            loadCustomerAccounts(customerID);
+
+        }
+
+        private void loadCustomerAccounts(int customerID)
+        {
             DataTable temp = dh.getAllAccountsByCustomerDataTable(customerID);
             lblAccount.Text = "Number of Active Accounts: " + dh.numberOfActiveAccounts(customerID);
-            
+
             DataTable dt = new DataTable();
             dt.Columns.Add("Account ID");
             dt.Columns.Add("Money Lent");
             dt.Columns.Add("Entry Date");
             dt.Columns.Add("Status");
 
-
-            Console.WriteLine(temp.Rows[0][3].GetType());
+            Console.WriteLine("This customer has n rows: " + temp.Rows.Count);
+            //Console.WriteLine(temp.Rows[0][3].GetType());
             for (int i = 0; i < temp.Rows.Count; i++)
             {
                 DataRow dr = dt.NewRow();
@@ -50,7 +56,6 @@ namespace Customer
             dgvAccounts.DataSource = dt;
             dgvAccounts.Columns[0].Visible = false; //Hide accountID
             dgvAccounts.Sort(dgvAccounts.Columns[3], ListSortDirection.Ascending);
-
         }
 
         private void dgvAccounts_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -65,10 +70,10 @@ namespace Customer
         {
             
             string[] accountDetails = dh.getAccountDetails(accountID);
-            if (accountDetails[4] == "Paid")
+            /*if (accountDetails[4] == "Paid")
                 panelBreakdown.Visible = false;
             else
-                panelBreakdown.Visible = true;
+                panelBreakdown.Visible = true;*/
 
             lblEntryDate.Text = "Entry Date: " + dh.getEntryDate(accountID).ToString("MM-dd-yyyy");
             lblInterestRate.Text = "Interest Rate: " + accountDetails[5];

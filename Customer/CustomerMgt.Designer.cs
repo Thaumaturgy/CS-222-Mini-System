@@ -58,22 +58,37 @@
             this.lblBirthDate = new System.Windows.Forms.Label();
             this.lblHomeAddress = new System.Windows.Forms.Label();
             this.tabPageAccounts = new System.Windows.Forms.TabPage();
-            this.dgvAccounts = new System.Windows.Forms.DataGridView();
+            this.btnAddAccount = new System.Windows.Forms.Button();
             this.panelBreakdown = new System.Windows.Forms.Panel();
+            this.btnPaymentHistory = new System.Windows.Forms.Button();
+            this.btnPayLoan = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lblMoneyLent = new System.Windows.Forms.Label();
             this.lblAmountRemaining = new System.Windows.Forms.Label();
             this.lblAmountPaid = new System.Windows.Forms.Label();
             this.lblTotalLoan = new System.Windows.Forms.Label();
             this.lblInterest = new System.Windows.Forms.Label();
-            this.btnAddAccount = new System.Windows.Forms.Button();
-            this.btnPayLoan = new System.Windows.Forms.Button();
+            this.dgvAccounts = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblBalanceSummary = new System.Windows.Forms.Label();
+            this.lblMoneyLentSummary = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.rbtnInactive = new System.Windows.Forms.RadioButton();
+            this.rbtnActive = new System.Windows.Forms.RadioButton();
+            this.txtSearchLN = new System.Windows.Forms.TextBox();
+            this.txtSearchFN = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnResetCustomerTable = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.tabCustomer.SuspendLayout();
             this.tabPagePersonalDetails.SuspendLayout();
             this.tabPageAccounts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.panelBreakdown.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCustomers
@@ -83,23 +98,23 @@
             this.dgvCustomers.AllowUserToResizeRows = false;
             this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCustomers.ColumnHeadersHeight = 25;
-            this.dgvCustomers.Location = new System.Drawing.Point(12, 153);
+            this.dgvCustomers.Location = new System.Drawing.Point(12, 121);
             this.dgvCustomers.MultiSelect = false;
             this.dgvCustomers.Name = "dgvCustomers";
             this.dgvCustomers.ReadOnly = true;
             this.dgvCustomers.RowHeadersVisible = false;
             this.dgvCustomers.RowTemplate.Height = 24;
             this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCustomers.Size = new System.Drawing.Size(363, 482);
+            this.dgvCustomers.Size = new System.Drawing.Size(363, 550);
             this.dgvCustomers.TabIndex = 0;
             this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
             this.dgvCustomers.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellEnter);
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.Location = new System.Drawing.Point(12, 83);
+            this.btnAddCustomer.Location = new System.Drawing.Point(12, 679);
             this.btnAddCustomer.Name = "btnAddCustomer";
-            this.btnAddCustomer.Size = new System.Drawing.Size(129, 64);
+            this.btnAddCustomer.Size = new System.Drawing.Size(129, 31);
             this.btnAddCustomer.TabIndex = 2;
             this.btnAddCustomer.Text = "Add Customer";
             this.btnAddCustomer.UseVisualStyleBackColor = true;
@@ -108,7 +123,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(363, 39);
+            this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 17);
             this.label1.TabIndex = 3;
@@ -118,10 +133,10 @@
             // 
             this.tabCustomer.Controls.Add(this.tabPagePersonalDetails);
             this.tabCustomer.Controls.Add(this.tabPageAccounts);
-            this.tabCustomer.Location = new System.Drawing.Point(381, 83);
+            this.tabCustomer.Location = new System.Drawing.Point(381, 121);
             this.tabCustomer.Name = "tabCustomer";
             this.tabCustomer.SelectedIndex = 0;
-            this.tabCustomer.Size = new System.Drawing.Size(458, 552);
+            this.tabCustomer.Size = new System.Drawing.Size(471, 599);
             this.tabCustomer.TabIndex = 5;
             // 
             // tabPagePersonalDetails
@@ -153,7 +168,7 @@
             this.tabPagePersonalDetails.Location = new System.Drawing.Point(4, 25);
             this.tabPagePersonalDetails.Name = "tabPagePersonalDetails";
             this.tabPagePersonalDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePersonalDetails.Size = new System.Drawing.Size(396, 523);
+            this.tabPagePersonalDetails.Size = new System.Drawing.Size(463, 570);
             this.tabPagePersonalDetails.TabIndex = 0;
             this.tabPagePersonalDetails.Text = "Personal Details";
             this.tabPagePersonalDetails.UseVisualStyleBackColor = true;
@@ -382,32 +397,24 @@
             this.tabPageAccounts.Location = new System.Drawing.Point(4, 25);
             this.tabPageAccounts.Name = "tabPageAccounts";
             this.tabPageAccounts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAccounts.Size = new System.Drawing.Size(450, 523);
+            this.tabPageAccounts.Size = new System.Drawing.Size(463, 570);
             this.tabPageAccounts.TabIndex = 2;
             this.tabPageAccounts.Text = "Accounts";
             this.tabPageAccounts.UseVisualStyleBackColor = true;
             // 
-            // dgvAccounts
+            // btnAddAccount
             // 
-            this.dgvAccounts.AllowUserToAddRows = false;
-            this.dgvAccounts.AllowUserToDeleteRows = false;
-            this.dgvAccounts.AllowUserToResizeRows = false;
-            this.dgvAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAccounts.Location = new System.Drawing.Point(3, 45);
-            this.dgvAccounts.Name = "dgvAccounts";
-            this.dgvAccounts.ReadOnly = true;
-            this.dgvAccounts.RowHeadersVisible = false;
-            this.dgvAccounts.RowTemplate.Height = 24;
-            this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccounts.Size = new System.Drawing.Size(440, 260);
-            this.dgvAccounts.TabIndex = 0;
-            this.dgvAccounts.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccounts_CellEnter);
+            this.btnAddAccount.Location = new System.Drawing.Point(6, 20);
+            this.btnAddAccount.Name = "btnAddAccount";
+            this.btnAddAccount.Size = new System.Drawing.Size(108, 33);
+            this.btnAddAccount.TabIndex = 5;
+            this.btnAddAccount.Text = "Add Account";
+            this.btnAddAccount.UseVisualStyleBackColor = true;
             // 
             // panelBreakdown
             // 
             this.panelBreakdown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBreakdown.Controls.Add(this.btnPaymentHistory);
             this.panelBreakdown.Controls.Add(this.btnPayLoan);
             this.panelBreakdown.Controls.Add(this.label2);
             this.panelBreakdown.Controls.Add(this.lblMoneyLent);
@@ -415,20 +422,38 @@
             this.panelBreakdown.Controls.Add(this.lblAmountPaid);
             this.panelBreakdown.Controls.Add(this.lblTotalLoan);
             this.panelBreakdown.Controls.Add(this.lblInterest);
-            this.panelBreakdown.Location = new System.Drawing.Point(6, 325);
+            this.panelBreakdown.Location = new System.Drawing.Point(7, 374);
             this.panelBreakdown.Name = "panelBreakdown";
-            this.panelBreakdown.Size = new System.Drawing.Size(437, 181);
+            this.panelBreakdown.Size = new System.Drawing.Size(450, 190);
             this.panelBreakdown.TabIndex = 4;
+            // 
+            // btnPaymentHistory
+            // 
+            this.btnPaymentHistory.Location = new System.Drawing.Point(325, 90);
+            this.btnPaymentHistory.Name = "btnPaymentHistory";
+            this.btnPaymentHistory.Size = new System.Drawing.Size(97, 43);
+            this.btnPaymentHistory.TabIndex = 4;
+            this.btnPaymentHistory.Text = "Payment History";
+            this.btnPaymentHistory.UseVisualStyleBackColor = true;
+            // 
+            // btnPayLoan
+            // 
+            this.btnPayLoan.Location = new System.Drawing.Point(325, 41);
+            this.btnPayLoan.Name = "btnPayLoan";
+            this.btnPayLoan.Size = new System.Drawing.Size(97, 43);
+            this.btnPayLoan.TabIndex = 4;
+            this.btnPayLoan.Text = "Pay Loan";
+            this.btnPayLoan.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Trebuchet MS", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(133, -1);
+            this.label2.Location = new System.Drawing.Point(96, -4);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(133, 42);
+            this.label2.Size = new System.Drawing.Size(261, 42);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Balance";
+            this.label2.Text = "Loan Breakdown";
             // 
             // lblMoneyLent
             // 
@@ -475,31 +500,154 @@
             this.lblInterest.TabIndex = 1;
             this.lblInterest.Text = "Interest:";
             // 
-            // btnAddAccount
+            // dgvAccounts
             // 
-            this.btnAddAccount.Location = new System.Drawing.Point(6, 6);
-            this.btnAddAccount.Name = "btnAddAccount";
-            this.btnAddAccount.Size = new System.Drawing.Size(108, 33);
-            this.btnAddAccount.TabIndex = 5;
-            this.btnAddAccount.Text = "Add Account";
-            this.btnAddAccount.UseVisualStyleBackColor = true;
+            this.dgvAccounts.AllowUserToAddRows = false;
+            this.dgvAccounts.AllowUserToDeleteRows = false;
+            this.dgvAccounts.AllowUserToResizeRows = false;
+            this.dgvAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAccounts.Location = new System.Drawing.Point(7, 69);
+            this.dgvAccounts.Name = "dgvAccounts";
+            this.dgvAccounts.ReadOnly = true;
+            this.dgvAccounts.RowHeadersVisible = false;
+            this.dgvAccounts.RowTemplate.Height = 24;
+            this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAccounts.Size = new System.Drawing.Size(449, 299);
+            this.dgvAccounts.TabIndex = 0;
+            this.dgvAccounts.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccounts_CellEnter);
             // 
-            // btnPayLoan
+            // groupBox1
             // 
-            this.btnPayLoan.Location = new System.Drawing.Point(325, 41);
-            this.btnPayLoan.Name = "btnPayLoan";
-            this.btnPayLoan.Size = new System.Drawing.Size(97, 43);
-            this.btnPayLoan.TabIndex = 4;
-            this.btnPayLoan.Text = "Pay Loan";
-            this.btnPayLoan.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.lblBalanceSummary);
+            this.groupBox1.Controls.Add(this.lblMoneyLentSummary);
+            this.groupBox1.Location = new System.Drawing.Point(381, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(467, 58);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Customer Accounts Summary";
+            // 
+            // lblBalanceSummary
+            // 
+            this.lblBalanceSummary.AutoSize = true;
+            this.lblBalanceSummary.Location = new System.Drawing.Point(277, 24);
+            this.lblBalanceSummary.Name = "lblBalanceSummary";
+            this.lblBalanceSummary.Size = new System.Drawing.Size(59, 17);
+            this.lblBalanceSummary.TabIndex = 0;
+            this.lblBalanceSummary.Text = "Balance";
+            // 
+            // lblMoneyLentSummary
+            // 
+            this.lblMoneyLentSummary.AutoSize = true;
+            this.lblMoneyLentSummary.Location = new System.Drawing.Point(11, 24);
+            this.lblMoneyLentSummary.Name = "lblMoneyLentSummary";
+            this.lblMoneyLentSummary.Size = new System.Drawing.Size(118, 17);
+            this.lblMoneyLentSummary.TabIndex = 0;
+            this.lblMoneyLentSummary.Text = "Total Money Lent";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.rbtnInactive);
+            this.panel1.Controls.Add(this.rbtnActive);
+            this.panel1.Controls.Add(this.txtSearchLN);
+            this.panel1.Controls.Add(this.txtSearchFN);
+            this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.Location = new System.Drawing.Point(16, 57);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(359, 58);
+            this.panel1.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(185, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 17);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Status";
+            // 
+            // rbtnInactive
+            // 
+            this.rbtnInactive.AutoSize = true;
+            this.rbtnInactive.Location = new System.Drawing.Point(204, 32);
+            this.rbtnInactive.Name = "rbtnInactive";
+            this.rbtnInactive.Size = new System.Drawing.Size(77, 21);
+            this.rbtnInactive.TabIndex = 12;
+            this.rbtnInactive.Text = "Inactive";
+            this.rbtnInactive.UseVisualStyleBackColor = true;
+            // 
+            // rbtnActive
+            // 
+            this.rbtnActive.AutoSize = true;
+            this.rbtnActive.Checked = true;
+            this.rbtnActive.Location = new System.Drawing.Point(131, 31);
+            this.rbtnActive.Name = "rbtnActive";
+            this.rbtnActive.Size = new System.Drawing.Size(67, 21);
+            this.rbtnActive.TabIndex = 12;
+            this.rbtnActive.TabStop = true;
+            this.rbtnActive.Text = "Active";
+            this.rbtnActive.UseVisualStyleBackColor = true;
+            // 
+            // txtSearchLN
+            // 
+            this.txtSearchLN.Location = new System.Drawing.Point(3, 31);
+            this.txtSearchLN.Name = "txtSearchLN";
+            this.txtSearchLN.Size = new System.Drawing.Size(122, 22);
+            this.txtSearchLN.TabIndex = 11;
+            this.txtSearchLN.Text = "LN";
+            // 
+            // txtSearchFN
+            // 
+            this.txtSearchFN.Location = new System.Drawing.Point(3, 3);
+            this.txtSearchFN.Name = "txtSearchFN";
+            this.txtSearchFN.Size = new System.Drawing.Size(122, 22);
+            this.txtSearchFN.TabIndex = 10;
+            this.txtSearchFN.Text = "FN";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(295, 3);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(61, 50);
+            this.btnSearch.TabIndex = 9;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // btnResetCustomerTable
+            // 
+            this.btnResetCustomerTable.Location = new System.Drawing.Point(147, 680);
+            this.btnResetCustomerTable.Name = "btnResetCustomerTable";
+            this.btnResetCustomerTable.Size = new System.Drawing.Size(225, 31);
+            this.btnResetCustomerTable.TabIndex = 2;
+            this.btnResetCustomerTable.Text = "Reset Customer Table";
+            this.btnResetCustomerTable.UseVisualStyleBackColor = true;
+            this.btnResetCustomerTable.Click += new System.EventHandler(this.btnAddCustomer_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(311, 4);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(61, 50);
+            this.btnReset.TabIndex = 9;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // CustomerMgt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(851, 647);
+            this.ClientSize = new System.Drawing.Size(864, 723);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabCustomer);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnResetCustomerTable);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnAddCustomer);
             this.Controls.Add(this.dgvCustomers);
             this.Name = "CustomerMgt";
@@ -510,9 +658,13 @@
             this.tabPagePersonalDetails.ResumeLayout(false);
             this.tabPagePersonalDetails.PerformLayout();
             this.tabPageAccounts.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
             this.panelBreakdown.ResumeLayout(false);
             this.panelBreakdown.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -560,5 +712,18 @@
         private System.Windows.Forms.Label lblInterest;
         private System.Windows.Forms.Button btnAddAccount;
         private System.Windows.Forms.Button btnPayLoan;
+        private System.Windows.Forms.Button btnPaymentHistory;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblBalanceSummary;
+        private System.Windows.Forms.Label lblMoneyLentSummary;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RadioButton rbtnInactive;
+        private System.Windows.Forms.RadioButton rbtnActive;
+        private System.Windows.Forms.TextBox txtSearchLN;
+        private System.Windows.Forms.TextBox txtSearchFN;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnResetCustomerTable;
+        private System.Windows.Forms.Button btnReset;
     }
 }

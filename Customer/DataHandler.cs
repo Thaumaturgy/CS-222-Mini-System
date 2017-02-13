@@ -245,6 +245,33 @@ namespace Customer
             return totalBalance;
         }
 
+        public double getTotalBalance(string customerPIN) //Gets Amount Left to be Paid
+        {
+            //ASSUMES AN ACCOUNT EXISTS FOR CUSTOMER! -CAUGHT
+
+            int customerID = getCustomerID(customerPIN);
+            string q = "SELECT SUM(moneyLent) from account WHERE customerID = " + customerID + " AND status = 'Active';";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            double totalBalance;
+            try
+            {
+                totalBalance = double.Parse(dt.Rows[0][0].ToString());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Total Balance Exception: " + ex.ToString());
+                totalBalance = 0;
+            }
+
+            return totalBalance; 
+        }
+
         public bool accountExists(int accountID)
         {
             string q = "SELECT accountID from account WHERE accountID = " + accountID + ";";
@@ -397,10 +424,12 @@ namespace Customer
         public double getInterestAmount(int accountID)
         {
             string[] accDetails = getAccountDetails(accountID);
-            DateTime entryDate = getEntryDate(accountID);
+            /*DateTime entryDate = getEntryDate(accountID);
             int monthsElapsed = ((DateTime.Now.Year - entryDate.Year) * 12 + DateTime.Now.Subtract(entryDate).Days) / 30; //Approximation
             Console.WriteLine("months elapsed: " + monthsElapsed);
-            double interestAmount = monthsElapsed * double.Parse(accDetails[5]) * double.Parse(accDetails[2]);
+            double interestAmount = monthsElapsed * double.Parse(accDetails[5]) * double.Parse(accDetails[2]);*/
+
+            double interestAmount = double.Parse(accDetails[5]) * double.Parse(accDetails[2]);
 
             return interestAmount;
 
@@ -466,6 +495,85 @@ namespace Customer
             return total;
         }
 
+        /*public DataTable getAllAccountsWithStatus(bool isActive)
+        {
+            string status;
+            if (isActive)
+                status = "Active";
+            else
+                status = "Paid";
+
+            string q = "SELECT * FROM boombroom.customer join boombroom.account ON customer.customerID = account.customerID WHERE account.status = '" + status + "';";
+
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            return dt;
+        }*/
+
+        public DataTable searchCustomers(string fn, string ln, bool isActive)
+        {
+            string status;
+            if (isActive)
+                status = "Active";
+            else
+                status = "Paid";
+
+            string q = "SELECT customer.customerID, customerFName, customerLName, gender, civilStatus,"+
+                " birthDate, homeAddress, jobDescription, workingAddress, telNumber, phoneNumber, pinNumber"+
+                " FROM customer join account ON customer.customerID = account.customerID"+
+                " WHERE account.status = '" + status +"' AND customerFName LIKE '%"+fn+"%' AND customerLName LIKE '%" +ln + "%';";
+                //account.status = 'status'IS WRONG CONDITION!
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            return dt;
+
+        }
+
+        public bool customerIsActive(string customerPIN)
+        {
+            string q = "SELECT COUNT(*) FROM customer JOIN account ON customer.customerID = account.customerID WHERE status = 'Active' AND pinNumber = '" + customerPIN + "';";
+
+
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            int numberOfActiveAccounts = int.Parse(dt.Rows[0][0].ToString());
+            
+            return numberOfActiveAccounts > 0;
+        }
+
+        public double getTotalMoneyLent(int customerID)
+        {
+            string q = "SELECT SUM(moneyLent) from accounts WHERE customerID = " + customerID + ";";
+            conn.Open();
+            
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            Console.WriteLine("DT ROW " + dt.Rows[0][0].ToString() + "ROW COUNT: " + dt.Rows.Count);
+            double total = 0;
+            if (dt.Rows[0][0].ToString().Length == 0)
+                total = 0;
+            else
+                total = double.Parse(dt.Rows[0][0].ToString());
+
+            return total;
+        }
+        
 
 
 

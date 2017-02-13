@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.lblAccount = new System.Windows.Forms.Label();
             this.dgvAccounts = new System.Windows.Forms.DataGridView();
             this.grpboxAccountDetails = new System.Windows.Forms.GroupBox();
+            this.panelBreakdown = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblMoneyLent = new System.Windows.Forms.Label();
+            this.lblAmountRemaining = new System.Windows.Forms.Label();
+            this.lblAmountPaid = new System.Windows.Forms.Label();
             this.lblTotalLoan = new System.Windows.Forms.Label();
             this.lblInterest = new System.Windows.Forms.Label();
             this.lblInterestRate = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblEntryDate = new System.Windows.Forms.Label();
-            this.lblMoneyLent = new System.Windows.Forms.Label();
-            this.panelBreakdown = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblAmountPaid = new System.Windows.Forms.Label();
-            this.lblAmountRemaining = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.grpboxAccountDetails.SuspendLayout();
             this.panelBreakdown.SuspendLayout();
@@ -82,14 +82,14 @@
             this.dgvAccounts.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvAccounts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Thistle;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Plum;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Thistle;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Plum;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAccounts.GridColor = System.Drawing.Color.SlateBlue;
             this.dgvAccounts.Location = new System.Drawing.Point(12, 96);
             this.dgvAccounts.MultiSelect = false;
@@ -117,10 +117,61 @@
             this.grpboxAccountDetails.TabStop = false;
             this.grpboxAccountDetails.Text = "Account Details";
             // 
+            // panelBreakdown
+            // 
+            this.panelBreakdown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBreakdown.Controls.Add(this.label2);
+            this.panelBreakdown.Controls.Add(this.lblMoneyLent);
+            this.panelBreakdown.Controls.Add(this.lblAmountRemaining);
+            this.panelBreakdown.Controls.Add(this.lblAmountPaid);
+            this.panelBreakdown.Controls.Add(this.lblTotalLoan);
+            this.panelBreakdown.Controls.Add(this.lblInterest);
+            this.panelBreakdown.Location = new System.Drawing.Point(6, 174);
+            this.panelBreakdown.Name = "panelBreakdown";
+            this.panelBreakdown.Size = new System.Drawing.Size(358, 181);
+            this.panelBreakdown.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(51, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(261, 42);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Loan Breakdown";
+            // 
+            // lblMoneyLent
+            // 
+            this.lblMoneyLent.AutoSize = true;
+            this.lblMoneyLent.Location = new System.Drawing.Point(73, 42);
+            this.lblMoneyLent.Name = "lblMoneyLent";
+            this.lblMoneyLent.Size = new System.Drawing.Size(102, 23);
+            this.lblMoneyLent.TabIndex = 0;
+            this.lblMoneyLent.Text = "Money Lent:";
+            // 
+            // lblAmountRemaining
+            // 
+            this.lblAmountRemaining.AutoSize = true;
+            this.lblAmountRemaining.Location = new System.Drawing.Point(75, 134);
+            this.lblAmountRemaining.Name = "lblAmountRemaining";
+            this.lblAmountRemaining.Size = new System.Drawing.Size(163, 23);
+            this.lblAmountRemaining.TabIndex = 2;
+            this.lblAmountRemaining.Text = "Amount Remaining: ";
+            // 
+            // lblAmountPaid
+            // 
+            this.lblAmountPaid.AutoSize = true;
+            this.lblAmountPaid.Location = new System.Drawing.Point(75, 111);
+            this.lblAmountPaid.Name = "lblAmountPaid";
+            this.lblAmountPaid.Size = new System.Drawing.Size(116, 23);
+            this.lblAmountPaid.TabIndex = 2;
+            this.lblAmountPaid.Text = "Amount Paid: ";
+            // 
             // lblTotalLoan
             // 
             this.lblTotalLoan.AutoSize = true;
-            this.lblTotalLoan.Location = new System.Drawing.Point(61, 82);
+            this.lblTotalLoan.Location = new System.Drawing.Point(75, 88);
             this.lblTotalLoan.Name = "lblTotalLoan";
             this.lblTotalLoan.Size = new System.Drawing.Size(100, 23);
             this.lblTotalLoan.TabIndex = 2;
@@ -129,7 +180,7 @@
             // lblInterest
             // 
             this.lblInterest.AutoSize = true;
-            this.lblInterest.Location = new System.Drawing.Point(61, 59);
+            this.lblInterest.Location = new System.Drawing.Point(75, 65);
             this.lblInterest.Name = "lblInterest";
             this.lblInterest.Size = new System.Drawing.Size(77, 23);
             this.lblInterest.TabIndex = 1;
@@ -162,57 +213,6 @@
             this.lblEntryDate.Size = new System.Drawing.Size(90, 23);
             this.lblEntryDate.TabIndex = 0;
             this.lblEntryDate.Text = "Entry Date";
-            // 
-            // lblMoneyLent
-            // 
-            this.lblMoneyLent.AutoSize = true;
-            this.lblMoneyLent.Location = new System.Drawing.Point(59, 36);
-            this.lblMoneyLent.Name = "lblMoneyLent";
-            this.lblMoneyLent.Size = new System.Drawing.Size(102, 23);
-            this.lblMoneyLent.TabIndex = 0;
-            this.lblMoneyLent.Text = "Money Lent:";
-            // 
-            // panelBreakdown
-            // 
-            this.panelBreakdown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelBreakdown.Controls.Add(this.label2);
-            this.panelBreakdown.Controls.Add(this.lblMoneyLent);
-            this.panelBreakdown.Controls.Add(this.lblAmountRemaining);
-            this.panelBreakdown.Controls.Add(this.lblAmountPaid);
-            this.panelBreakdown.Controls.Add(this.lblTotalLoan);
-            this.panelBreakdown.Controls.Add(this.lblInterest);
-            this.panelBreakdown.Location = new System.Drawing.Point(10, 172);
-            this.panelBreakdown.Name = "panelBreakdown";
-            this.panelBreakdown.Size = new System.Drawing.Size(355, 181);
-            this.panelBreakdown.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(133, -1);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(139, 43);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Balance";
-            // 
-            // lblAmountPaid
-            // 
-            this.lblAmountPaid.AutoSize = true;
-            this.lblAmountPaid.Location = new System.Drawing.Point(61, 105);
-            this.lblAmountPaid.Name = "lblAmountPaid";
-            this.lblAmountPaid.Size = new System.Drawing.Size(116, 23);
-            this.lblAmountPaid.TabIndex = 2;
-            this.lblAmountPaid.Text = "Amount Paid: ";
-            // 
-            // lblAmountRemaining
-            // 
-            this.lblAmountRemaining.AutoSize = true;
-            this.lblAmountRemaining.Location = new System.Drawing.Point(61, 128);
-            this.lblAmountRemaining.Name = "lblAmountRemaining";
-            this.lblAmountRemaining.Size = new System.Drawing.Size(163, 23);
-            this.lblAmountRemaining.TabIndex = 2;
-            this.lblAmountRemaining.Text = "Amount Remaining: ";
             // 
             // CustomerProfile
             // 

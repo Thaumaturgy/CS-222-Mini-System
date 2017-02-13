@@ -43,7 +43,7 @@ namespace Customer
             dt.Columns.Add("Name");
             dt.Columns.Add("Phone Number");
             dt.Columns.Add("PIN");
-
+            dt.Columns.Add("Status"); //Not inherent in DBMS
             
 
             for (int i = 0; i < temp.Rows.Count; i++)
@@ -52,10 +52,16 @@ namespace Customer
                 dr[0] = temp.Rows[i][1] +"  "+ temp.Rows[i][2];
                 dr[1] = temp.Rows[i][10];
                 dr[2] = temp.Rows[i][11];
-
+                
+                bool customerActive = dh.customerIsActive(temp.Rows[i][11].ToString());
+                if (customerActive)
+                    dr[3] = "Active"; //Status
+                else
+                    dr[3] = "Inactive";
                 dt.Rows.Add(dr);
                 
             }
+
 
             dgvCustomers.DataSource = dt;
             dgvCustomers.ClearSelection();
@@ -73,6 +79,7 @@ namespace Customer
 
             loadCustomerDetails(customerPIN);
             loadCustomerAccounts(customerPIN);
+            loadAccountsSummary(customerPIN);
         }
 
 
@@ -133,10 +140,10 @@ namespace Customer
         {
 
             string[] accountDetails = dh.getAccountDetails(accountID);
-            if (accountDetails[4] == "Paid")
+            /*if (accountDetails[4] == "Paid")
                 panelBreakdown.Visible = false;
             else
-                panelBreakdown.Visible = true;
+                panelBreakdown.Visible = true;*/
 
             lblMoneyLent.Text = "Money Lent: " + accountDetails[2];
             lblInterest.Text = "Interest: " + dh.getInterestAmount(accountID);
@@ -144,6 +151,7 @@ namespace Customer
             lblAmountPaid.Text = "Amount Paid: " + dh.getTotalPayment(accountID);
             lblAmountRemaining.Text = "Amount Remaining: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPayment(accountID));
 
+            panelBreakdown.Visible = true;
 
         }
 
@@ -159,6 +167,53 @@ namespace Customer
             this.Hide();
             Registration regis = new Registration();
             regis.Show();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            loadSearchCustomer(txtSearchFN.Text, txtSearchLN.Text, rbtnActive.Checked);
+        }
+
+        private void loadSearchCustomer(string fn, string ln, bool isActive)
+        {
+            DataTable temp = dh.searchCustomers(fn, ln, isActive);
+            DataTable dt = new DataTable();
+            //Filter Columns
+            dt.Columns.Add("Name");
+            dt.Columns.Add("Phone Number");
+            dt.Columns.Add("PIN");
+            dt.Columns.Add("Status"); //Not inherent in DBMS
+
+
+            for (int i = 0; i < temp.Rows.Count; i++)
+            {
+                DataRow dr = dt.NewRow();
+                dr[0] = temp.Rows[i][1] + "  " + temp.Rows[i][2];
+                dr[1] = temp.Rows[i][10];
+                dr[2] = temp.Rows[i][11];
+
+                bool customerActive = dh.customerIsActive(temp.Rows[i][11].ToString());
+                if (customerActive)
+                    dr[3] = "Active"; //Status
+                else
+                    dr[3] = "Inactive";
+                dt.Rows.Add(dr);
+
+            }
+
+            dgvCustomers.DataSource = dt;
+            dgvCustomers.ClearSelection();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            loadCustomersTable();
+        }
+
+        private void loadAccountsSummary(string customerPIN)
+        {
+            lblBalanceSummary.Text =  "Total Balance: " + dh.getTotalBalance(customerPIN).ToString();
+            lblMoneyLentSummary.Text = "Total Money Lent: " + dh.getTotalMoneyLent(dh.getCustomerID(customerPIN));
         }
     }
 }
