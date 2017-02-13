@@ -44,5 +44,18 @@ namespace Customer
         {
 
         }
+
+        private void txtboxLogin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           // e.Handled = !char.IsDigit(e.KeyChar);
+        }
+
+        private void txtboxLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            bool maxReached = txtboxLogin.Text.Length == 4;
+            if (!((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)) 
+                && e.KeyCode != Keys.Back && maxReached)
+                e.SuppressKeyPress = true;
+        }
     }
 }

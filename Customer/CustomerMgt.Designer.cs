@@ -36,14 +36,11 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.txtPIN = new System.Windows.Forms.TextBox();
-            this.txtBdate = new System.Windows.Forms.TextBox();
             this.txtPNum = new System.Windows.Forms.TextBox();
             this.txtTelNum = new System.Windows.Forms.TextBox();
             this.txtWorkingAdd = new System.Windows.Forms.TextBox();
             this.txtJobDesc = new System.Windows.Forms.TextBox();
             this.txtHomeAdd = new System.Windows.Forms.TextBox();
-            this.txtCivilStatus = new System.Windows.Forms.TextBox();
-            this.txtGender = new System.Windows.Forms.TextBox();
             this.txtLN = new System.Windows.Forms.TextBox();
             this.txtFN = new System.Windows.Forms.TextBox();
             this.lblPIN = new System.Windows.Forms.Label();
@@ -81,6 +78,10 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnResetCustomerTable = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.cBoxGender = new System.Windows.Forms.ComboBox();
+            this.dtpBdate = new System.Windows.Forms.DateTimePicker();
+            this.cBoxCivilStatus = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.tabCustomer.SuspendLayout();
             this.tabPagePersonalDetails.SuspendLayout();
@@ -141,17 +142,17 @@
             // 
             // tabPagePersonalDetails
             // 
+            this.tabPagePersonalDetails.Controls.Add(this.cBoxCivilStatus);
+            this.tabPagePersonalDetails.Controls.Add(this.dtpBdate);
+            this.tabPagePersonalDetails.Controls.Add(this.cBoxGender);
             this.tabPagePersonalDetails.Controls.Add(this.button2);
             this.tabPagePersonalDetails.Controls.Add(this.button1);
             this.tabPagePersonalDetails.Controls.Add(this.txtPIN);
-            this.tabPagePersonalDetails.Controls.Add(this.txtBdate);
             this.tabPagePersonalDetails.Controls.Add(this.txtPNum);
             this.tabPagePersonalDetails.Controls.Add(this.txtTelNum);
             this.tabPagePersonalDetails.Controls.Add(this.txtWorkingAdd);
             this.tabPagePersonalDetails.Controls.Add(this.txtJobDesc);
             this.tabPagePersonalDetails.Controls.Add(this.txtHomeAdd);
-            this.tabPagePersonalDetails.Controls.Add(this.txtCivilStatus);
-            this.tabPagePersonalDetails.Controls.Add(this.txtGender);
             this.tabPagePersonalDetails.Controls.Add(this.txtLN);
             this.tabPagePersonalDetails.Controls.Add(this.txtFN);
             this.tabPagePersonalDetails.Controls.Add(this.lblPIN);
@@ -198,14 +199,8 @@
             this.txtPIN.ReadOnly = true;
             this.txtPIN.Size = new System.Drawing.Size(60, 22);
             this.txtPIN.TabIndex = 16;
-            // 
-            // txtBdate
-            // 
-            this.txtBdate.Location = new System.Drawing.Point(141, 107);
-            this.txtBdate.Name = "txtBdate";
-            this.txtBdate.ReadOnly = true;
-            this.txtBdate.Size = new System.Drawing.Size(100, 22);
-            this.txtBdate.TabIndex = 15;
+            this.txtPIN.TextChanged += new System.EventHandler(this.txtPIN_TextChanged);
+            this.txtPIN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPIN_KeyDown);
             // 
             // txtPNum
             // 
@@ -214,6 +209,7 @@
             this.txtPNum.ReadOnly = true;
             this.txtPNum.Size = new System.Drawing.Size(154, 22);
             this.txtPNum.TabIndex = 15;
+            this.txtPNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPNum_KeyDown);
             // 
             // txtTelNum
             // 
@@ -222,6 +218,7 @@
             this.txtTelNum.ReadOnly = true;
             this.txtTelNum.Size = new System.Drawing.Size(154, 22);
             this.txtTelNum.TabIndex = 15;
+            this.txtTelNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTelNum_KeyDown);
             // 
             // txtWorkingAdd
             // 
@@ -247,22 +244,6 @@
             this.txtHomeAdd.Size = new System.Drawing.Size(306, 22);
             this.txtHomeAdd.TabIndex = 15;
             // 
-            // txtCivilStatus
-            // 
-            this.txtCivilStatus.Location = new System.Drawing.Point(256, 107);
-            this.txtCivilStatus.Name = "txtCivilStatus";
-            this.txtCivilStatus.ReadOnly = true;
-            this.txtCivilStatus.Size = new System.Drawing.Size(123, 22);
-            this.txtCivilStatus.TabIndex = 15;
-            // 
-            // txtGender
-            // 
-            this.txtGender.Location = new System.Drawing.Point(25, 107);
-            this.txtGender.Name = "txtGender";
-            this.txtGender.ReadOnly = true;
-            this.txtGender.Size = new System.Drawing.Size(100, 22);
-            this.txtGender.TabIndex = 15;
-            // 
             // txtLN
             // 
             this.txtLN.Location = new System.Drawing.Point(141, 45);
@@ -278,6 +259,7 @@
             this.txtFN.ReadOnly = true;
             this.txtFN.Size = new System.Drawing.Size(100, 22);
             this.txtFN.TabIndex = 15;
+            this.txtFN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFN_KeyDown);
             // 
             // lblPIN
             // 
@@ -353,7 +335,7 @@
             // 
             this.lblCivilStatus.AutoSize = true;
             this.lblCivilStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCivilStatus.Location = new System.Drawing.Point(259, 84);
+            this.lblCivilStatus.Location = new System.Drawing.Point(272, 84);
             this.lblCivilStatus.Name = "lblCivilStatus";
             this.lblCivilStatus.Size = new System.Drawing.Size(94, 20);
             this.lblCivilStatus.TabIndex = 11;
@@ -637,11 +619,53 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Enabled = false;
+            this.dateTimePicker1.Location = new System.Drawing.Point(554, 106);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.TabIndex = 10;
+            // 
+            // cBoxGender
+            // 
+            this.cBoxGender.FormattingEnabled = true;
+            this.cBoxGender.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.cBoxGender.Location = new System.Drawing.Point(25, 107);
+            this.cBoxGender.Name = "cBoxGender";
+            this.cBoxGender.Size = new System.Drawing.Size(100, 24);
+            this.cBoxGender.TabIndex = 18;
+            // 
+            // dtpBdate
+            // 
+            this.dtpBdate.CustomFormat = "MM/dd/yyyy";
+            this.dtpBdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpBdate.Location = new System.Drawing.Point(141, 107);
+            this.dtpBdate.Name = "dtpBdate";
+            this.dtpBdate.Size = new System.Drawing.Size(122, 22);
+            this.dtpBdate.TabIndex = 19;
+            // 
+            // cBoxCivilStatus
+            // 
+            this.cBoxCivilStatus.FormattingEnabled = true;
+            this.cBoxCivilStatus.Items.AddRange(new object[] {
+            "Single",
+            "Married",
+            "Divorced",
+            "Widowed"});
+            this.cBoxCivilStatus.Location = new System.Drawing.Point(276, 109);
+            this.cBoxCivilStatus.Name = "cBoxCivilStatus";
+            this.cBoxCivilStatus.Size = new System.Drawing.Size(121, 24);
+            this.cBoxCivilStatus.TabIndex = 20;
+            // 
             // CustomerMgt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(864, 723);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabCustomer);
@@ -690,9 +714,6 @@
         private System.Windows.Forms.Label lblBirthDate;
         private System.Windows.Forms.Label lblHomeAddress;
         private System.Windows.Forms.TabPage tabPageAccounts;
-        private System.Windows.Forms.TextBox txtBdate;
-        private System.Windows.Forms.TextBox txtCivilStatus;
-        private System.Windows.Forms.TextBox txtGender;
         private System.Windows.Forms.TextBox txtLN;
         private System.Windows.Forms.TextBox txtPIN;
         private System.Windows.Forms.TextBox txtPNum;
@@ -725,5 +746,9 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnResetCustomerTable;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox cBoxGender;
+        private System.Windows.Forms.DateTimePicker dtpBdate;
+        private System.Windows.Forms.ComboBox cBoxCivilStatus;
     }
 }

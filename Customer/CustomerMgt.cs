@@ -22,6 +22,7 @@ namespace Customer
         private void CustomerMgt_Load(object sender, EventArgs e)
         {
             loadCustomersTable();
+            //dgvAccounts.ClearSelection();
             //dgvCustomers.Rows[0].Selected = true;
             
         }
@@ -74,12 +75,17 @@ namespace Customer
 
         private void dgvCustomers_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
+            //ssageBox.Show("Cell clicked in dgvCustomers");
             customerPIN = dgvCustomers.Rows[e.RowIndex].Cells[2].Value.ToString();
             label1.Text = "Viewing customer: " + dgvCustomers.Rows[e.RowIndex].Cells[0].Value;
 
+           //essageBox.Show("Loading CustomerDetails, CustomerAccounts, AccuntsSummary");
             loadCustomerDetails(customerPIN);
             loadCustomerAccounts(customerPIN);
             loadAccountsSummary(customerPIN);
+            //panelBreakdown.Visible = false;
+            //dgvAccounts.ClearSelection();
+
         }
 
 
@@ -93,9 +99,16 @@ namespace Customer
             string[] customerProfile = dh.getCustomerProfile(customerPIN);
             txtFN.Text = customerProfile[1];
             txtLN.Text = customerProfile[2];
-            txtGender.Text = customerProfile[3];
-            txtCivilStatus.Text = customerProfile[4];
-            txtBdate.Text = customerProfile[5];
+
+            //txtGender.Text = customerProfile[3];
+            cBoxGender.Text = customerProfile[3] == "M" ? "Male" : "Female";
+
+            //txtCivilStatus.Text = customerProfile[4];
+            cBoxCivilStatus.Text = customerProfile[4];
+
+            dtpBdate.Value = dh.getBDate(customerPIN);
+            //txtBdate.Text = customerProfile[5];
+
             txtHomeAdd.Text = customerProfile[6];
             txtJobDesc.Text = customerProfile[7];
             txtWorkingAdd.Text = customerProfile[8];
@@ -107,6 +120,7 @@ namespace Customer
 
         private void loadCustomerAccounts(string customerPIN)
         {
+            //MessageBox.Show("Loading Customer Accounts");
             DataTable temp = dh.getAllAccountsByCustomerDataTable(customerPIN);
             
             DataTable customerAccounts = new DataTable();
@@ -122,18 +136,19 @@ namespace Customer
                 DataRow dr = customerAccounts.NewRow();
                 dr[0] = temp.Rows[i][0];
                 dr[1] = temp.Rows[i][2];
-                dr[2] = ((DateTime)temp.Rows[i][3]).ToString("MM-dd-yyyy"); ;
+                dr[2] = ((DateTime)temp.Rows[i][3]).ToString("MM-dd-yyyy");
                 dr[3] = temp.Rows[i][4];
                 dr[4] = temp.Rows[i][5];
                 customerAccounts.Rows.Add(dr);
             }
 
             dgvAccounts.DataSource = customerAccounts;
-            dgvAccounts.ClearSelection();
 
             dgvAccounts.Columns[0].Visible = false; //Hides accountID columnf
             panelBreakdown.Visible = false;
-            
+
+
+            dgvAccounts.ClearSelection();
         }
 
         private void refreshAccountProfile(int accountID)
@@ -157,6 +172,7 @@ namespace Customer
 
         private void dgvAccounts_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
+           //essageBox.Show("Cell clicked in dgvAccounts");
             int accountID = int.Parse(dgvAccounts.Rows[e.RowIndex].Cells[0].Value.ToString());
             refreshAccountProfile(accountID);
 
@@ -172,6 +188,8 @@ namespace Customer
         private void btnSearch_Click(object sender, EventArgs e)
         {
             loadSearchCustomer(txtSearchFN.Text, txtSearchLN.Text, rbtnActive.Checked);
+
+
         }
 
         private void loadSearchCustomer(string fn, string ln, bool isActive)
@@ -201,6 +219,8 @@ namespace Customer
 
             }
 
+
+
             dgvCustomers.DataSource = dt;
             dgvCustomers.ClearSelection();
         }
@@ -212,8 +232,56 @@ namespace Customer
 
         private void loadAccountsSummary(string customerPIN)
         {
-            lblBalanceSummary.Text =  "Total Balance: " + dh.getTotalBalance(customerPIN).ToString();
+            lblBalanceSummary.Text =  "Total Balance: " + dh.getTotalBalance(dh.getCustomerID(customerPIN)).ToString();
             lblMoneyLentSummary.Text = "Total Money Lent: " + dh.getTotalMoneyLent(dh.getCustomerID(customerPIN));
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            dgvAccounts.ClearSelection();
+        }
+
+        private void txtPIN_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPIN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)) && e.KeyCode != Keys.Back)
+                e.SuppressKeyPress = true;
+        }
+
+        private void txtPIN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtTelNum_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtPNum_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtFN_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void txtTelNum_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)) && e.KeyCode != Keys.Back)
+                e.SuppressKeyPress = true;
+        }
+
+        private void txtPNum_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)) && e.KeyCode != Keys.Back)
+                e.SuppressKeyPress = true;
         }
     }
 }

@@ -222,35 +222,15 @@ namespace Customer
 
         public double getTotalBalance(int customerID)
         {
-            //ASSUMES AN ACCOUNT EXISTS FOR CUSTOMER! -CAUGHT
-
-            string q = "SELECT SUM(moneyLent) from account WHERE customerID = " + customerID + " AND status = 'Active';";
-            conn.Open();
-            MySqlCommand com = new MySqlCommand(q, conn);
-            MySqlDataAdapter adp = new MySqlDataAdapter(com);
-            DataTable dt = new DataTable();
-            adp.Fill(dt);
-            conn.Close();
-
-            double totalBalance;
-            try
-            {
-                totalBalance = double.Parse(dt.Rows[0][0].ToString());
-            }catch(Exception ex)
-            {
-                Console.WriteLine("Total Balance Exception: " + ex.ToString());
-                totalBalance = 0;
-            }
-
+            double totalBalance = getTotalMoneyLent(customerID) + getTotalInterestOfCustomer(customerID) - getTotalPaymentsOfCustomer(customerID);
             return totalBalance;
         }
 
-        public double getTotalBalance(string customerPIN) //Gets Amount Left to be Paid
+        public double getTotalInterestOfCustomer(int customerID)
         {
-            //ASSUMES AN ACCOUNT EXISTS FOR CUSTOMER! -CAUGHT
+            string q = "SELECT SUM(interest*moneyLent) FROM account JOIN customer ON account.customerID = customer.customerID"+
+                " WHERE customer.customerID = "+ customerID +";";
 
-            int customerID = getCustomerID(customerPIN);
-            string q = "SELECT SUM(moneyLent) from account WHERE customerID = " + customerID + " AND status = 'Active';";
             conn.Open();
             MySqlCommand com = new MySqlCommand(q, conn);
             MySqlDataAdapter adp = new MySqlDataAdapter(com);
@@ -258,18 +238,36 @@ namespace Customer
             adp.Fill(dt);
             conn.Close();
 
-            double totalBalance;
-            try
-            {
-                totalBalance = double.Parse(dt.Rows[0][0].ToString());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Total Balance Exception: " + ex.ToString());
-                totalBalance = 0;
-            }
+            double total = 0;
+            if (dt.Rows[0][0].ToString().Length == 0)
+                total = 0;
+            else
+                total = double.Parse(dt.Rows[0][0].ToString());
 
-            return totalBalance; 
+            return total;
+        }
+
+        public double getTotalPaymentsOfCustomer(int customerID)
+        {
+            //ASSUMES AN ACCOUNT EXISTS FOR CUSTOMER! -CAUGHT
+
+            string q = "SELECT SUM(paymentAmount) FROM account JOIN customer ON account.customerID = customer.customerID "+
+                "JOIN payment ON payment.accountID = account.accountID WHERE customer.customerID = "+ customerID +";";
+
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            double total = 0;
+            if (dt.Rows[0][0].ToString().Length == 0)
+                total = 0;
+            else
+                total = double.Parse(dt.Rows[0][0].ToString());
+
+            return total;
         }
 
         public bool accountExists(int accountID)
@@ -453,6 +451,25 @@ namespace Customer
             return entryDate;
         }
 
+        public DateTime getBDate(string customerPIN)
+        {
+            string[] customerProfile = getCustomerProfile(customerPIN);
+
+            Console.WriteLine(customerProfile[5]);
+            //Weird Date format? dd/mm/yyyy??? WEIRD
+            int day = int.Parse(customerProfile[5].Substring(0, 2));
+            Console.WriteLine("Day: " + day);
+
+            int month = int.Parse(customerProfile[5].Substring(3, 2));
+            Console.WriteLine("Month: " + month);
+
+            int year = int.Parse(customerProfile[5].Substring(6, 4));
+            Console.WriteLine("Year: " + year);
+            DateTime bDate = new DateTime(year, month, day);
+
+            return bDate;
+        }
+
 
         public DataTable getAllPaymentsByAccountDataTable(int accountID)
         {
@@ -516,17 +533,26 @@ namespace Customer
 
         public DataTable searchCustomers(string fn, string ln, bool isActive)
         {
-            string status;
+            string q;
             if (isActive)
-                status = "Active";
+                q = "SELECT customer.customerID, customerFName, customerLName, gender, civilStatus,"
+                + " birthDate, homeAddress, jobDescription, workingAddress, telNumber, phoneNumber, pinNumber"
+                + " FROM customer JOIN account ON customer.customerID = account.customerID"
+                + " WHERE account.status = 'Active' AND customerFName LIKE '%" + fn + "%' AND customerLName LIKE '%" + ln + "%';";
             else
-                status = "Paid";
+                q = "SELECT customer.customerID, customerFName, customerLName, gender, civilStatus,"
+                +" birthDate, homeAddress, jobDescription, workingAddress, telNumber, phoneNumber, pinNumber"
+                +" FROM customer WHERE customerID NOT IN (SELECT DISTINCT customer.customerID"
+                +" FROM customer JOIN account ON customer.customerID = account.customerID"
+                + " WHERE account.status = 'Active')  AND customerFName LIKE '%" + fn + "%' AND customerLName LIKE '%" + ln + "%';";
 
-            string q = "SELECT customer.customerID, customerFName, customerLName, gender, civilStatus,"+
+
+            /*string q = "SELECT customer.customerID, customerFName, customerLName, gender, civilStatus,"+
                 " birthDate, homeAddress, jobDescription, workingAddress, telNumber, phoneNumber, pinNumber"+
                 " FROM customer join account ON customer.customerID = account.customerID"+
-                " WHERE account.status = '" + status +"' AND customerFName LIKE '%"+fn+"%' AND customerLName LIKE '%" +ln + "%';";
+                " WHERE account.status = '" + query +"' AND customerFName LIKE '%"+fn+"%' AND customerLName LIKE '%" +ln + "%';";*/
                 //account.status = 'status'IS WRONG CONDITION!
+
             MySqlCommand com = new MySqlCommand(q, conn);
             MySqlDataAdapter adp = new MySqlDataAdapter(com);
             DataTable dt = new DataTable();
@@ -555,7 +581,7 @@ namespace Customer
 
         public double getTotalMoneyLent(int customerID)
         {
-            string q = "SELECT SUM(moneyLent) from accounts WHERE customerID = " + customerID + ";";
+            string q = "SELECT SUM(moneyLent) from account WHERE customerID = " + customerID + ";";
             conn.Open();
             
             MySqlCommand com = new MySqlCommand(q, conn);
