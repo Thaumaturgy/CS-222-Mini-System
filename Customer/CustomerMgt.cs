@@ -232,8 +232,12 @@ namespace Customer
 
         private void loadAccountsSummary(string customerPIN)
         {
-            lblBalanceSummary.Text =  "Total Balance: " + dh.getTotalBalanceOfCustomer(dh.getCustomerID(customerPIN)).ToString();
-            lblMoneyLentSummary.Text = "Total Money Lent: " + dh.getTotalMoneyLentOfCustomer(dh.getCustomerID(customerPIN));
+            int customerID = dh.getCustomerID(customerPIN);
+
+            double totalLoan = dh.getTotalMoneyLentOfCustomer(customerID, 1) + dh.getTotalInterestOfCustomer(dh.getCustomerID(customerPIN), 1);
+
+            lblBalanceSummary.Text =  "Total Balance: " + dh.getTotalBalanceOfCustomer(customerID).ToString();
+            lblMoneyLentSummary.Text = "Total Loan: " + totalLoan;
         }
 
         private void button3_Click(object sender, EventArgs e)

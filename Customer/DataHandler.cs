@@ -218,7 +218,7 @@ namespace Customer
             return canAdd;
         }
 
-        public double getTotalMoneyLentOfCustomerActiveAccounts(int customerID, int status)
+        public double getTotalMoneyLentOfCustomer(int customerID, int status)
         {
             //statuses:
             // -1 = Paid
@@ -254,16 +254,24 @@ namespace Customer
 
         public double getTotalBalanceOfCustomer(int customerID)
         {
-            double totalBalance = getTotalMoneyLentOfCustomer(customerID) + getTotalInterestOfCustomer(customerID) - getTotalPaymentsOfCustomer(customerID);
+            double totalBalance = getTotalMoneyLentOfCustomer(customerID,0) + getTotalInterestOfCustomer(customerID, 0) - getTotalPaymentsOfCustomer(customerID, 0);
             return totalBalance;
         }
 
 
 
-        public double getTotalInterestOfCustomer(int customerID)
+        public double getTotalInterestOfCustomer(int customerID, int status)
         {
+            string s;
+            if (status == -1)
+                s = " AND account.status = 'Paid';";
+            else if (status == 1)
+                s = " AND account.status = 'Active';";
+            else
+                s = ";";
+
             string q = "SELECT SUM(interest*moneyLent) FROM account JOIN customer ON account.customerID = customer.customerID"+
-                " WHERE customer.customerID = "+ customerID +";";
+                " WHERE customer.customerID = "+ customerID + s;
 
             conn.Open();
             MySqlCommand com = new MySqlCommand(q, conn);
@@ -281,12 +289,20 @@ namespace Customer
             return total;
         }
 
-        public double getTotalPaymentsOfCustomer(int customerID)
+        public double getTotalPaymentsOfCustomer(int customerID, int status)
         {
+            string s;
+            if (status == -1)
+                s = " AND account.status = 'Paid';";
+            else if (status == 1)
+                s = " AND account.status = 'Active';";
+            else
+                s = ";";
+
             //ASSUMES AN ACCOUNT EXISTS FOR CUSTOMER! -CAUGHT
 
             string q = "SELECT SUM(paymentAmount) FROM account JOIN customer ON account.customerID = customer.customerID "+
-                "JOIN payment ON payment.accountID = account.accountID WHERE customer.customerID = "+ customerID +";";
+                "JOIN payment ON payment.accountID = account.accountID WHERE customer.customerID = "+ customerID + s;
 
             conn.Open();
             MySqlCommand com = new MySqlCommand(q, conn);
@@ -629,7 +645,7 @@ namespace Customer
             return numberOfActiveAccounts > 0;
         }
 
-        public double getTotalMoneyLentOfCustomer(int customerID)
+        /*public double getTotalMoneyLentOfCustomer(int customerID)
         {
             string q = "SELECT SUM(moneyLent) from account WHERE customerID = " + customerID + ";";
             conn.Open();
@@ -648,9 +664,9 @@ namespace Customer
                 total = double.Parse(dt.Rows[0][0].ToString());
 
             return total;
-        }
+        }*/
 
-        public bool addPayment(int accountID, double paymentAmount, DateTime paymentDate)
+        /*public bool addPayment(int accountID, double paymentAmount, DateTime paymentDate)
         {
             //if totalpaymentOfaccount + paymentAmount > moneyLent
             int day = paymentDate.Day;
@@ -660,7 +676,7 @@ namespace Customer
                 + paymentAmount + ", '" + month + "-" + day + "-" + year + "');";
 
 
-        }
+        }*/
 
 
 

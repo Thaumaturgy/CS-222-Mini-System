@@ -601,9 +601,9 @@
             this.lblMoneyLentSummary.AutoSize = true;
             this.lblMoneyLentSummary.Location = new System.Drawing.Point(11, 24);
             this.lblMoneyLentSummary.Name = "lblMoneyLentSummary";
-            this.lblMoneyLentSummary.Size = new System.Drawing.Size(118, 17);
+            this.lblMoneyLentSummary.Size = new System.Drawing.Size(76, 17);
             this.lblMoneyLentSummary.TabIndex = 0;
-            this.lblMoneyLentSummary.Text = "Total Money Lent";
+            this.lblMoneyLentSummary.Text = "Total Loan";
             // 
             // panel1
             // 
