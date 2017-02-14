@@ -59,13 +59,11 @@ namespace Customer
         }
 
 
-        public bool updateCustomer(string fn, string ln, string gender, string civilStatus, string bDate, string homeAdd, string jobDesc, string workAdd, string telNum, string pNum, string PIN, string currentPIN)
+        public bool updateCustomer(int customerID, string fn, string ln, string gender, string civilStatus, string bDate, string homeAdd, string jobDesc, string workAdd, string telNum, string pNum, string PIN)
         {
-            if (!pinExists(PIN))
-            {
                 string q = "UPDATE customer SET customerFName = '" + fn + "', customerLName = '" + ln + "', gender = '" + gender + "', civilStatus = '" + civilStatus + "', birthDate = '" + bDate + "', " +
-                    "homeAddress = '" + homeAdd + "', jobDescription = '" + jobDesc + "', workingAddress = '" + workAdd + "', telNumber = '" + telNum + "', phoneNumber = '" + pNum + "', pinNumber = '" + PIN + "' " +
-                    "WHERE pinNumber = '" + currentPIN + "';";
+                    "homeAddress = '" + homeAdd + "', jobDescription = '" + jobDesc + "', workingAddress = '" + workAdd + "', telNumber = '" + telNum + "', phoneNumber = '" + pNum + "', pinNumber = '" + PIN + "' "+
+                    "WHERE customerID = "+customerID+";";
 
                 conn.Open();
                 MySqlCommand com = new MySqlCommand(q, conn);
@@ -89,9 +87,7 @@ namespace Customer
                 if (rowsAffected > 0)
                     return true;
 
-            }
-
-            return false; //PIN already in use
+            return false; 
         }
 
         public int getCustomerID(string PIN)

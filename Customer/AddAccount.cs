@@ -10,16 +10,18 @@ using System.Windows.Forms;
 
 namespace Customer
 {
-    public partial class CustomerAccMgt : Form
+    public partial class AddAccount : Form
     {
-        public CustomerAccMgt()
+        int customerID;
+        public AddAccount(int customerID)
         {
+            this.customerID = customerID;
             InitializeComponent();
         }
 
-        private void CustomerAccMgt_Load(object sender, EventArgs e)
+        private void AddAccount_Load(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

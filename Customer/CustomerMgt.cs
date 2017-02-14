@@ -22,6 +22,7 @@ namespace Customer
         private void CustomerMgt_Load(object sender, EventArgs e)
         {
             loadCustomersTable();
+            dtpBdate.MaxDate = DateTime.Now;
             //dgvAccounts.ClearSelection();
             //dgvCustomers.Rows[0].Selected = true;
             
@@ -64,7 +65,8 @@ namespace Customer
             }
 
 
-            dgvCustomers.DataSource = dt;
+            dgvCustomers.DataSource = null; //Rebinding DataSource by removing Bind
+            dgvCustomers.DataSource = dt; //Rebinding DataSource by assigning new Bind
             dgvCustomers.ClearSelection();
         }
 
@@ -285,23 +287,50 @@ namespace Customer
         private void checkBoxEditMode_CheckedChanged(object sender, EventArgs e)
         {
 
+            if (hasMadeEdits())
+            {
+                DialogResult dr = MessageBox.Show("Edits not saved! Save edits?", "Unsaved Edits", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if(dr == DialogResult.Yes)
+                {
+                    string gender = cBoxGender.Text == "Male" ? "M" : "F";
+                    
+                    updateCustomer(dh.getCustomerID(customerPIN), txtFN.Text, txtLN.Text, gender, cBoxCivilStatus.Text, dtpBdate.Value.ToString("yyyy-MM-dd")
+                        , txtHomeAdd.Text, txtJobDesc.Text, txtWorkingAdd.Text, txtTelNum.Text, txtPNum.Text, txtPIN.Text);
+
+                }else
+                    loadCustomerDetails(customerPIN);
+            }
+
             //Set their visibility according to whether Edit Mode is On or Not
             cBoxGender.Visible = checkBoxEditMode.Checked;
             cBoxCivilStatus.Visible = checkBoxEditMode.Checked;
             dtpBdate.Visible = checkBoxEditMode.Checked;
 
 
-            txtFN.ReadOnly = checkBoxEditMode.Checked;
-            txtLN.ReadOnly = checkBoxEditMode.Checked;
-            cBoxCivilStatus.Visible = checkBoxEditMode.Checked;
-            txtHomeAdd.ReadOnly = checkBoxEditMode.Checked;
-            txtJobDesc.ReadOnly = checkBoxEditMode.Checked;
-            txtWorkingAdd.ReadOnly = checkBoxEditMode.Checked;
-            txtTelNum.ReadOnly = checkBoxEditMode.Checked;
-            txtPNum.ReadOnly = checkBoxEditMode.Checked;
-            txtPIN.ReadOnly = checkBoxEditMode.Checked;
+            txtFN.ReadOnly = !checkBoxEditMode.Checked;
+            txtLN.ReadOnly = !checkBoxEditMode.Checked;
+            txtCivilStatus.Visible = !checkBoxEditMode.Checked;
+            txtHomeAdd.ReadOnly = !checkBoxEditMode.Checked;
+            txtJobDesc.ReadOnly = !checkBoxEditMode.Checked;
+            txtWorkingAdd.ReadOnly = !checkBoxEditMode.Checked;
+            txtTelNum.ReadOnly = !checkBoxEditMode.Checked;
+            txtPNum.ReadOnly = !checkBoxEditMode.Checked;
+            txtPIN.ReadOnly = !checkBoxEditMode.Checked;
 
-            hasMadeEdits();
+            
+            
+        }
+
+        public void updateCustomer(int customerID, string fn, string ln, string gender, string civilStatus, string bDate, string homeAdd, string jobDesc, string workAdd, string telNum, string pNum, string PIN)
+        {
+            bool updateSuccess = dh.updateCustomer(dh.getCustomerID(customerPIN), txtFN.Text, txtLN.Text, gender, cBoxCivilStatus.Text, dtpBdate.Value.ToString("yyyy-MM-dd")
+                        , txtHomeAdd.Text, txtJobDesc.Text, txtWorkingAdd.Text, txtTelNum.Text, txtPNum.Text, txtPIN.Text);
+
+            if (updateSuccess)
+            {
+                loadCustomersTable();
+                loadCustomerDetails(customerPIN);
+            }
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -348,30 +377,27 @@ namespace Customer
 
         }
         
-        private void hasMadeEdits()
+        private bool hasMadeEdits()
         {
             string[] customerProfile = dh.getCustomerProfile(customerPIN);
-            if (txtFN.Text == customerProfile[1] && txtLN.Text == customerProfile[2] && cBoxGender.Text == cBoxGender.Text
+
+            return !(txtFN.Text == customerProfile[1] && txtLN.Text == customerProfile[2] && cBoxGender.Text == cBoxGender.Text
                 && cBoxCivilStatus.Text == customerProfile[4] && txtHomeAdd.Text == customerProfile[6]
                 && txtJobDesc.Text == customerProfile[7] && txtWorkingAdd.Text == customerProfile[8]
                 && txtTelNum.Text == customerProfile[9] && txtPNum.Text == customerProfile[10]
-                && txtPIN.Text == customerProfile[11] && dtpBdate.Value == dh.getBDate(customerPIN))
-                Console.WriteLine("No Edits Made");
-            else
-                Console.WriteLine("Edits Made");
+                && txtPIN.Text == customerProfile[11] && dtpBdate.Value == dh.getBDate(customerPIN));
+            //Returns !(allFieldsTheSame);
+        }
 
+        private void btnResetEdit_Click(object sender, EventArgs e)
+        {
+            loadCustomerDetails(customerPIN);
+        }
 
-
-            //txtGender.Text = customerProfile[3];
-            cBoxGender.Text = customerProfile[3] == "M" ? "Male" : "Female";
-            ; //Covering of cBoxGender
-
-            
-            
-            
-            
-            
-            
+        private void button2_Click(object sender, EventArgs e)
+        {
+            dgvCustomers.DataSource = null;
+            dgvAccounts.DataSource = null;
         }
     }
 }
