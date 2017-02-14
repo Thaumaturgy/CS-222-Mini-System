@@ -254,7 +254,8 @@ namespace Customer
 
         public double getTotalBalanceOfCustomer(int customerID)
         {
-            double totalBalance = getTotalMoneyLentOfCustomer(customerID,0) + getTotalInterestOfCustomer(customerID, 0) - getTotalPaymentsOfCustomer(customerID, 0);
+            //The Status of the Accounts don't matter as long as status is 0 OR 1.
+            double totalBalance = getTotalMoneyLentOfCustomer(customerID, 0) + getTotalInterestOfCustomer(customerID, 0) - getTotalPaymentsOfCustomer(customerID, 0);
             return totalBalance;
         }
 
@@ -547,7 +548,7 @@ namespace Customer
 
         public DataTable getAllPaymentsByAccountDataTable(int accountID)
         {
-            string q = "SELECT paymentAmount, paymentDate from payment WHERE accountID = " + accountID + ";";
+            string q = "SELECT accountID, paymentAmount, paymentDate from payment WHERE accountID = " + accountID + ";";
             conn.Open();
             MySqlCommand com = new MySqlCommand(q, conn);
             MySqlDataAdapter adp = new MySqlDataAdapter(com);
