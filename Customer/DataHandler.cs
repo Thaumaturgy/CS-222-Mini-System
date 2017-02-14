@@ -194,12 +194,12 @@ namespace Customer
             return false;
         }
 
-        public bool hasPaidMoreThanHalf(int customerID)
+        public bool hasPaidMoreThanHalf(int customerID) //Paid more than half of Loan in each account?
         {
             
             string[,] allAccounts = getAllAccountsByCustomer(customerID);
 
-            bool canAdd = true;
+            bool paidMoreThanHalf = true;
             for(int i = 0; i < allAccounts.GetLength(0); i++)
             {
                 int accountID = int.Parse(allAccounts[i, 0]);
@@ -207,11 +207,14 @@ namespace Customer
                 if (allAccounts[i, 4] != "Paid") //Continues if account is not yet fully paid
                 {
                     //Checks if Account A has a total payment less than half of the moneyLent in that account
-                    if(getTotalPaymentOfAccount(accountID) < double.Parse(allAccounts[i, 2]) / 2)
-                        canAdd = false; //Cannot add if total payment is less than half of moneyLent
+                    if (getTotalPaymentOfAccount(accountID) < double.Parse(allAccounts[i, 2]) / 2)
+                    {
+                        paidMoreThanHalf = false; //Cannot add if total payment is less than half of moneyLent
+                        break;
+                    }
                 }
             }
-            return canAdd;
+            return paidMoreThanHalf;
         }
 
         public double getTotalMoneyLentOfCustomer(int customerID, int status)
