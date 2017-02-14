@@ -33,6 +33,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabCustomer = new System.Windows.Forms.TabControl();
             this.tabPagePersonalDetails = new System.Windows.Forms.TabPage();
+            this.checkBoxEditMode = new System.Windows.Forms.CheckBox();
+            this.cBoxCivilStatus = new System.Windows.Forms.ComboBox();
+            this.dtpBdate = new System.Windows.Forms.DateTimePicker();
+            this.cBoxGender = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.txtPIN = new System.Windows.Forms.TextBox();
@@ -78,10 +82,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnResetCustomerTable = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.cBoxGender = new System.Windows.Forms.ComboBox();
-            this.dtpBdate = new System.Windows.Forms.DateTimePicker();
-            this.cBoxCivilStatus = new System.Windows.Forms.ComboBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.tabCustomer.SuspendLayout();
             this.tabPagePersonalDetails.SuspendLayout();
@@ -142,6 +143,8 @@
             // 
             // tabPagePersonalDetails
             // 
+            this.tabPagePersonalDetails.BackColor = System.Drawing.Color.SlateBlue;
+            this.tabPagePersonalDetails.Controls.Add(this.checkBoxEditMode);
             this.tabPagePersonalDetails.Controls.Add(this.cBoxCivilStatus);
             this.tabPagePersonalDetails.Controls.Add(this.dtpBdate);
             this.tabPagePersonalDetails.Controls.Add(this.cBoxGender);
@@ -172,11 +175,59 @@
             this.tabPagePersonalDetails.Size = new System.Drawing.Size(463, 570);
             this.tabPagePersonalDetails.TabIndex = 0;
             this.tabPagePersonalDetails.Text = "Personal Details";
-            this.tabPagePersonalDetails.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEditMode
+            // 
+            this.checkBoxEditMode.AutoSize = true;
+            this.checkBoxEditMode.Location = new System.Drawing.Point(12, 542);
+            this.checkBoxEditMode.Name = "checkBoxEditMode";
+            this.checkBoxEditMode.Size = new System.Drawing.Size(93, 21);
+            this.checkBoxEditMode.TabIndex = 21;
+            this.checkBoxEditMode.Text = "Edit Mode";
+            this.checkBoxEditMode.UseVisualStyleBackColor = true;
+            this.checkBoxEditMode.CheckedChanged += new System.EventHandler(this.checkBoxEditMode_CheckedChanged);
+            // 
+            // cBoxCivilStatus
+            // 
+            this.cBoxCivilStatus.Enabled = false;
+            this.cBoxCivilStatus.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cBoxCivilStatus.FormattingEnabled = true;
+            this.cBoxCivilStatus.Items.AddRange(new object[] {
+            "Single",
+            "Married",
+            "Divorced",
+            "Widowed"});
+            this.cBoxCivilStatus.Location = new System.Drawing.Point(276, 109);
+            this.cBoxCivilStatus.Name = "cBoxCivilStatus";
+            this.cBoxCivilStatus.Size = new System.Drawing.Size(121, 24);
+            this.cBoxCivilStatus.TabIndex = 20;
+            // 
+            // dtpBdate
+            // 
+            this.dtpBdate.CustomFormat = "MM/dd/yyyy";
+            this.dtpBdate.Enabled = false;
+            this.dtpBdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpBdate.Location = new System.Drawing.Point(141, 107);
+            this.dtpBdate.Name = "dtpBdate";
+            this.dtpBdate.Size = new System.Drawing.Size(122, 22);
+            this.dtpBdate.TabIndex = 19;
+            // 
+            // cBoxGender
+            // 
+            this.cBoxGender.Enabled = false;
+            this.cBoxGender.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cBoxGender.FormattingEnabled = true;
+            this.cBoxGender.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
+            this.cBoxGender.Location = new System.Drawing.Point(25, 107);
+            this.cBoxGender.Name = "cBoxGender";
+            this.cBoxGender.Size = new System.Drawing.Size(100, 24);
+            this.cBoxGender.TabIndex = 18;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(116, 428);
+            this.button2.Location = new System.Drawing.Point(101, 494);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(85, 42);
             this.button2.TabIndex = 17;
@@ -185,7 +236,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(25, 428);
+            this.button1.Location = new System.Drawing.Point(10, 494);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 42);
             this.button1.TabIndex = 17;
@@ -194,6 +245,9 @@
             // 
             // txtPIN
             // 
+            this.txtPIN.BackColor = System.Drawing.Color.White;
+            this.txtPIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPIN.Enabled = false;
             this.txtPIN.Location = new System.Drawing.Point(299, 45);
             this.txtPIN.Name = "txtPIN";
             this.txtPIN.ReadOnly = true;
@@ -204,6 +258,9 @@
             // 
             // txtPNum
             // 
+            this.txtPNum.BackColor = System.Drawing.Color.White;
+            this.txtPNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPNum.Enabled = false;
             this.txtPNum.Location = new System.Drawing.Point(215, 352);
             this.txtPNum.Name = "txtPNum";
             this.txtPNum.ReadOnly = true;
@@ -213,6 +270,9 @@
             // 
             // txtTelNum
             // 
+            this.txtTelNum.BackColor = System.Drawing.Color.White;
+            this.txtTelNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTelNum.Enabled = false;
             this.txtTelNum.Location = new System.Drawing.Point(25, 352);
             this.txtTelNum.Name = "txtTelNum";
             this.txtTelNum.ReadOnly = true;
@@ -222,6 +282,9 @@
             // 
             // txtWorkingAdd
             // 
+            this.txtWorkingAdd.BackColor = System.Drawing.Color.White;
+            this.txtWorkingAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtWorkingAdd.Enabled = false;
             this.txtWorkingAdd.Location = new System.Drawing.Point(25, 289);
             this.txtWorkingAdd.Name = "txtWorkingAdd";
             this.txtWorkingAdd.ReadOnly = true;
@@ -230,6 +293,9 @@
             // 
             // txtJobDesc
             // 
+            this.txtJobDesc.BackColor = System.Drawing.Color.White;
+            this.txtJobDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtJobDesc.Enabled = false;
             this.txtJobDesc.Location = new System.Drawing.Point(25, 228);
             this.txtJobDesc.Name = "txtJobDesc";
             this.txtJobDesc.ReadOnly = true;
@@ -238,6 +304,9 @@
             // 
             // txtHomeAdd
             // 
+            this.txtHomeAdd.BackColor = System.Drawing.Color.White;
+            this.txtHomeAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtHomeAdd.Enabled = false;
             this.txtHomeAdd.Location = new System.Drawing.Point(25, 168);
             this.txtHomeAdd.Name = "txtHomeAdd";
             this.txtHomeAdd.ReadOnly = true;
@@ -246,6 +315,9 @@
             // 
             // txtLN
             // 
+            this.txtLN.BackColor = System.Drawing.Color.White;
+            this.txtLN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLN.Enabled = false;
             this.txtLN.Location = new System.Drawing.Point(141, 45);
             this.txtLN.Name = "txtLN";
             this.txtLN.ReadOnly = true;
@@ -254,6 +326,9 @@
             // 
             // txtFN
             // 
+            this.txtFN.BackColor = System.Drawing.Color.White;
+            this.txtFN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFN.Enabled = false;
             this.txtFN.Location = new System.Drawing.Point(25, 45);
             this.txtFN.Name = "txtFN";
             this.txtFN.ReadOnly = true;
@@ -392,6 +467,7 @@
             this.btnAddAccount.TabIndex = 5;
             this.btnAddAccount.Text = "Add Account";
             this.btnAddAccount.UseVisualStyleBackColor = true;
+            this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
             // panelBreakdown
             // 
@@ -411,7 +487,7 @@
             // 
             // btnPaymentHistory
             // 
-            this.btnPaymentHistory.Location = new System.Drawing.Point(325, 90);
+            this.btnPaymentHistory.Location = new System.Drawing.Point(325, 87);
             this.btnPaymentHistory.Name = "btnPaymentHistory";
             this.btnPaymentHistory.Size = new System.Drawing.Size(97, 43);
             this.btnPaymentHistory.TabIndex = 4;
@@ -619,53 +695,22 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // dateTimePicker1
+            // button3
             // 
-            this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(554, 106);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker1.TabIndex = 10;
-            // 
-            // cBoxGender
-            // 
-            this.cBoxGender.FormattingEnabled = true;
-            this.cBoxGender.Items.AddRange(new object[] {
-            "Male",
-            "Female"});
-            this.cBoxGender.Location = new System.Drawing.Point(25, 107);
-            this.cBoxGender.Name = "cBoxGender";
-            this.cBoxGender.Size = new System.Drawing.Size(100, 24);
-            this.cBoxGender.TabIndex = 18;
-            // 
-            // dtpBdate
-            // 
-            this.dtpBdate.CustomFormat = "MM/dd/yyyy";
-            this.dtpBdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpBdate.Location = new System.Drawing.Point(141, 107);
-            this.dtpBdate.Name = "dtpBdate";
-            this.dtpBdate.Size = new System.Drawing.Size(122, 22);
-            this.dtpBdate.TabIndex = 19;
-            // 
-            // cBoxCivilStatus
-            // 
-            this.cBoxCivilStatus.FormattingEnabled = true;
-            this.cBoxCivilStatus.Items.AddRange(new object[] {
-            "Single",
-            "Married",
-            "Divorced",
-            "Widowed"});
-            this.cBoxCivilStatus.Location = new System.Drawing.Point(276, 109);
-            this.cBoxCivilStatus.Name = "cBoxCivilStatus";
-            this.cBoxCivilStatus.Size = new System.Drawing.Size(121, 24);
-            this.cBoxCivilStatus.TabIndex = 20;
+            this.button3.Location = new System.Drawing.Point(732, 92);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(120, 23);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Can Add?";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // CustomerMgt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(864, 723);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabCustomer);
@@ -746,9 +791,10 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnResetCustomerTable;
         private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ComboBox cBoxGender;
         private System.Windows.Forms.DateTimePicker dtpBdate;
         private System.Windows.Forms.ComboBox cBoxCivilStatus;
+        private System.Windows.Forms.CheckBox checkBoxEditMode;
+        private System.Windows.Forms.Button button3;
     }
 }

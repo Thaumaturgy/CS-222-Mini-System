@@ -52,6 +52,7 @@
             this.txtboxLogin.Name = "txtboxLogin";
             this.txtboxLogin.Size = new System.Drawing.Size(100, 22);
             this.txtboxLogin.TabIndex = 1;
+            this.txtboxLogin.TextChanged += new System.EventHandler(this.txtboxLogin_TextChanged);
             this.txtboxLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtboxLogin_KeyDown);
             this.txtboxLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxLogin_KeyPress);
             // 

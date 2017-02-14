@@ -52,10 +52,18 @@ namespace Customer
 
         private void txtboxLogin_KeyDown(object sender, KeyEventArgs e)
         {
-            bool maxReached = txtboxLogin.Text.Length == 4;
-            if (!((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)) 
-                && e.KeyCode != Keys.Back && maxReached)
+            bool isNum = (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9);
+            bool isBack = e.KeyCode == Keys.Back;
+            int charCount = isBack ? 0 : 1;
+            bool maxReached = txtboxLogin.Text.Length + charCount == 5;
+
+            if (!(isNum || isBack) || maxReached ) 
                 e.SuppressKeyPress = true;
+        }
+
+        private void txtboxLogin_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

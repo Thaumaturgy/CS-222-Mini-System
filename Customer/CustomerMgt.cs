@@ -163,8 +163,8 @@ namespace Customer
             lblMoneyLent.Text = "Money Lent: " + accountDetails[2];
             lblInterest.Text = "Interest: " + dh.getInterestAmount(accountID);
             lblTotalLoan.Text = "Total Loan: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]));
-            lblAmountPaid.Text = "Amount Paid: " + dh.getTotalPayment(accountID);
-            lblAmountRemaining.Text = "Amount Remaining: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPayment(accountID));
+            lblAmountPaid.Text = "Amount Paid: " + dh.getTotalPaymentOfAccount(accountID);
+            lblAmountRemaining.Text = "Amount Remaining: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPaymentOfAccount(accountID));
 
             panelBreakdown.Visible = true;
 
@@ -232,8 +232,8 @@ namespace Customer
 
         private void loadAccountsSummary(string customerPIN)
         {
-            lblBalanceSummary.Text =  "Total Balance: " + dh.getTotalBalance(dh.getCustomerID(customerPIN)).ToString();
-            lblMoneyLentSummary.Text = "Total Money Lent: " + dh.getTotalMoneyLent(dh.getCustomerID(customerPIN));
+            lblBalanceSummary.Text =  "Total Balance: " + dh.getTotalBalanceOfCustomer(dh.getCustomerID(customerPIN)).ToString();
+            lblMoneyLentSummary.Text = "Total Money Lent: " + dh.getTotalMoneyLentOfCustomer(dh.getCustomerID(customerPIN));
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -248,24 +248,16 @@ namespace Customer
 
         private void txtPIN_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)) && e.KeyCode != Keys.Back)
+            bool isNum = (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9);
+            bool isBack = e.KeyCode == Keys.Back;
+            int charCount = isBack ? 0 : 1;
+            bool maxReached = txtPIN.Text.Length + charCount == 5;
+
+            if (!(isNum || isBack) || maxReached)
                 e.SuppressKeyPress = true;
         }
 
-        private void txtPIN_KeyPress(object sender, KeyPressEventArgs e)
-        {
 
-        }
-
-        private void txtTelNum_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
-        private void txtPNum_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
 
         private void txtFN_KeyDown(object sender, KeyEventArgs e)
         {
@@ -282,6 +274,36 @@ namespace Customer
         {
             if (!((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)) && e.KeyCode != Keys.Back)
                 e.SuppressKeyPress = true;
+        }
+
+        private void checkBoxEditMode_CheckedChanged(object sender, EventArgs e)
+        {
+                txtFN.Enabled = checkBoxEditMode.Checked;
+                txtLN.Enabled = checkBoxEditMode.Checked;
+                cBoxGender.Enabled = checkBoxEditMode.Checked;
+                cBoxCivilStatus.Enabled = checkBoxEditMode.Checked;
+                dtpBdate.Enabled = checkBoxEditMode.Checked;
+                txtHomeAdd.Enabled = checkBoxEditMode.Checked;
+                txtJobDesc.Enabled = checkBoxEditMode.Checked;
+                txtWorkingAdd.Enabled = checkBoxEditMode.Checked;
+                txtTelNum.Enabled = checkBoxEditMode.Checked;
+                txtPNum.Enabled = checkBoxEditMode.Checked;
+                txtPIN.Enabled = checkBoxEditMode.Checked;
+
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            if (dh.hasPaidMoreThanHalf(dh.getCustomerID(customerPIN)))
+                MessageBox.Show("He can Add!");
+            else
+                MessageBox.Show("He can Cannot Add!");
+        }
+
+        private void btnAddAccount_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

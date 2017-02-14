@@ -81,8 +81,8 @@ namespace Customer
             lblStatus.Text = "Status: " + accountDetails[4];
             lblInterest.Text = "Interest: " + dh.getInterestAmount(accountID);
             lblTotalLoan.Text = "Total Loan: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]));
-            lblAmountPaid.Text = "Amount Paid: " + dh.getTotalPayment(accountID);
-            lblAmountRemaining.Text = "Amount Remaining: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPayment(accountID));
+            lblAmountPaid.Text = "Amount Paid: " + dh.getTotalPaymentOfAccount(accountID);
+            lblAmountRemaining.Text = "Amount Remaining: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPaymentOfAccount(accountID));
 
 
         }

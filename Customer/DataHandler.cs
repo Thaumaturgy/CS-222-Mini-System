@@ -198,18 +198,43 @@ namespace Customer
             return false;
         }
 
-        public bool canAddAccount(int customerID, double moneyLent)
+        public bool hasPaidMoreThanHalf(int customerID)
         {
-            if (getTotalBalance(customerID) + moneyLent > 20000) return false;
+            
+            string[,] allAccounts = getAllAccountsByCustomer(customerID);
 
-
-            //paid half
-            return false;
+            bool canAdd = true;
+            for(int i = 0; i < allAccounts.GetLength(0); i++)
+            {
+                int accountID = int.Parse(allAccounts[i, 0]);
+                
+                if (allAccounts[i, 4] != "Paid") //Continues if account is not yet fully paid
+                {
+                    //Checks if Account A has a total payment less than half of the moneyLent in that account
+                    if(getTotalPaymentOfAccount(accountID) < double.Parse(allAccounts[i, 2]) / 2)
+                        canAdd = false; //Cannot add if total payment is less than half of moneyLent
+                }
+            }
+            return canAdd;
         }
 
-        /*public int numberOfAccounts(int customerID)
+        public double getTotalMoneyLentOfCustomerActiveAccounts(int customerID, int status)
         {
-            string q = "SELECT COUNT(accountID) from account WHERE customerID = " + customerID + ";";
+            //statuses:
+            // -1 = Paid
+            // 0 = Paid and Active
+            // 1 = Active
+
+            string s;
+            if (status == -1)
+                s = " AND account.status = 'Paid';";
+            else if (status == 1)
+                s = " AND account.status = 'Active';";
+            else
+                s = ";";
+
+            string q = "SELECT SUM(moneyLent) FROM account WHERE customerID = " + customerID + s;
+
             conn.Open();
             MySqlCommand com = new MySqlCommand(q, conn);
             MySqlDataAdapter adp = new MySqlDataAdapter(com);
@@ -217,14 +242,23 @@ namespace Customer
             adp.Fill(dt);
             conn.Close();
 
+            double total = 0;
+            if (dt.Rows[0][0].ToString().Length == 0)
+                total = 0;
+            else
+                total = double.Parse(dt.Rows[0][0].ToString());
 
-        }*/
+            return total;
+        }
 
-        public double getTotalBalance(int customerID)
+
+        public double getTotalBalanceOfCustomer(int customerID)
         {
-            double totalBalance = getTotalMoneyLent(customerID) + getTotalInterestOfCustomer(customerID) - getTotalPaymentsOfCustomer(customerID);
+            double totalBalance = getTotalMoneyLentOfCustomer(customerID) + getTotalInterestOfCustomer(customerID) - getTotalPaymentsOfCustomer(customerID);
             return totalBalance;
         }
+
+
 
         public double getTotalInterestOfCustomer(int customerID)
         {
@@ -269,6 +303,30 @@ namespace Customer
 
             return total;
         }
+
+
+        //REDUNDANT PIECE OF CODE
+
+        /*public double getTotalPaymentsOfAccount(int accountID)
+        {
+            string q = "SELECT SUM(paymentAmount)FROM account JOIN payment"+
+                " ON account.accountID = payment.accountID WHERE account.accountID = " + accountID + ";";
+
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
+
+            double total = 0;
+            if (dt.Rows[0][0].ToString().Length == 0)
+                total = 0;
+            else
+                total = double.Parse(dt.Rows[0][0].ToString());
+
+            return total;
+        }*/
 
         public bool accountExists(int accountID)
         {
@@ -484,7 +542,7 @@ namespace Customer
             return dt;
         }
 
-        public double getTotalPayment(int accountID)
+        public double getTotalPaymentOfAccount(int accountID)
         {
             string q = "SELECT SUM(paymentAmount) from payment WHERE accountID = " + accountID + ";";
             conn.Open();
@@ -500,14 +558,6 @@ namespace Customer
                 total = 0;
             else
                 total = double.Parse(dt.Rows[0][0].ToString());
-
-            /*try
-            {
-                
-            }catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }*/
             Console.WriteLine(total);
             return total;
         }
@@ -535,12 +585,12 @@ namespace Customer
         {
             string q;
             if (isActive)
-                q = "SELECT customer.customerID, customerFName, customerLName, gender, civilStatus,"
+                q = "SELECT DISTINCT customer.customerID, customerFName, customerLName, gender, civilStatus,"
                 + " birthDate, homeAddress, jobDescription, workingAddress, telNumber, phoneNumber, pinNumber"
                 + " FROM customer JOIN account ON customer.customerID = account.customerID"
                 + " WHERE account.status = 'Active' AND customerFName LIKE '%" + fn + "%' AND customerLName LIKE '%" + ln + "%';";
             else
-                q = "SELECT customer.customerID, customerFName, customerLName, gender, civilStatus,"
+                q = "SELECT DISTINCT customer.customerID, customerFName, customerLName, gender, civilStatus,"
                 +" birthDate, homeAddress, jobDescription, workingAddress, telNumber, phoneNumber, pinNumber"
                 +" FROM customer WHERE customerID NOT IN (SELECT DISTINCT customer.customerID"
                 +" FROM customer JOIN account ON customer.customerID = account.customerID"
@@ -579,7 +629,7 @@ namespace Customer
             return numberOfActiveAccounts > 0;
         }
 
-        public double getTotalMoneyLent(int customerID)
+        public double getTotalMoneyLentOfCustomer(int customerID)
         {
             string q = "SELECT SUM(moneyLent) from account WHERE customerID = " + customerID + ";";
             conn.Open();
@@ -599,7 +649,18 @@ namespace Customer
 
             return total;
         }
-        
+
+        public bool addPayment(int accountID, double paymentAmount, DateTime paymentDate)
+        {
+            //if totalpaymentOfaccount + paymentAmount > moneyLent
+            int day = paymentDate.Day;
+            int month = paymentDate.Month;
+            int year = paymentDate.Year;
+            string q = "INSERT INTO payment(accountID, paymentAmount, paymentDate) VALUES(" + accountID + ", " 
+                + paymentAmount + ", '" + month + "-" + day + "-" + year + "');";
+
+
+        }
 
 
 
