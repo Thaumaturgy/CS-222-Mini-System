@@ -49,6 +49,7 @@
             // txtboxLogin
             // 
             this.txtboxLogin.Location = new System.Drawing.Point(83, 37);
+            this.txtboxLogin.MaxLength = 4;
             this.txtboxLogin.Name = "txtboxLogin";
             this.txtboxLogin.Size = new System.Drawing.Size(100, 22);
             this.txtboxLogin.TabIndex = 1;

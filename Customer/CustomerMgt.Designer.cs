@@ -62,6 +62,7 @@
             this.btnAddAccount = new System.Windows.Forms.Button();
             this.panelBreakdown = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.dgvPaymentHistory = new System.Windows.Forms.DataGridView();
             this.lblMoneyLent = new System.Windows.Forms.Label();
             this.lblAmountRemaining = new System.Windows.Forms.Label();
             this.lblAmountPaid = new System.Windows.Forms.Label();
@@ -81,16 +82,17 @@
             this.btnResetCustomerTable = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.dgvPaymentHistory = new System.Windows.Forms.DataGridView();
+            this.txtBoxDTP = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.tabCustomer.SuspendLayout();
             this.tabPagePersonalDetails.SuspendLayout();
             this.tabPageAccounts.SuspendLayout();
             this.panelBreakdown.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentHistory)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvCustomers
@@ -145,11 +147,11 @@
             // 
             this.tabPagePersonalDetails.BackColor = System.Drawing.Color.SlateBlue;
             this.tabPagePersonalDetails.Controls.Add(this.checkBoxEditMode);
-            this.tabPagePersonalDetails.Controls.Add(this.cBoxCivilStatus);
-            this.tabPagePersonalDetails.Controls.Add(this.dtpBdate);
             this.tabPagePersonalDetails.Controls.Add(this.cBoxGender);
             this.tabPagePersonalDetails.Controls.Add(this.button2);
             this.tabPagePersonalDetails.Controls.Add(this.button1);
+            this.tabPagePersonalDetails.Controls.Add(this.textBox1);
+            this.tabPagePersonalDetails.Controls.Add(this.txtBoxDTP);
             this.tabPagePersonalDetails.Controls.Add(this.txtPIN);
             this.tabPagePersonalDetails.Controls.Add(this.txtPNum);
             this.tabPagePersonalDetails.Controls.Add(this.txtTelNum);
@@ -169,10 +171,12 @@
             this.tabPagePersonalDetails.Controls.Add(this.lblJobDescription);
             this.tabPagePersonalDetails.Controls.Add(this.lblBirthDate);
             this.tabPagePersonalDetails.Controls.Add(this.lblHomeAddress);
+            this.tabPagePersonalDetails.Controls.Add(this.dtpBdate);
+            this.tabPagePersonalDetails.Controls.Add(this.cBoxCivilStatus);
             this.tabPagePersonalDetails.Location = new System.Drawing.Point(4, 25);
             this.tabPagePersonalDetails.Name = "tabPagePersonalDetails";
             this.tabPagePersonalDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePersonalDetails.Size = new System.Drawing.Size(463, 570);
+            this.tabPagePersonalDetails.Size = new System.Drawing.Size(554, 570);
             this.tabPagePersonalDetails.TabIndex = 0;
             this.tabPagePersonalDetails.Text = "Personal Details";
             // 
@@ -211,6 +215,7 @@
             this.dtpBdate.Name = "dtpBdate";
             this.dtpBdate.Size = new System.Drawing.Size(122, 22);
             this.dtpBdate.TabIndex = 19;
+            this.dtpBdate.ValueChanged += new System.EventHandler(this.dtpBdate_ValueChanged);
             // 
             // cBoxGender
             // 
@@ -249,6 +254,7 @@
             this.txtPIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPIN.Enabled = false;
             this.txtPIN.Location = new System.Drawing.Point(299, 45);
+            this.txtPIN.MaxLength = 4;
             this.txtPIN.Name = "txtPIN";
             this.txtPIN.ReadOnly = true;
             this.txtPIN.Size = new System.Drawing.Size(60, 22);
@@ -495,6 +501,21 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Loan Breakdown";
             // 
+            // dgvPaymentHistory
+            // 
+            this.dgvPaymentHistory.AllowUserToAddRows = false;
+            this.dgvPaymentHistory.AllowUserToDeleteRows = false;
+            this.dgvPaymentHistory.AllowUserToResizeRows = false;
+            this.dgvPaymentHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPaymentHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPaymentHistory.Location = new System.Drawing.Point(241, 5);
+            this.dgvPaymentHistory.Name = "dgvPaymentHistory";
+            this.dgvPaymentHistory.RowHeadersVisible = false;
+            this.dgvPaymentHistory.RowTemplate.Height = 24;
+            this.dgvPaymentHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPaymentHistory.Size = new System.Drawing.Size(294, 180);
+            this.dgvPaymentHistory.TabIndex = 0;
+            // 
             // lblMoneyLent
             // 
             this.lblMoneyLent.AutoSize = true;
@@ -687,20 +708,31 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
-            // dgvPaymentHistory
+            // txtBoxDTP
             // 
-            this.dgvPaymentHistory.AllowUserToAddRows = false;
-            this.dgvPaymentHistory.AllowUserToDeleteRows = false;
-            this.dgvPaymentHistory.AllowUserToResizeRows = false;
-            this.dgvPaymentHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPaymentHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPaymentHistory.Location = new System.Drawing.Point(241, 5);
-            this.dgvPaymentHistory.Name = "dgvPaymentHistory";
-            this.dgvPaymentHistory.RowHeadersVisible = false;
-            this.dgvPaymentHistory.RowTemplate.Height = 24;
-            this.dgvPaymentHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPaymentHistory.Size = new System.Drawing.Size(294, 180);
-            this.dgvPaymentHistory.TabIndex = 0;
+            this.txtBoxDTP.BackColor = System.Drawing.Color.White;
+            this.txtBoxDTP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBoxDTP.Enabled = false;
+            this.txtBoxDTP.Location = new System.Drawing.Point(141, 107);
+            this.txtBoxDTP.Name = "txtBoxDTP";
+            this.txtBoxDTP.ReadOnly = true;
+            this.txtBoxDTP.Size = new System.Drawing.Size(122, 22);
+            this.txtBoxDTP.TabIndex = 16;
+            this.txtBoxDTP.TextChanged += new System.EventHandler(this.txtPIN_TextChanged);
+            this.txtBoxDTP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPIN_KeyDown);
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(403, 108);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(122, 22);
+            this.textBox1.TabIndex = 16;
+            this.textBox1.TextChanged += new System.EventHandler(this.txtPIN_TextChanged);
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPIN_KeyDown);
             // 
             // CustomerMgt
             // 
@@ -726,12 +758,12 @@
             this.tabPageAccounts.ResumeLayout(false);
             this.panelBreakdown.ResumeLayout(false);
             this.panelBreakdown.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentHistory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -793,5 +825,7 @@
         private System.Windows.Forms.CheckBox checkBoxEditMode;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dgvPaymentHistory;
+        private System.Windows.Forms.TextBox txtBoxDTP;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

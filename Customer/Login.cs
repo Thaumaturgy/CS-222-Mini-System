@@ -54,10 +54,8 @@ namespace Customer
         {
             bool isNum = (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9);
             bool isBack = e.KeyCode == Keys.Back;
-            int charCount = isBack ? 0 : 1;
-            bool maxReached = txtboxLogin.Text.Length + charCount == 5;
 
-            if (!(isNum || isBack) || maxReached ) 
+            if (!(isNum || isBack)) 
                 e.SuppressKeyPress = true;
         }
 
