@@ -61,9 +61,9 @@ namespace Customer
         private void dgvAccounts_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             int accountID = int.Parse(dgvAccounts.Rows[e.RowIndex].Cells[0].Value.ToString());
-            Console.WriteLine(accountID);
             refreshAccountProfile(accountID);
-            
+            loadPaymentHistory(accountID);
+
         }
 
         private void refreshAccountProfile(int accountID)
@@ -91,5 +91,33 @@ namespace Customer
         {
             lblInterest.Text = "Remaining Loan: "+ dh.getInterestAmount(11);
         }
+
+        public void loadPaymentHistory(int accountID)
+        {
+            DataTable temp = dh.getAllPaymentsByAccountDataTable(accountID);
+
+            DataTable accountPayments = new DataTable();
+            accountPayments.Columns.Add("accountID"); //For Data Storing ONLY!!
+            accountPayments.Columns.Add("Payment Amount");
+            accountPayments.Columns.Add("Payment Date");
+
+
+            Console.WriteLine("THis guy has n payments :" + temp.Rows.Count);
+            for (int i = 0; i < temp.Rows.Count; i++)
+            {
+                DataRow dr = accountPayments.NewRow();
+                dr[0] = temp.Rows[i][0];
+                dr[1] = temp.Rows[i][1];
+                dr[2] = ((DateTime)temp.Rows[i][2]).ToString("MM-dd-yyyy");
+                accountPayments.Rows.Add(dr);
+            }
+
+            dgvPaymentHistory.DataSource = accountPayments;
+
+            dgvPaymentHistory.Columns[0].Visible = false; //Hide accountID!
+           // dgvPaymentHistory.ClearSelection();
+        }
+
+
     }
 }

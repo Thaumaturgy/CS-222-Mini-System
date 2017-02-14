@@ -83,7 +83,8 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.txtBoxDTP = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCivilStatus = new System.Windows.Forms.TextBox();
+            this.txtGender = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.tabCustomer.SuspendLayout();
             this.tabPagePersonalDetails.SuspendLayout();
@@ -147,11 +148,8 @@
             // 
             this.tabPagePersonalDetails.BackColor = System.Drawing.Color.SlateBlue;
             this.tabPagePersonalDetails.Controls.Add(this.checkBoxEditMode);
-            this.tabPagePersonalDetails.Controls.Add(this.cBoxGender);
             this.tabPagePersonalDetails.Controls.Add(this.button2);
             this.tabPagePersonalDetails.Controls.Add(this.button1);
-            this.tabPagePersonalDetails.Controls.Add(this.textBox1);
-            this.tabPagePersonalDetails.Controls.Add(this.txtBoxDTP);
             this.tabPagePersonalDetails.Controls.Add(this.txtPIN);
             this.tabPagePersonalDetails.Controls.Add(this.txtPNum);
             this.tabPagePersonalDetails.Controls.Add(this.txtTelNum);
@@ -171,8 +169,12 @@
             this.tabPagePersonalDetails.Controls.Add(this.lblJobDescription);
             this.tabPagePersonalDetails.Controls.Add(this.lblBirthDate);
             this.tabPagePersonalDetails.Controls.Add(this.lblHomeAddress);
+            this.tabPagePersonalDetails.Controls.Add(this.cBoxGender);
             this.tabPagePersonalDetails.Controls.Add(this.dtpBdate);
             this.tabPagePersonalDetails.Controls.Add(this.cBoxCivilStatus);
+            this.tabPagePersonalDetails.Controls.Add(this.txtBoxDTP);
+            this.tabPagePersonalDetails.Controls.Add(this.txtGender);
+            this.tabPagePersonalDetails.Controls.Add(this.txtCivilStatus);
             this.tabPagePersonalDetails.Location = new System.Drawing.Point(4, 25);
             this.tabPagePersonalDetails.Name = "tabPagePersonalDetails";
             this.tabPagePersonalDetails.Padding = new System.Windows.Forms.Padding(3);
@@ -193,7 +195,6 @@
             // 
             // cBoxCivilStatus
             // 
-            this.cBoxCivilStatus.Enabled = false;
             this.cBoxCivilStatus.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cBoxCivilStatus.FormattingEnabled = true;
             this.cBoxCivilStatus.Items.AddRange(new object[] {
@@ -205,21 +206,21 @@
             this.cBoxCivilStatus.Name = "cBoxCivilStatus";
             this.cBoxCivilStatus.Size = new System.Drawing.Size(121, 24);
             this.cBoxCivilStatus.TabIndex = 20;
+            this.cBoxCivilStatus.Visible = false;
             // 
             // dtpBdate
             // 
             this.dtpBdate.CustomFormat = "MM/dd/yyyy";
-            this.dtpBdate.Enabled = false;
             this.dtpBdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpBdate.Location = new System.Drawing.Point(141, 107);
             this.dtpBdate.Name = "dtpBdate";
             this.dtpBdate.Size = new System.Drawing.Size(122, 22);
             this.dtpBdate.TabIndex = 19;
+            this.dtpBdate.Visible = false;
             this.dtpBdate.ValueChanged += new System.EventHandler(this.dtpBdate_ValueChanged);
             // 
             // cBoxGender
             // 
-            this.cBoxGender.Enabled = false;
             this.cBoxGender.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cBoxGender.FormattingEnabled = true;
             this.cBoxGender.Items.AddRange(new object[] {
@@ -229,6 +230,7 @@
             this.cBoxGender.Name = "cBoxGender";
             this.cBoxGender.Size = new System.Drawing.Size(100, 24);
             this.cBoxGender.TabIndex = 18;
+            this.cBoxGender.Visible = false;
             // 
             // button2
             // 
@@ -252,7 +254,6 @@
             // 
             this.txtPIN.BackColor = System.Drawing.Color.White;
             this.txtPIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPIN.Enabled = false;
             this.txtPIN.Location = new System.Drawing.Point(299, 45);
             this.txtPIN.MaxLength = 4;
             this.txtPIN.Name = "txtPIN";
@@ -266,7 +267,6 @@
             // 
             this.txtPNum.BackColor = System.Drawing.Color.White;
             this.txtPNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPNum.Enabled = false;
             this.txtPNum.Location = new System.Drawing.Point(215, 352);
             this.txtPNum.Name = "txtPNum";
             this.txtPNum.ReadOnly = true;
@@ -278,7 +278,6 @@
             // 
             this.txtTelNum.BackColor = System.Drawing.Color.White;
             this.txtTelNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTelNum.Enabled = false;
             this.txtTelNum.Location = new System.Drawing.Point(25, 352);
             this.txtTelNum.Name = "txtTelNum";
             this.txtTelNum.ReadOnly = true;
@@ -290,7 +289,6 @@
             // 
             this.txtWorkingAdd.BackColor = System.Drawing.Color.White;
             this.txtWorkingAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtWorkingAdd.Enabled = false;
             this.txtWorkingAdd.Location = new System.Drawing.Point(25, 289);
             this.txtWorkingAdd.Name = "txtWorkingAdd";
             this.txtWorkingAdd.ReadOnly = true;
@@ -301,7 +299,6 @@
             // 
             this.txtJobDesc.BackColor = System.Drawing.Color.White;
             this.txtJobDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtJobDesc.Enabled = false;
             this.txtJobDesc.Location = new System.Drawing.Point(25, 228);
             this.txtJobDesc.Name = "txtJobDesc";
             this.txtJobDesc.ReadOnly = true;
@@ -312,7 +309,6 @@
             // 
             this.txtHomeAdd.BackColor = System.Drawing.Color.White;
             this.txtHomeAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtHomeAdd.Enabled = false;
             this.txtHomeAdd.Location = new System.Drawing.Point(25, 168);
             this.txtHomeAdd.Name = "txtHomeAdd";
             this.txtHomeAdd.ReadOnly = true;
@@ -323,7 +319,6 @@
             // 
             this.txtLN.BackColor = System.Drawing.Color.White;
             this.txtLN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtLN.Enabled = false;
             this.txtLN.Location = new System.Drawing.Point(141, 45);
             this.txtLN.Name = "txtLN";
             this.txtLN.ReadOnly = true;
@@ -334,7 +329,6 @@
             // 
             this.txtFN.BackColor = System.Drawing.Color.White;
             this.txtFN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFN.Enabled = false;
             this.txtFN.Location = new System.Drawing.Point(25, 45);
             this.txtFN.Name = "txtFN";
             this.txtFN.ReadOnly = true;
@@ -712,7 +706,6 @@
             // 
             this.txtBoxDTP.BackColor = System.Drawing.Color.White;
             this.txtBoxDTP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBoxDTP.Enabled = false;
             this.txtBoxDTP.Location = new System.Drawing.Point(141, 107);
             this.txtBoxDTP.Name = "txtBoxDTP";
             this.txtBoxDTP.ReadOnly = true;
@@ -721,18 +714,31 @@
             this.txtBoxDTP.TextChanged += new System.EventHandler(this.txtPIN_TextChanged);
             this.txtBoxDTP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPIN_KeyDown);
             // 
-            // textBox1
+            // txtCivilStatus
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(403, 108);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(122, 22);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.TextChanged += new System.EventHandler(this.txtPIN_TextChanged);
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPIN_KeyDown);
+            this.txtCivilStatus.BackColor = System.Drawing.Color.White;
+            this.txtCivilStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCivilStatus.Location = new System.Drawing.Point(276, 110);
+            this.txtCivilStatus.Multiline = true;
+            this.txtCivilStatus.Name = "txtCivilStatus";
+            this.txtCivilStatus.ReadOnly = true;
+            this.txtCivilStatus.Size = new System.Drawing.Size(122, 23);
+            this.txtCivilStatus.TabIndex = 16;
+            this.txtCivilStatus.TextChanged += new System.EventHandler(this.txtPIN_TextChanged);
+            this.txtCivilStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPIN_KeyDown);
+            // 
+            // txtGender
+            // 
+            this.txtGender.BackColor = System.Drawing.Color.White;
+            this.txtGender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtGender.Location = new System.Drawing.Point(25, 107);
+            this.txtGender.Multiline = true;
+            this.txtGender.Name = "txtGender";
+            this.txtGender.ReadOnly = true;
+            this.txtGender.Size = new System.Drawing.Size(100, 25);
+            this.txtGender.TabIndex = 16;
+            this.txtGender.TextChanged += new System.EventHandler(this.txtPIN_TextChanged);
+            this.txtGender.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPIN_KeyDown);
             // 
             // CustomerMgt
             // 
@@ -826,6 +832,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dgvPaymentHistory;
         private System.Windows.Forms.TextBox txtBoxDTP;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCivilStatus;
+        private System.Windows.Forms.TextBox txtGender;
     }
 }

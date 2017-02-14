@@ -102,11 +102,14 @@ namespace Customer
 
             //txtGender.Text = customerProfile[3];
             cBoxGender.Text = customerProfile[3] == "M" ? "Male" : "Female";
+            txtGender.Text = cBoxGender.Text; //Covering of cBoxGender
 
             //txtCivilStatus.Text = customerProfile[4];
             cBoxCivilStatus.Text = customerProfile[4];
+            txtCivilStatus.Text = cBoxCivilStatus.Text; //Covering of cBoxCivilStatus
 
             dtpBdate.Value = dh.getBDate(customerPIN);
+            txtBoxDTP.Text = dtpBdate.Value.ToString("MM/dd/yyyy");
             //txtBdate.Text = customerProfile[5];
 
             txtHomeAdd.Text = customerProfile[6];
@@ -281,19 +284,24 @@ namespace Customer
 
         private void checkBoxEditMode_CheckedChanged(object sender, EventArgs e)
         {
-                txtFN.Enabled = checkBoxEditMode.Checked;
-                txtLN.Enabled = checkBoxEditMode.Checked;
-                cBoxGender.Enabled = checkBoxEditMode.Checked;
-                cBoxCivilStatus.Enabled = checkBoxEditMode.Checked;
-                dtpBdate.Enabled = checkBoxEditMode.Checked;
-                txtHomeAdd.Enabled = checkBoxEditMode.Checked;
-                txtJobDesc.Enabled = checkBoxEditMode.Checked;
-                txtWorkingAdd.Enabled = checkBoxEditMode.Checked;
-                txtTelNum.Enabled = checkBoxEditMode.Checked;
-                txtPNum.Enabled = checkBoxEditMode.Checked;
-                txtPIN.Enabled = checkBoxEditMode.Checked;
+
+            //Set their visibility according to whether Edit Mode is On or Not
+            cBoxGender.Visible = checkBoxEditMode.Checked;
+            cBoxCivilStatus.Visible = checkBoxEditMode.Checked;
+            dtpBdate.Visible = checkBoxEditMode.Checked;
 
 
+            txtFN.ReadOnly = checkBoxEditMode.Checked;
+            txtLN.ReadOnly = checkBoxEditMode.Checked;
+            cBoxCivilStatus.Visible = checkBoxEditMode.Checked;
+            txtHomeAdd.ReadOnly = checkBoxEditMode.Checked;
+            txtJobDesc.ReadOnly = checkBoxEditMode.Checked;
+            txtWorkingAdd.ReadOnly = checkBoxEditMode.Checked;
+            txtTelNum.ReadOnly = checkBoxEditMode.Checked;
+            txtPNum.ReadOnly = checkBoxEditMode.Checked;
+            txtPIN.ReadOnly = checkBoxEditMode.Checked;
+
+            hasMadeEdits();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -338,6 +346,32 @@ namespace Customer
         private void dtpBdate_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+        
+        private void hasMadeEdits()
+        {
+            string[] customerProfile = dh.getCustomerProfile(customerPIN);
+            if (txtFN.Text == customerProfile[1] && txtLN.Text == customerProfile[2] && cBoxGender.Text == cBoxGender.Text
+                && cBoxCivilStatus.Text == customerProfile[4] && txtHomeAdd.Text == customerProfile[6]
+                && txtJobDesc.Text == customerProfile[7] && txtWorkingAdd.Text == customerProfile[8]
+                && txtTelNum.Text == customerProfile[9] && txtPNum.Text == customerProfile[10]
+                && txtPIN.Text == customerProfile[11] && dtpBdate.Value == dh.getBDate(customerPIN))
+                Console.WriteLine("No Edits Made");
+            else
+                Console.WriteLine("Edits Made");
+
+
+
+            //txtGender.Text = customerProfile[3];
+            cBoxGender.Text = customerProfile[3] == "M" ? "Male" : "Female";
+            ; //Covering of cBoxGender
+
+            
+            
+            
+            
+            
+            
         }
     }
 }
