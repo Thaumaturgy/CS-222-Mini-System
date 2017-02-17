@@ -49,6 +49,8 @@ namespace Customer
             }
             if(containsPeriod != -1)
                 txtPayment.SelectionStart = txtPayment.Text.Length - 3;
+
+            btnOK.Enabled = double.Parse(txtPayment.Text) != 0;
         }
 
         private void txtPayment_KeyDown(object sender, KeyEventArgs e)
@@ -67,7 +69,11 @@ namespace Customer
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if()
+            bool success = dh.addPayment(accountID, double.Parse(txtPayment.Text), DateTime.Now.ToString("yyyy-MM-dd"));
+            if (success)
+                MessageBox.Show("Payment Success", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Payment Fail", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

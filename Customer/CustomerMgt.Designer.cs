@@ -187,7 +187,7 @@
             // checkBoxEditMode
             // 
             this.checkBoxEditMode.AutoSize = true;
-            this.checkBoxEditMode.Location = new System.Drawing.Point(25, 449);
+            this.checkBoxEditMode.Location = new System.Drawing.Point(25, 460);
             this.checkBoxEditMode.Name = "checkBoxEditMode";
             this.checkBoxEditMode.Size = new System.Drawing.Size(93, 21);
             this.checkBoxEditMode.TabIndex = 21;
@@ -215,7 +215,7 @@
             this.btnApply.TabIndex = 17;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
-            this.btnApply.Click += new System.EventHandler(this.button1_Click);
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // txtPIN
             // 
@@ -301,6 +301,7 @@
             this.txtFN.ReadOnly = true;
             this.txtFN.Size = new System.Drawing.Size(100, 22);
             this.txtFN.TabIndex = 15;
+            this.txtFN.TextChanged += new System.EventHandler(this.txtFN_TextChanged);
             this.txtFN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFN_KeyDown);
             // 
             // lblPIN

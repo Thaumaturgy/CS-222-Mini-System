@@ -167,11 +167,11 @@ namespace Customer
             else
                 panelBreakdown.Visible = true;*/
 
-            lblMoneyLent.Text = "Money Lent: " + accountDetails[2];
-            lblInterest.Text = "Interest: " + dh.getInterestAmount(accountID);
-            lblTotalLoan.Text = "Total Loan: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]));
-            lblAmountPaid.Text = "Amount Paid: " + dh.getTotalPaymentOfAccount(accountID);
-            lblAmountRemaining.Text = "Amount Remaining: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPaymentOfAccount(accountID));
+            lblMoneyLent.Text = "Money Lent: " + (double.Parse(accountDetails[2]).ToString("0.00"));
+            lblInterest.Text = "Interest: " + (dh.getInterestAmount(accountID).ToString("0.00"));
+            lblTotalLoan.Text = "Total Loan: " + ((dh.getInterestAmount(accountID) + double.Parse(accountDetails[2])).ToString("0.00"));
+            lblAmountPaid.Text = "Amount Paid: " + (dh.getTotalPaymentOfAccount(accountID).ToString("0.00"));
+            lblAmountRemaining.Text = "Amount Remaining: " + ((dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPaymentOfAccount(accountID)).ToString("0.00"));
 
             panelBreakdown.Visible = true;
 
@@ -244,8 +244,8 @@ namespace Customer
 
             double totalLoan = dh.getTotalMoneyLentOfCustomer(customerID, 1) + dh.getTotalInterestOfCustomer(dh.getCustomerID(customerPIN), 1);
 
-            lblBalanceSummary.Text =  "Total Balance: " + dh.getTotalBalanceOfCustomer(customerID).ToString();
-            lblMoneyLentSummary.Text = "Total Loan: " + totalLoan;
+            lblBalanceSummary.Text =  "Total Balance: " + dh.getTotalBalanceOfCustomer(customerID).ToString("0.00");
+            lblMoneyLentSummary.Text = "Total Loan: " + totalLoan.ToString("0.00");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -320,7 +320,7 @@ namespace Customer
             txtPIN.ReadOnly = !checkBoxEditMode.Checked;
 
             btnApply.Enabled = checkBoxEditMode.Checked;
-            btnReset.Enabled = checkBoxEditMode.Checked;
+            btnResetEdit.Enabled = checkBoxEditMode.Checked;
             
         }
 
@@ -329,11 +329,11 @@ namespace Customer
             bool updateSuccess = dh.updateCustomer(dh.getCustomerID(customerPIN), txtFN.Text, txtLN.Text, gender, cBoxCivilStatus.Text, dtpBdate.Value.ToString("yyyy-MM-dd")
                         , txtHomeAdd.Text, txtJobDesc.Text, txtWorkingAdd.Text, txtTelNum.Text, txtPNum.Text, txtPIN.Text);
 
-            if (updateSuccess)
-            {
-                loadCustomersTable();
-                loadCustomerDetails(customerPIN);
-            }
+            loadCustomersTable();
+            loadCustomerDetails(customerPIN);
+
+            if(!updateSuccess)
+                MessageBox.Show("PIN already exists!", "Duplicate PIN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -375,8 +375,8 @@ namespace Customer
             for (int i = 0; i < temp.Rows.Count; i++)
             {
                 DataRow dr = accountPayments.NewRow();
-                dr[0] = temp.Rows[i][0];
-                dr[1] = temp.Rows[i][1];
+                dr[0] = double.Parse(temp.Rows[i][0].ToString()).ToString("0.00");
+                dr[1] = double.Parse(temp.Rows[i][1].ToString()).ToString("0.00");
                 dr[2] = ((DateTime)temp.Rows[i][2]).ToString("MM-dd-yyyy");
                 accountPayments.Rows.Add(dr);
             }
@@ -409,19 +409,13 @@ namespace Customer
             loadCustomerDetails(customerPIN);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            dgvCustomers.DataSource = null;
-            dgvAccounts.DataSource = null;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnApply_Click(object sender, EventArgs e)
         {
             string gender = cBoxGender.Text == "Male" ? "M" : "F";
 
             updateCustomer(dh.getCustomerID(customerPIN), txtFN.Text, txtLN.Text, gender, cBoxCivilStatus.Text, dtpBdate.Value.ToString("yyyy-MM-dd")
                 , txtHomeAdd.Text, txtJobDesc.Text, txtWorkingAdd.Text, txtTelNum.Text, txtPNum.Text, txtPIN.Text);
-
+            
             checkBoxEditMode.Checked = false;
         }
 
@@ -442,6 +436,11 @@ namespace Customer
                 loadCustomersTable();
                 loadCustomerAccounts(customerPIN);
             }
+        }
+
+        private void txtFN_TextChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
         }
     }
 }

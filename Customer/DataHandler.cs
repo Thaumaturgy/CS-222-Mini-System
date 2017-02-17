@@ -10,15 +10,6 @@ namespace Customer
     class DataHandler
     {
 
-        
-        /*static int Main(string[] args)
-        {
-            DataHandler dt = new DataHandler("localhost", "BoomBroom", "root", "root");
-            //dt.addCustomer("Atlas", "Brin", "M", "Widowed", "1960-02-15", "Davao", "Professor", "AdDU", "23214221", "2324242", "1652");
-            bool u =  dt.updateCustomer("Atlas", "Brin", "M", "Widowed", "1960-02-15", "Davao", "Professor", "AdDU", "23214221", "2324242", "1652", "1652");
-            Console.WriteLine(u);
-            return 0;
-        }*/
 
         public MySqlConnection conn;
 
@@ -63,6 +54,7 @@ namespace Customer
 
         public bool updateCustomer(int customerID, string fn, string ln, string gender, string civilStatus, string bDate, string homeAdd, string jobDesc, string workAdd, string telNum, string pNum, string PIN)
         {
+
                 string q = "UPDATE customer SET customerFName = '" + fn + "', customerLName = '" + ln + "', gender = '" + gender + "', civilStatus = '" + civilStatus + "', birthDate = '" + bDate + "', " +
                     "homeAddress = '" + homeAdd + "', jobDescription = '" + jobDesc + "', workingAddress = '" + workAdd + "', telNumber = '" + telNum + "', phoneNumber = '" + pNum + "', pinNumber = '" + PIN + "' "+
                     "WHERE customerID = "+customerID+";";
@@ -125,18 +117,28 @@ namespace Customer
         }
 
         public bool addPayment(int accountID, double paymentAmount, string paymentDate)
-        {
+        {//Adds payment and deactivates account when account is paid!
             int rowsAffected = 0;
             if (accountExists(accountID)) {
-                string q = "INSERT INTO payment(accountID, paymentAmount, paymenDate VALUES (" + accountID + "," + paymentAmount + ",'" + paymentDate + "');";
+                string q = "INSERT INTO payment(accountID, paymentAmount, paymentDate) VALUES (" + accountID + "," + paymentAmount + ",'" + paymentDate + "');";
                 conn.Open();
                 MySqlCommand com = new MySqlCommand(q, conn);
                 rowsAffected = com.ExecuteNonQuery();
-
-                double moneyLentWithInterest = double.Parse(getAccountDetails(accountID)[2]);
-                
-                //if(getTotalPaymentOfAccount(accountID) == ss
                 conn.Close();
+
+                double moneyLentWithInterest = double.Parse(getAccountDetails(accountID)[2]) + getInterestAmount(accountID);
+                
+                if(getTotalPaymentOfAccount(accountID) == moneyLentWithInterest)
+                {
+                    q = "UPDATE account SET status = 'Paid' WHERE accountID = " + accountID + ";";
+
+                    conn.Open();
+                    com = new MySqlCommand(q, conn);
+                    com.ExecuteNonQuery();
+                    conn.Close();
+                }
+
+                
             }
 
             return rowsAffected > 0;
