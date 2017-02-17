@@ -124,6 +124,26 @@ namespace Customer
             return customerProfile;
         }
 
+        public bool addPayment(int accountID, double paymentAmount, string paymentDate)
+        {
+            int rowsAffected = 0;
+            if (accountExists(accountID)) {
+                string q = "INSERT INTO payment(accountID, paymentAmount, paymenDate VALUES (" + accountID + "," + paymentAmount + ",'" + paymentDate + "');";
+                conn.Open();
+                MySqlCommand com = new MySqlCommand(q, conn);
+                rowsAffected = com.ExecuteNonQuery();
+
+                double moneyLentWithInterest = double.Parse(getAccountDetails(accountID)[2]);
+                
+                //if(getTotalPaymentOfAccount(accountID) == ss
+                conn.Close();
+            }
+
+            return rowsAffected > 0;
+            
+
+        }
+
         public bool addCard(string cardNumber, string bank)
         {
             int rowsAffected = 0;

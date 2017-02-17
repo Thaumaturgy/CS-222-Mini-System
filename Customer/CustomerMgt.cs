@@ -14,6 +14,7 @@ namespace Customer
     {
         DataHandler dh = new DataHandler("localhost", "boombroom", "root", "root");
         string customerPIN;
+        int accountID;
         public CustomerMgt()
         {
             InitializeComponent();
@@ -179,7 +180,7 @@ namespace Customer
         private void dgvAccounts_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
            //essageBox.Show("Cell clicked in dgvAccounts");
-            int accountID = int.Parse(dgvAccounts.Rows[e.RowIndex].Cells[0].Value.ToString());
+            accountID = int.Parse(dgvAccounts.Rows[e.RowIndex].Cells[0].Value.ToString());
             refreshAccountProfile(accountID);
             loadPaymentHistory(accountID);
 
@@ -432,6 +433,15 @@ namespace Customer
         private void btnAddPayment_Click(object sender, EventArgs e)
         {
 
+            
+            AddPayment ap = new AddPayment(accountID);
+            
+            DialogResult pay = ap.ShowDialog();
+            if(pay == DialogResult.OK)
+            {
+                loadCustomersTable();
+                loadCustomerAccounts(customerPIN);
+            }
         }
     }
 }

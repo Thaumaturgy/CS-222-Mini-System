@@ -64,6 +64,7 @@
             this.tabPageAccounts = new System.Windows.Forms.TabPage();
             this.btnAddAccount = new System.Windows.Forms.Button();
             this.panelBreakdown = new System.Windows.Forms.Panel();
+            this.btnAddPayment = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvPaymentHistory = new System.Windows.Forms.DataGridView();
             this.lblMoneyLent = new System.Windows.Forms.Label();
@@ -84,7 +85,6 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.btnAddPayment = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.tabCustomer.SuspendLayout();
             this.tabPagePersonalDetails.SuspendLayout();
@@ -531,6 +531,16 @@
             this.panelBreakdown.Size = new System.Drawing.Size(478, 214);
             this.panelBreakdown.TabIndex = 4;
             // 
+            // btnAddPayment
+            // 
+            this.btnAddPayment.Location = new System.Drawing.Point(23, 172);
+            this.btnAddPayment.Name = "btnAddPayment";
+            this.btnAddPayment.Size = new System.Drawing.Size(113, 24);
+            this.btnAddPayment.TabIndex = 4;
+            this.btnAddPayment.Text = "Add Payment";
+            this.btnAddPayment.UseVisualStyleBackColor = true;
+            this.btnAddPayment.Click += new System.EventHandler(this.btnAddPayment_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -741,16 +751,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
-            // btnAddPayment
-            // 
-            this.btnAddPayment.Location = new System.Drawing.Point(23, 172);
-            this.btnAddPayment.Name = "btnAddPayment";
-            this.btnAddPayment.Size = new System.Drawing.Size(113, 24);
-            this.btnAddPayment.TabIndex = 4;
-            this.btnAddPayment.Text = "Add Payment";
-            this.btnAddPayment.UseVisualStyleBackColor = true;
-            this.btnAddPayment.Click += new System.EventHandler(this.btnAddPayment_Click);
-            // 
             // CustomerMgt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -766,6 +766,7 @@
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnAddCustomer);
             this.Name = "CustomerMgt";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CustomerMgt";
             this.Load += new System.EventHandler(this.CustomerMgt_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
