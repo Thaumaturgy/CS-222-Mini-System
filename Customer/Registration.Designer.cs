@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.txtFN = new System.Windows.Forms.TextBox();
+            this.txtLN = new System.Windows.Forms.TextBox();
+            this.cboxCivilStatus = new System.Windows.Forms.ComboBox();
             this.rbtnMale = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rbtnFemale = new System.Windows.Forms.RadioButton();
@@ -54,33 +54,33 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtFN
             // 
-            this.textBox1.Location = new System.Drawing.Point(156, 77);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(144, 22);
-            this.textBox1.TabIndex = 0;
+            this.txtFN.Location = new System.Drawing.Point(156, 77);
+            this.txtFN.Name = "txtFN";
+            this.txtFN.Size = new System.Drawing.Size(144, 22);
+            this.txtFN.TabIndex = 0;
             // 
-            // textBox2
+            // txtLN
             // 
-            this.textBox2.Location = new System.Drawing.Point(156, 105);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(143, 22);
-            this.textBox2.TabIndex = 0;
+            this.txtLN.Location = new System.Drawing.Point(156, 105);
+            this.txtLN.Name = "txtLN";
+            this.txtLN.Size = new System.Drawing.Size(143, 22);
+            this.txtLN.TabIndex = 0;
             // 
-            // comboBox2
+            // cboxCivilStatus
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.cboxCivilStatus.FormattingEnabled = true;
+            this.cboxCivilStatus.Items.AddRange(new object[] {
             "",
             "Single",
             "Married",
             "Widowed",
             "Divorced"});
-            this.comboBox2.Location = new System.Drawing.Point(156, 163);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(143, 24);
-            this.comboBox2.TabIndex = 1;
+            this.cboxCivilStatus.Location = new System.Drawing.Point(156, 163);
+            this.cboxCivilStatus.Name = "cboxCivilStatus";
+            this.cboxCivilStatus.Size = new System.Drawing.Size(143, 24);
+            this.cboxCivilStatus.TabIndex = 1;
             // 
             // rbtnMale
             // 
@@ -250,7 +250,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(152, 23);
+            this.label8.Location = new System.Drawing.Point(103, 22);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(184, 17);
             this.label8.TabIndex = 6;
@@ -260,7 +260,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 506);
+            this.ClientSize = new System.Drawing.Size(352, 380);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -274,16 +274,16 @@
             this.Controls.Add(this.txtboxFname);
             this.Controls.Add(this.dtpBirthDate);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cboxCivilStatus);
             this.Controls.Add(this.txtboxPIN);
             this.Controls.Add(this.txtboxPhoneNum);
             this.Controls.Add(this.txtboxTelNum);
             this.Controls.Add(this.txtboxWorkingAddress);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtLN);
             this.Controls.Add(this.txtboxHomeAddress);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtFN);
             this.Name = "Registration";
-            this.Text = "Form1";
+            this.Text = "Registration";
             this.Load += new System.EventHandler(this.Registration_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -294,9 +294,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox txtFN;
+        private System.Windows.Forms.TextBox txtLN;
+        private System.Windows.Forms.ComboBox cboxCivilStatus;
         private System.Windows.Forms.RadioButton rbtnMale;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rbtnFemale;

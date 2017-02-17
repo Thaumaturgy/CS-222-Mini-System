@@ -147,6 +147,7 @@ namespace Customer
                 customerAccounts.Rows.Add(dr);
             }
 
+
             dgvAccounts.DataSource = customerAccounts;
 
             dgvAccounts.Columns[0].Visible = false; //Hides accountID columnf
@@ -317,7 +318,8 @@ namespace Customer
             txtPNum.ReadOnly = !checkBoxEditMode.Checked;
             txtPIN.ReadOnly = !checkBoxEditMode.Checked;
 
-            
+            btnApply.Enabled = checkBoxEditMode.Checked;
+            btnReset.Enabled = checkBoxEditMode.Checked;
             
         }
 
@@ -343,7 +345,19 @@ namespace Customer
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
+            if (!dh.hasPaidMoreThanHalf(dh.getCustomerID(customerPIN)))
+            {
+                MessageBox.Show("Cannot Add Account because customer hasn't paid half of the balances in active accounts!", "Cannot Add Account", MessageBoxButtons.OK);
+                return;
+            }
+            AddAccount aa = new AddAccount(dh.getCustomerID(customerPIN));
 
+            DialogResult addAccount = aa.ShowDialog();
+            if( addAccount == DialogResult.Yes)
+            {
+                loadCustomersTable();
+            }
+            
         }
 
         public void loadPaymentHistory(int accountID)
@@ -398,6 +412,26 @@ namespace Customer
         {
             dgvCustomers.DataSource = null;
             dgvAccounts.DataSource = null;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string gender = cBoxGender.Text == "Male" ? "M" : "F";
+
+            updateCustomer(dh.getCustomerID(customerPIN), txtFN.Text, txtLN.Text, gender, cBoxCivilStatus.Text, dtpBdate.Value.ToString("yyyy-MM-dd")
+                , txtHomeAdd.Text, txtJobDesc.Text, txtWorkingAdd.Text, txtTelNum.Text, txtPNum.Text, txtPIN.Text);
+
+            checkBoxEditMode.Checked = false;
+        }
+
+        private void dgvCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnAddPayment_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

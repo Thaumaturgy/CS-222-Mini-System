@@ -45,6 +45,8 @@ namespace Customer
             
         }
 
+
+
         public bool pinExists(String PIN)
         {
             conn.Open();
@@ -124,22 +126,22 @@ namespace Customer
 
         public bool addCard(string cardNumber, string bank)
         {
-            if (!cardExists(cardNumber)){
+            int rowsAffected = 0;
+            if (!cardExists(cardNumber, bank)){
                 string q = "INSERT INTO card(cardNumber, bank) VALUES ('" + cardNumber + "','" + bank + "');";
                 conn.Open();
                 MySqlCommand com = new MySqlCommand(q, conn);
-                int rowsAffected = com.ExecuteNonQuery();
+                rowsAffected = com.ExecuteNonQuery();
                 conn.Close();
-                Console.Write(q);
-                if (rowsAffected > 0) return true;
             }
-            return false;
+
+            return rowsAffected > 0;
         }
 
-        public bool cardExists(string cardNumber)
+        public bool cardExists(string cardNumber, string bank)
         {
             conn.Open();
-            MySqlCommand com = new MySqlCommand("SELECT cardID from card WHERE cardNumber = '" + cardNumber + "';", conn);
+            MySqlCommand com = new MySqlCommand("SELECT cardID from card WHERE cardNumber = '" + cardNumber + "' AND bank = '"+ bank +"';", conn);
             MySqlDataAdapter adp = new MySqlDataAdapter(com);
             DataTable dt = new DataTable();
             adp.Fill(dt);
@@ -149,17 +151,17 @@ namespace Customer
             return false;
         }
 
-        public int getCardID(string cardNumber)
+        public int getCardID(string cardNumber, string bank)
         {
-            if (!cardExists(cardNumber))
+            if (!cardExists(cardNumber, bank))
                 return -1; //bad coding style actually. Gah. it's the easy way tho.
 
-            return int.Parse(getCardDetails(cardNumber)[0]);
+            return int.Parse(getCardDetails(cardNumber, bank)[0]);
         }
 
-        public string[] getCardDetails(string cardNumber) //highly discouraged from using index [0] as it contains ID as string
+        public string[] getCardDetails(string cardNumber, string bank) //highly discouraged from using index [0] as it contains ID as string
         {
-            if (cardExists(cardNumber)) return null;
+            if (!cardExists(cardNumber, bank)) return null;
 
             string q = "SELECT * from card WHERE cardNumber = '" + cardNumber + "';";
             conn.Open();
@@ -181,18 +183,7 @@ namespace Customer
             return cardDetails;
         }
 
-        public bool addAccountCard(int accID, int cardID)
-        {
-            String q = "INSERT INTO account_card(accID, cID) VALUES (" + accID + "," + cardID + ");";
-            conn.Open();
-            MySqlCommand com = new MySqlCommand(q, conn);
-            int rowsAffected = com.ExecuteNonQuery();
-            conn.Close();
-            Console.Write(q);
-
-            if (rowsAffected > 0) return true;
-            return false;
-        }
+        
 
         public bool hasPaidMoreThanHalf(int customerID) //Paid more than half of Loan in each account?
         {
@@ -360,15 +351,18 @@ namespace Customer
         public bool addAccount(int customerID, double moneyLent, string entryDate, string status, double interest)
         {
             //yyyy-mm-dd
+            int rowsAffected = 0;
+            if (hasPaidMoreThanHalf(customerID))
+            {
+                String q = "INSERT INTO account(customerID, moneyLent, entryDate, status, interest) VALUES " +
+                        "(" + customerID + ", " + moneyLent + ", '" + entryDate + "', '" + status + "', " + interest + ");";
 
-            String q = "INSERT INTO account(customerID, moneyLent, entryDate, status, interest) VALUES " +
-                    "(" + customerID  + ", " + moneyLent + ", '" + entryDate + "', '" + status + "', " + interest + ");";
-
-            conn.Open();
-            MySqlCommand com = new MySqlCommand(q, conn);
-            int rowsAffected = com.ExecuteNonQuery();
-            conn.Close();
-            Console.Write(q);
+                conn.Open();
+                MySqlCommand com = new MySqlCommand(q, conn);
+                rowsAffected = com.ExecuteNonQuery();
+                conn.Close();
+                Console.Write(q);
+            }
 
             return rowsAffected > 0;
         }
@@ -678,20 +672,51 @@ namespace Customer
 
         }*/
 
+        public bool addCardToAccount(int accountID, string cardNumber, string bank)
+        {
+            if (!cardExists(cardNumber, bank))
+            {
+                string q = "INSERT INTO card(cardNumber, bank) VALUES ('cardNumber', 'bank');";
+                conn.Open();
+                MySqlCommand com = new MySqlCommand(q, conn);
+                com.ExecuteNonQuery();
+                conn.Close();
+            }
 
+            int cardID = getCardID(cardNumber, bank);
 
+            bool success = addAccountCard(accountID, cardID);
+            return success;
+        }
 
+        
+        public bool addAccountCard(int accID, int cardID)
+        {
+            String q = "INSERT INTO account_card(accID, cID) VALUES (" + accID + "," + cardID + ");";
+            conn.Open();
+            MySqlCommand com = new MySqlCommand(q, conn);
+            int rowsAffected = com.ExecuteNonQuery();
+            conn.Close();
 
+            return rowsAffected > 0;
+        }
 
+        public int getLastInsertedIDOfAccounts()
+        {
+            string q = "SELECT MAX(accountID) FROM account;";
+            MySqlCommand com = new MySqlCommand(q, conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            conn.Close();
 
+            int lastID = -1;
+            if (dt.Rows[0][0].ToString().Length == 0) //If Row 0 Cell 0 has no content, set lastID = -1;
+                lastID = -1;
+            else
+                lastID = int.Parse(dt.Rows[0][0].ToString());
 
-
-
-
-
-
-
-
-
+            return lastID;
+        }
     }
 }

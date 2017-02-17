@@ -35,7 +35,7 @@
             this.tabPagePersonalDetails = new System.Windows.Forms.TabPage();
             this.checkBoxEditMode = new System.Windows.Forms.CheckBox();
             this.btnResetEdit = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnApply = new System.Windows.Forms.Button();
             this.txtPIN = new System.Windows.Forms.TextBox();
             this.txtPNum = new System.Windows.Forms.TextBox();
             this.txtTelNum = new System.Windows.Forms.TextBox();
@@ -82,10 +82,9 @@
             this.txtSearchLN = new System.Windows.Forms.TextBox();
             this.txtSearchFN = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.btnResetCustomerTable = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnAddPayment = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.tabCustomer.SuspendLayout();
             this.tabPagePersonalDetails.SuspendLayout();
@@ -101,24 +100,26 @@
             // 
             this.dgvCustomers.AllowUserToAddRows = false;
             this.dgvCustomers.AllowUserToDeleteRows = false;
+            this.dgvCustomers.AllowUserToResizeColumns = false;
             this.dgvCustomers.AllowUserToResizeRows = false;
             this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCustomers.ColumnHeadersHeight = 25;
-            this.dgvCustomers.Location = new System.Drawing.Point(12, 121);
+            this.dgvCustomers.Location = new System.Drawing.Point(16, 143);
             this.dgvCustomers.MultiSelect = false;
             this.dgvCustomers.Name = "dgvCustomers";
             this.dgvCustomers.ReadOnly = true;
             this.dgvCustomers.RowHeadersVisible = false;
             this.dgvCustomers.RowTemplate.Height = 24;
             this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCustomers.Size = new System.Drawing.Size(363, 550);
+            this.dgvCustomers.Size = new System.Drawing.Size(473, 361);
             this.dgvCustomers.TabIndex = 0;
             this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
+            this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
             this.dgvCustomers.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellEnter);
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.Location = new System.Drawing.Point(12, 679);
+            this.btnAddCustomer.Location = new System.Drawing.Point(16, 106);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(129, 31);
             this.btnAddCustomer.TabIndex = 2;
@@ -139,10 +140,10 @@
             // 
             this.tabCustomer.Controls.Add(this.tabPagePersonalDetails);
             this.tabCustomer.Controls.Add(this.tabPageAccounts);
-            this.tabCustomer.Location = new System.Drawing.Point(381, 121);
+            this.tabCustomer.Location = new System.Drawing.Point(495, 12);
             this.tabCustomer.Name = "tabCustomer";
             this.tabCustomer.SelectedIndex = 0;
-            this.tabCustomer.Size = new System.Drawing.Size(562, 599);
+            this.tabCustomer.Size = new System.Drawing.Size(492, 571);
             this.tabCustomer.TabIndex = 5;
             // 
             // tabPagePersonalDetails
@@ -150,7 +151,7 @@
             this.tabPagePersonalDetails.BackColor = System.Drawing.Color.SlateBlue;
             this.tabPagePersonalDetails.Controls.Add(this.checkBoxEditMode);
             this.tabPagePersonalDetails.Controls.Add(this.btnResetEdit);
-            this.tabPagePersonalDetails.Controls.Add(this.button1);
+            this.tabPagePersonalDetails.Controls.Add(this.btnApply);
             this.tabPagePersonalDetails.Controls.Add(this.txtPIN);
             this.tabPagePersonalDetails.Controls.Add(this.txtPNum);
             this.tabPagePersonalDetails.Controls.Add(this.txtTelNum);
@@ -179,14 +180,14 @@
             this.tabPagePersonalDetails.Location = new System.Drawing.Point(4, 25);
             this.tabPagePersonalDetails.Name = "tabPagePersonalDetails";
             this.tabPagePersonalDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePersonalDetails.Size = new System.Drawing.Size(554, 570);
+            this.tabPagePersonalDetails.Size = new System.Drawing.Size(484, 542);
             this.tabPagePersonalDetails.TabIndex = 0;
             this.tabPagePersonalDetails.Text = "Personal Details";
             // 
             // checkBoxEditMode
             // 
             this.checkBoxEditMode.AutoSize = true;
-            this.checkBoxEditMode.Location = new System.Drawing.Point(12, 542);
+            this.checkBoxEditMode.Location = new System.Drawing.Point(25, 449);
             this.checkBoxEditMode.Name = "checkBoxEditMode";
             this.checkBoxEditMode.Size = new System.Drawing.Size(93, 21);
             this.checkBoxEditMode.TabIndex = 21;
@@ -196,7 +197,8 @@
             // 
             // btnResetEdit
             // 
-            this.btnResetEdit.Location = new System.Drawing.Point(101, 494);
+            this.btnResetEdit.Enabled = false;
+            this.btnResetEdit.Location = new System.Drawing.Point(116, 401);
             this.btnResetEdit.Name = "btnResetEdit";
             this.btnResetEdit.Size = new System.Drawing.Size(85, 42);
             this.btnResetEdit.TabIndex = 17;
@@ -204,14 +206,16 @@
             this.btnResetEdit.UseVisualStyleBackColor = true;
             this.btnResetEdit.Click += new System.EventHandler(this.btnResetEdit_Click);
             // 
-            // button1
+            // btnApply
             // 
-            this.button1.Location = new System.Drawing.Point(10, 494);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(85, 42);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Apply";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnApply.Enabled = false;
+            this.btnApply.Location = new System.Drawing.Point(25, 401);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(85, 42);
+            this.btnApply.TabIndex = 17;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtPIN
             // 
@@ -495,14 +499,14 @@
             this.tabPageAccounts.Location = new System.Drawing.Point(4, 25);
             this.tabPageAccounts.Name = "tabPageAccounts";
             this.tabPageAccounts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAccounts.Size = new System.Drawing.Size(554, 570);
+            this.tabPageAccounts.Size = new System.Drawing.Size(484, 542);
             this.tabPageAccounts.TabIndex = 2;
             this.tabPageAccounts.Text = "Accounts";
             this.tabPageAccounts.UseVisualStyleBackColor = true;
             // 
             // btnAddAccount
             // 
-            this.btnAddAccount.Location = new System.Drawing.Point(6, 20);
+            this.btnAddAccount.Location = new System.Drawing.Point(6, 6);
             this.btnAddAccount.Name = "btnAddAccount";
             this.btnAddAccount.Size = new System.Drawing.Size(108, 33);
             this.btnAddAccount.TabIndex = 5;
@@ -514,6 +518,7 @@
             // 
             this.panelBreakdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panelBreakdown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBreakdown.Controls.Add(this.btnAddPayment);
             this.panelBreakdown.Controls.Add(this.label2);
             this.panelBreakdown.Controls.Add(this.dgvPaymentHistory);
             this.panelBreakdown.Controls.Add(this.lblMoneyLent);
@@ -521,9 +526,9 @@
             this.panelBreakdown.Controls.Add(this.lblAmountPaid);
             this.panelBreakdown.Controls.Add(this.lblTotalLoan);
             this.panelBreakdown.Controls.Add(this.lblInterest);
-            this.panelBreakdown.Location = new System.Drawing.Point(7, 374);
+            this.panelBreakdown.Location = new System.Drawing.Point(3, 322);
             this.panelBreakdown.Name = "panelBreakdown";
-            this.panelBreakdown.Size = new System.Drawing.Size(540, 190);
+            this.panelBreakdown.Size = new System.Drawing.Size(478, 214);
             this.panelBreakdown.TabIndex = 4;
             // 
             // label2
@@ -541,14 +546,15 @@
             this.dgvPaymentHistory.AllowUserToAddRows = false;
             this.dgvPaymentHistory.AllowUserToDeleteRows = false;
             this.dgvPaymentHistory.AllowUserToResizeRows = false;
+            this.dgvPaymentHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPaymentHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPaymentHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPaymentHistory.Location = new System.Drawing.Point(241, 5);
+            this.dgvPaymentHistory.Location = new System.Drawing.Point(241, 3);
             this.dgvPaymentHistory.Name = "dgvPaymentHistory";
             this.dgvPaymentHistory.RowHeadersVisible = false;
             this.dgvPaymentHistory.RowTemplate.Height = 24;
             this.dgvPaymentHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPaymentHistory.Size = new System.Drawing.Size(294, 180);
+            this.dgvPaymentHistory.Size = new System.Drawing.Size(232, 206);
             this.dgvPaymentHistory.TabIndex = 0;
             // 
             // lblMoneyLent
@@ -604,13 +610,13 @@
             this.dgvAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAccounts.Location = new System.Drawing.Point(7, 69);
+            this.dgvAccounts.Location = new System.Drawing.Point(3, 72);
             this.dgvAccounts.Name = "dgvAccounts";
             this.dgvAccounts.ReadOnly = true;
             this.dgvAccounts.RowHeadersVisible = false;
             this.dgvAccounts.RowTemplate.Height = 24;
             this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccounts.Size = new System.Drawing.Size(540, 299);
+            this.dgvAccounts.Size = new System.Drawing.Size(475, 244);
             this.dgvAccounts.TabIndex = 0;
             this.dgvAccounts.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccounts_CellEnter);
             // 
@@ -618,9 +624,9 @@
             // 
             this.groupBox1.Controls.Add(this.lblBalanceSummary);
             this.groupBox1.Controls.Add(this.lblMoneyLentSummary);
-            this.groupBox1.Location = new System.Drawing.Point(381, 12);
+            this.groupBox1.Location = new System.Drawing.Point(19, 510);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(467, 58);
+            this.groupBox1.Size = new System.Drawing.Size(474, 73);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Customer Accounts Summary";
@@ -628,18 +634,20 @@
             // lblBalanceSummary
             // 
             this.lblBalanceSummary.AutoSize = true;
-            this.lblBalanceSummary.Location = new System.Drawing.Point(277, 24);
+            this.lblBalanceSummary.Location = new System.Drawing.Point(211, 21);
             this.lblBalanceSummary.Name = "lblBalanceSummary";
-            this.lblBalanceSummary.Size = new System.Drawing.Size(59, 17);
+            this.lblBalanceSummary.Padding = new System.Windows.Forms.Padding(4);
+            this.lblBalanceSummary.Size = new System.Drawing.Size(67, 25);
             this.lblBalanceSummary.TabIndex = 0;
             this.lblBalanceSummary.Text = "Balance";
             // 
             // lblMoneyLentSummary
             // 
             this.lblMoneyLentSummary.AutoSize = true;
-            this.lblMoneyLentSummary.Location = new System.Drawing.Point(11, 24);
+            this.lblMoneyLentSummary.Location = new System.Drawing.Point(6, 20);
             this.lblMoneyLentSummary.Name = "lblMoneyLentSummary";
-            this.lblMoneyLentSummary.Size = new System.Drawing.Size(76, 17);
+            this.lblMoneyLentSummary.Padding = new System.Windows.Forms.Padding(4);
+            this.lblMoneyLentSummary.Size = new System.Drawing.Size(84, 25);
             this.lblMoneyLentSummary.TabIndex = 0;
             this.lblMoneyLentSummary.Text = "Total Loan";
             // 
@@ -651,9 +659,9 @@
             this.panel1.Controls.Add(this.txtSearchLN);
             this.panel1.Controls.Add(this.txtSearchFN);
             this.panel1.Controls.Add(this.btnSearch);
-            this.panel1.Location = new System.Drawing.Point(16, 57);
+            this.panel1.Location = new System.Drawing.Point(16, 42);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(359, 58);
+            this.panel1.Size = new System.Drawing.Size(473, 58);
             this.panel1.TabIndex = 8;
             // 
             // label3
@@ -705,7 +713,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(295, 3);
+            this.btnSearch.Location = new System.Drawing.Point(287, 5);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(61, 50);
             this.btnSearch.TabIndex = 9;
@@ -713,29 +721,19 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnResetCustomerTable
-            // 
-            this.btnResetCustomerTable.Location = new System.Drawing.Point(147, 680);
-            this.btnResetCustomerTable.Name = "btnResetCustomerTable";
-            this.btnResetCustomerTable.Size = new System.Drawing.Size(225, 31);
-            this.btnResetCustomerTable.TabIndex = 2;
-            this.btnResetCustomerTable.Text = "Reset Customer Table";
-            this.btnResetCustomerTable.UseVisualStyleBackColor = true;
-            this.btnResetCustomerTable.Click += new System.EventHandler(this.btnAddCustomer_Click);
-            // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(311, 4);
+            this.btnReset.Location = new System.Drawing.Point(147, 108);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(61, 50);
+            this.btnReset.Size = new System.Drawing.Size(102, 29);
             this.btnReset.TabIndex = 9;
-            this.btnReset.Text = "Reset";
+            this.btnReset.Text = "Reset Table";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(732, 92);
+            this.button3.Location = new System.Drawing.Point(255, 111);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 23);
             this.button3.TabIndex = 10;
@@ -743,32 +741,30 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
-            // button2
+            // btnAddPayment
             // 
-            this.button2.Location = new System.Drawing.Point(1038, 111);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnAddPayment.Location = new System.Drawing.Point(23, 172);
+            this.btnAddPayment.Name = "btnAddPayment";
+            this.btnAddPayment.Size = new System.Drawing.Size(113, 24);
+            this.btnAddPayment.TabIndex = 4;
+            this.btnAddPayment.Text = "Add Payment";
+            this.btnAddPayment.UseVisualStyleBackColor = true;
+            this.btnAddPayment.Click += new System.EventHandler(this.btnAddPayment_Click);
             // 
             // CustomerMgt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1237, 723);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(994, 588);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.dgvCustomers);
             this.Controls.Add(this.tabCustomer);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnResetCustomerTable);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnAddCustomer);
-            this.Controls.Add(this.dgvCustomers);
             this.Name = "CustomerMgt";
             this.Text = "CustomerMgt";
             this.Load += new System.EventHandler(this.CustomerMgt_Load);
@@ -817,7 +813,7 @@
         private System.Windows.Forms.TextBox txtWorkingAdd;
         private System.Windows.Forms.TextBox txtJobDesc;
         private System.Windows.Forms.TextBox txtHomeAdd;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.Button btnResetEdit;
         private System.Windows.Forms.DataGridView dgvAccounts;
         private System.Windows.Forms.Panel panelBreakdown;
@@ -838,7 +834,6 @@
         private System.Windows.Forms.TextBox txtSearchLN;
         private System.Windows.Forms.TextBox txtSearchFN;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Button btnResetCustomerTable;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.ComboBox cBoxGender;
         private System.Windows.Forms.DateTimePicker dtpBdate;
@@ -849,6 +844,6 @@
         private System.Windows.Forms.TextBox txtBoxDTP;
         private System.Windows.Forms.TextBox txtCivilStatus;
         private System.Windows.Forms.TextBox txtGender;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAddPayment;
     }
 }
