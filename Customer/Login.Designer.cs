@@ -39,32 +39,47 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(112, 9);
+            this.label1.BackColor = System.Drawing.Color.SlateBlue;
+            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.AliceBlue;
+            this.label1.Location = new System.Drawing.Point(137, 75);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 25);
+            this.label1.Size = new System.Drawing.Size(57, 36);
             this.label1.TabIndex = 0;
             this.label1.Text = "PIN";
             // 
             // txtboxLogin
             // 
-            this.txtboxLogin.Location = new System.Drawing.Point(83, 37);
+            this.txtboxLogin.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.txtboxLogin.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtboxLogin.Font = new System.Drawing.Font("Trebuchet MS", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtboxLogin.ForeColor = System.Drawing.Color.BlueViolet;
+            this.txtboxLogin.Location = new System.Drawing.Point(80, 128);
+            this.txtboxLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtboxLogin.MaxLength = 4;
             this.txtboxLogin.Name = "txtboxLogin";
-            this.txtboxLogin.Size = new System.Drawing.Size(100, 22);
+            this.txtboxLogin.Size = new System.Drawing.Size(189, 43);
             this.txtboxLogin.TabIndex = 1;
+            this.txtboxLogin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtboxLogin.TextChanged += new System.EventHandler(this.txtboxLogin_TextChanged);
             this.txtboxLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtboxLogin_KeyDown);
             this.txtboxLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxLogin_KeyPress);
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(94, 107);
+            this.btnLogin.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnLogin.Enabled = false;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.ForeColor = System.Drawing.Color.AliceBlue;
+            this.btnLogin.Location = new System.Drawing.Point(121, 199);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 30);
+            this.btnLogin.Size = new System.Drawing.Size(94, 43);
             this.btnLogin.TabIndex = 2;
+            this.btnLogin.TabStop = false;
             this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // menuStrip1
@@ -73,9 +88,10 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.adminToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 204);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 307);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(275, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(356, 30);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -90,16 +106,21 @@
             // Login
             // 
             this.AcceptButton = this.btnLogin;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 232);
+            this.BackColor = System.Drawing.Color.SlateBlue;
+            this.ClientSize = new System.Drawing.Size(356, 337);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtboxLogin);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Trebuchet MS", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Login";
+            this.Opacity = 0.9D;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.menuStrip1.ResumeLayout(false);

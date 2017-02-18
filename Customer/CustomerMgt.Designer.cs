@@ -62,6 +62,7 @@
             this.txtGender = new System.Windows.Forms.TextBox();
             this.txtCivilStatus = new System.Windows.Forms.TextBox();
             this.tabPageAccounts = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnAddAccount = new System.Windows.Forms.Button();
             this.panelBreakdown = new System.Windows.Forms.Panel();
             this.btnAddPayment = new System.Windows.Forms.Button();
@@ -197,24 +198,36 @@
             // 
             // btnResetEdit
             // 
+            this.btnResetEdit.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnResetEdit.Enabled = false;
+            this.btnResetEdit.FlatAppearance.BorderSize = 2;
+            this.btnResetEdit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.btnResetEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnResetEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResetEdit.ForeColor = System.Drawing.Color.White;
             this.btnResetEdit.Location = new System.Drawing.Point(116, 401);
             this.btnResetEdit.Name = "btnResetEdit";
             this.btnResetEdit.Size = new System.Drawing.Size(85, 42);
             this.btnResetEdit.TabIndex = 17;
             this.btnResetEdit.Text = "Reset";
-            this.btnResetEdit.UseVisualStyleBackColor = true;
+            this.btnResetEdit.UseVisualStyleBackColor = false;
             this.btnResetEdit.Click += new System.EventHandler(this.btnResetEdit_Click);
             // 
             // btnApply
             // 
+            this.btnApply.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnApply.Enabled = false;
+            this.btnApply.FlatAppearance.BorderSize = 2;
+            this.btnApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.btnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApply.ForeColor = System.Drawing.Color.White;
             this.btnApply.Location = new System.Drawing.Point(25, 401);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(85, 42);
             this.btnApply.TabIndex = 17;
             this.btnApply.Text = "Apply";
-            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.UseVisualStyleBackColor = false;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // txtPIN
@@ -239,6 +252,7 @@
             this.txtPNum.ReadOnly = true;
             this.txtPNum.Size = new System.Drawing.Size(154, 22);
             this.txtPNum.TabIndex = 15;
+            this.txtPNum.TextChanged += new System.EventHandler(this.txtPNum_TextChanged);
             this.txtPNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPNum_KeyDown);
             // 
             // txtTelNum
@@ -250,6 +264,7 @@
             this.txtTelNum.ReadOnly = true;
             this.txtTelNum.Size = new System.Drawing.Size(154, 22);
             this.txtTelNum.TabIndex = 15;
+            this.txtTelNum.TextChanged += new System.EventHandler(this.txtTelNum_TextChanged);
             this.txtTelNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTelNum_KeyDown);
             // 
             // txtWorkingAdd
@@ -261,6 +276,7 @@
             this.txtWorkingAdd.ReadOnly = true;
             this.txtWorkingAdd.Size = new System.Drawing.Size(306, 22);
             this.txtWorkingAdd.TabIndex = 15;
+            this.txtWorkingAdd.TextChanged += new System.EventHandler(this.txtWorkingAdd_TextChanged);
             // 
             // txtJobDesc
             // 
@@ -271,6 +287,7 @@
             this.txtJobDesc.ReadOnly = true;
             this.txtJobDesc.Size = new System.Drawing.Size(306, 22);
             this.txtJobDesc.TabIndex = 15;
+            this.txtJobDesc.TextChanged += new System.EventHandler(this.txtJobDesc_TextChanged);
             // 
             // txtHomeAdd
             // 
@@ -281,6 +298,7 @@
             this.txtHomeAdd.ReadOnly = true;
             this.txtHomeAdd.Size = new System.Drawing.Size(306, 22);
             this.txtHomeAdd.TabIndex = 15;
+            this.txtHomeAdd.TextChanged += new System.EventHandler(this.txtHomeAdd_TextChanged);
             // 
             // txtLN
             // 
@@ -291,6 +309,7 @@
             this.txtLN.ReadOnly = true;
             this.txtLN.Size = new System.Drawing.Size(100, 22);
             this.txtLN.TabIndex = 15;
+            this.txtLN.TextChanged += new System.EventHandler(this.txtLN_TextChanged);
             // 
             // txtFN
             // 
@@ -426,6 +445,7 @@
             this.cBoxGender.Size = new System.Drawing.Size(100, 24);
             this.cBoxGender.TabIndex = 18;
             this.cBoxGender.Visible = false;
+            this.cBoxGender.SelectedIndexChanged += new System.EventHandler(this.cBoxGender_SelectedIndexChanged);
             // 
             // dtpBdate
             // 
@@ -453,6 +473,7 @@
             this.cBoxCivilStatus.Size = new System.Drawing.Size(121, 24);
             this.cBoxCivilStatus.TabIndex = 20;
             this.cBoxCivilStatus.Visible = false;
+            this.cBoxCivilStatus.SelectedIndexChanged += new System.EventHandler(this.cBoxCivilStatus_SelectedIndexChanged);
             // 
             // txtBoxDTP
             // 
@@ -494,6 +515,7 @@
             // 
             // tabPageAccounts
             // 
+            this.tabPageAccounts.Controls.Add(this.label4);
             this.tabPageAccounts.Controls.Add(this.btnAddAccount);
             this.tabPageAccounts.Controls.Add(this.panelBreakdown);
             this.tabPageAccounts.Controls.Add(this.dgvAccounts);
@@ -505,9 +527,19 @@
             this.tabPageAccounts.Text = "Accounts";
             this.tabPageAccounts.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(174, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 26);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Accounts";
+            // 
             // btnAddAccount
             // 
-            this.btnAddAccount.Location = new System.Drawing.Point(6, 6);
+            this.btnAddAccount.Location = new System.Drawing.Point(369, 36);
             this.btnAddAccount.Name = "btnAddAccount";
             this.btnAddAccount.Size = new System.Drawing.Size(108, 33);
             this.btnAddAccount.TabIndex = 5;
@@ -767,14 +799,17 @@
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnAddCustomer);
             this.Name = "CustomerMgt";
+            this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CustomerMgt";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CustomerMgt_FormClosing);
             this.Load += new System.EventHandler(this.CustomerMgt_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.tabCustomer.ResumeLayout(false);
             this.tabPagePersonalDetails.ResumeLayout(false);
             this.tabPagePersonalDetails.PerformLayout();
             this.tabPageAccounts.ResumeLayout(false);
+            this.tabPageAccounts.PerformLayout();
             this.panelBreakdown.ResumeLayout(false);
             this.panelBreakdown.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentHistory)).EndInit();
@@ -847,5 +882,6 @@
         private System.Windows.Forms.TextBox txtCivilStatus;
         private System.Windows.Forms.TextBox txtGender;
         private System.Windows.Forms.Button btnAddPayment;
+        private System.Windows.Forms.Label label4;
     }
 }

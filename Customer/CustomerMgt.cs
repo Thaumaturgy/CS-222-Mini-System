@@ -24,6 +24,7 @@ namespace Customer
         {
             loadCustomersTable();
             dtpBdate.MaxDate = DateTime.Now;
+            
             //dgvAccounts.ClearSelection();
             //dgvCustomers.Rows[0].Selected = true;
             
@@ -86,6 +87,7 @@ namespace Customer
             loadCustomerDetails(customerPIN);
             loadCustomerAccounts(customerPIN);
             loadAccountsSummary(customerPIN);
+            btnAddAccount.Enabled = dh.hasPaidMoreThanHalf(dh.getCustomerID(customerPIN));
             //panelBreakdown.Visible = false;
             //dgvAccounts.ClearSelection();
 
@@ -121,6 +123,9 @@ namespace Customer
             txtTelNum.Text = customerProfile[9];
             txtPNum.Text = customerProfile[10];
             txtPIN.Text = customerProfile[11];
+
+            btnApply.Enabled = false;
+            btnResetEdit.Enabled = false;
 
         }
 
@@ -162,27 +167,24 @@ namespace Customer
         {
 
             string[] accountDetails = dh.getAccountDetails(accountID);
-            /*if (accountDetails[4] == "Paid")
-                panelBreakdown.Visible = false;
-            else
-                panelBreakdown.Visible = true;*/
 
             lblMoneyLent.Text = "Money Lent: " + (double.Parse(accountDetails[2]).ToString("0.00"));
             lblInterest.Text = "Interest: " + (dh.getInterestAmount(accountID).ToString("0.00"));
             lblTotalLoan.Text = "Total Loan: " + ((dh.getInterestAmount(accountID) + double.Parse(accountDetails[2])).ToString("0.00"));
             lblAmountPaid.Text = "Amount Paid: " + (dh.getTotalPaymentOfAccount(accountID).ToString("0.00"));
             lblAmountRemaining.Text = "Amount Remaining: " + ((dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPaymentOfAccount(accountID)).ToString("0.00"));
-
+            btnAddPayment.Visible = accountDetails[4] == "Active" ? true : false; // if account is active, set visible to true, else set to false;
             panelBreakdown.Visible = true;
+
+            loadPaymentHistory(accountID);
 
         }
 
         private void dgvAccounts_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-           //essageBox.Show("Cell clicked in dgvAccounts");
             accountID = int.Parse(dgvAccounts.Rows[e.RowIndex].Cells[0].Value.ToString());
             refreshAccountProfile(accountID);
-            loadPaymentHistory(accountID);
+            //Account Profile Refreshes breakdown and Payment history
 
         }
 
@@ -253,10 +255,7 @@ namespace Customer
             dgvAccounts.ClearSelection();
         }
 
-        private void txtPIN_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void txtPIN_KeyDown(object sender, KeyEventArgs e)
         {
@@ -319,23 +318,34 @@ namespace Customer
             txtPNum.ReadOnly = !checkBoxEditMode.Checked;
             txtPIN.ReadOnly = !checkBoxEditMode.Checked;
 
-            btnApply.Enabled = checkBoxEditMode.Checked;
-            btnResetEdit.Enabled = checkBoxEditMode.Checked;
+            btnApply.Enabled = false;
+            btnResetEdit.Enabled = false;
+            //Mgt can only reset after making edits
             
         }
 
         public void updateCustomer(int customerID, string fn, string ln, string gender, string civilStatus, string bDate, string homeAdd, string jobDesc, string workAdd, string telNum, string pNum, string PIN)
         {
-            bool updateSuccess = dh.updateCustomer(dh.getCustomerID(customerPIN), txtFN.Text, txtLN.Text, gender, cBoxCivilStatus.Text, dtpBdate.Value.ToString("yyyy-MM-dd")
-                        , txtHomeAdd.Text, txtJobDesc.Text, txtWorkingAdd.Text, txtTelNum.Text, txtPNum.Text, txtPIN.Text);
+
+            if (allFieldsFilled())
+            {
+                bool updateSuccess = dh.updateCustomer(dh.getCustomerID(customerPIN), txtFN.Text, txtLN.Text, gender, cBoxCivilStatus.Text, dtpBdate.Value.ToString("yyyy-MM-dd")
+                          , txtHomeAdd.Text, txtJobDesc.Text, txtWorkingAdd.Text, txtTelNum.Text, txtPNum.Text, txtPIN.Text);
+
+                if (!updateSuccess)
+                    MessageBox.Show("PIN already exists!", "Duplicate PIN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }else
+                MessageBox.Show("Customer fields must be complete!", "Incomplete Fields", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             loadCustomersTable();
             loadCustomerDetails(customerPIN);
-
-            if(!updateSuccess)
-                MessageBox.Show("PIN already exists!", "Duplicate PIN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
+        public bool allFieldsFilled()
+        {
+            return !(txtFN.Text == "" || txtLN.Text == "" || txtHomeAdd.Text == "" || txtWorkingAdd.Text == "" || txtTelNum.Text == ""
+                || txtPNum.Text == "");
+        }
         private void button3_Click_1(object sender, EventArgs e)
         {
             if (dh.hasPaidMoreThanHalf(dh.getCustomerID(customerPIN)))
@@ -366,41 +376,42 @@ namespace Customer
             DataTable temp = dh.getAllPaymentsByAccountDataTable(accountID);
 
             DataTable accountPayments = new DataTable();
-            accountPayments.Columns.Add("accountID"); //For Data Storing ONLY!!
+            //accountPayments.Columns.Add("accountID"); //For Data Storing ONLY!!
             accountPayments.Columns.Add("Payment Amount");
             accountPayments.Columns.Add("Payment Date");
             
-
-            Console.WriteLine("THis guy has n payments :" + temp.Rows.Count);
             for (int i = 0; i < temp.Rows.Count; i++)
             {
                 DataRow dr = accountPayments.NewRow();
-                dr[0] = double.Parse(temp.Rows[i][0].ToString()).ToString("0.00");
-                dr[1] = double.Parse(temp.Rows[i][1].ToString()).ToString("0.00");
-                dr[2] = ((DateTime)temp.Rows[i][2]).ToString("MM-dd-yyyy");
+                dr[0] = double.Parse(temp.Rows[i][2].ToString()).ToString("0.00");
+                dr[1] = ((DateTime)temp.Rows[i][3]).ToString("MM-dd-yyyy");
+                //dr[1] = double.Parse(temp.Rows[i][1].ToString()).ToString("0.00");
+
+                
                 accountPayments.Rows.Add(dr);
             }
 
             dgvPaymentHistory.DataSource = accountPayments;
 
-            dgvPaymentHistory.Columns[0].Visible = false; //Hide accountID!
             dgvPaymentHistory.ClearSelection();
         }
 
         private void dtpBdate_ValueChanged(object sender, EventArgs e)
         {
-
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
         }
         
         private bool hasMadeEdits()
         {
             string[] customerProfile = dh.getCustomerProfile(customerPIN);
-
-            return !(txtFN.Text == customerProfile[1] && txtLN.Text == customerProfile[2] && cBoxGender.Text == cBoxGender.Text
+            string gender = customerProfile[3] == "M" ? "Male" : "Female";
+            return !(txtFN.Text == customerProfile[1] && txtLN.Text == customerProfile[2] && cBoxGender.Text == gender
                 && cBoxCivilStatus.Text == customerProfile[4] && txtHomeAdd.Text == customerProfile[6]
                 && txtJobDesc.Text == customerProfile[7] && txtWorkingAdd.Text == customerProfile[8]
                 && txtTelNum.Text == customerProfile[9] && txtPNum.Text == customerProfile[10]
-                && txtPIN.Text == customerProfile[11] && dtpBdate.Value == dh.getBDate(customerPIN));
+                && txtPIN.Text == customerProfile[11] && dtpBdate.Value == dh.getBDate(customerPIN))  && txtPIN.Text.Length == 4;
+
             //Returns !(allFieldsTheSame);
         }
 
@@ -434,13 +445,74 @@ namespace Customer
             if(pay == DialogResult.OK)
             {
                 loadCustomersTable();
-                loadCustomerAccounts(customerPIN);
+                //loadCustomerAccounts(customerPIN);
             }
         }
 
         private void txtFN_TextChanged(object sender, EventArgs e)
         {
             btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void txtLN_TextChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void cBoxGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void cBoxCivilStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void txtHomeAdd_TextChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void txtJobDesc_TextChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void txtWorkingAdd_TextChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void txtTelNum_TextChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void txtPNum_TextChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void txtPIN_TextChanged(object sender, EventArgs e)
+        {
+            btnResetEdit.Enabled = hasMadeEdits();
+            btnApply.Enabled = btnResetEdit.Enabled;
+        }
+
+        private void CustomerMgt_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
         }
     }
 }

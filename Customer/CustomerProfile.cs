@@ -14,18 +14,19 @@ namespace Customer
     {
         DataHandler dh = new DataHandler("localhost", "boombroom", "root", "root");
 
-        int customerID;
+        string customerPIN;
         //bool isAdmin; //PIVOTAL PARAMETER!
-        public CustomerProfile(int customerID)
+        public CustomerProfile(string customerPIN)
         {
-            this.customerID = customerID;
+            this.customerPIN = customerPIN;
             InitializeComponent();
         }
 
         private void CustomerProfile_Load(object sender, EventArgs e)
         {
             //dataGridView1.DataSource;
-            loadCustomerAccounts(customerID);
+            lblWelcome.Text = "Welcome, " + dh.getCustomerProfile(customerPIN)[1];
+            loadCustomerAccounts(dh.getCustomerID(customerPIN));
 
         }
 
@@ -78,12 +79,16 @@ namespace Customer
             lblEntryDate.Text = "Entry Date: " + dh.getEntryDate(accountID).ToString("MM-dd-yyyy");
             lblInterestRate.Text = "Interest Rate: " + accountDetails[5];
             lblMoneyLent.Text = "Money Lent: " + accountDetails[2];
-            lblStatus.Text = "Status: " + accountDetails[4];
+            lblStatus.Text = accountDetails[4];
             lblInterest.Text = "Interest: " + dh.getInterestAmount(accountID);
             lblTotalLoan.Text = "Total Loan: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]));
             lblAmountPaid.Text = "Amount Paid: " + dh.getTotalPaymentOfAccount(accountID);
             lblAmountRemaining.Text = "Amount Remaining: " + (dh.getInterestAmount(accountID) + double.Parse(accountDetails[2]) - dh.getTotalPaymentOfAccount(accountID));
 
+            if (accountDetails[4] == "Active")
+                lblStatus.ForeColor = Color.LimeGreen;
+            else
+                lblStatus.ForeColor = Color.Red;
 
         }
 
@@ -106,9 +111,9 @@ namespace Customer
             for (int i = 0; i < temp.Rows.Count; i++)
             {
                 DataRow dr = accountPayments.NewRow();
-                dr[0] = temp.Rows[i][0];
-                dr[1] = temp.Rows[i][1];
-                dr[2] = ((DateTime)temp.Rows[i][2]).ToString("MM-dd-yyyy");
+                dr[0] = temp.Rows[i][1];
+                dr[1] = temp.Rows[i][2];
+                dr[2] = ((DateTime)temp.Rows[i][3]).ToString("MM-dd-yyyy");
                 accountPayments.Rows.Add(dr);
             }
 
@@ -118,6 +123,10 @@ namespace Customer
            // dgvPaymentHistory.ClearSelection();
         }
 
-
+        private void CustomerProfile_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+        }
     }
 }

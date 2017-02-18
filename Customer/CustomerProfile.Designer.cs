@@ -28,52 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label1 = new System.Windows.Forms.Label();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.lblAccount = new System.Windows.Forms.Label();
             this.dgvAccounts = new System.Windows.Forms.DataGridView();
             this.grpboxAccountDetails = new System.Windows.Forms.GroupBox();
             this.panelBreakdown = new System.Windows.Forms.Panel();
+            this.dgvPaymentHistory = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.lblMoneyLent = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.lblAmountRemaining = new System.Windows.Forms.Label();
             this.lblAmountPaid = new System.Windows.Forms.Label();
             this.lblTotalLoan = new System.Windows.Forms.Label();
             this.lblInterest = new System.Windows.Forms.Label();
             this.lblInterestRate = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblEntryDate = new System.Windows.Forms.Label();
-            this.dgvPaymentHistory = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.grpboxAccountDetails.SuspendLayout();
             this.panelBreakdown.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPaymentHistory)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblWelcome
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(211, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 32);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Welcome";
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.BackColor = System.Drawing.Color.Transparent;
+            this.lblWelcome.Font = new System.Drawing.Font("Trebuchet MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.ForeColor = System.Drawing.Color.White;
+            this.lblWelcome.Location = new System.Drawing.Point(211, 9);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(128, 36);
+            this.lblWelcome.TabIndex = 0;
+            this.lblWelcome.Text = "Welcome";
             // 
             // lblAccount
             // 
             this.lblAccount.AutoSize = true;
             this.lblAccount.BackColor = System.Drawing.Color.Transparent;
+            this.lblAccount.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAccount.ForeColor = System.Drawing.Color.White;
             this.lblAccount.Location = new System.Drawing.Point(12, 62);
             this.lblAccount.Name = "lblAccount";
-            this.lblAccount.Size = new System.Drawing.Size(186, 17);
+            this.lblAccount.Size = new System.Drawing.Size(143, 23);
             this.lblAccount.TabIndex = 1;
-            this.lblAccount.Text = "Number of Active Accounts: ";
+            this.lblAccount.Text = "Active Accounts: ";
             // 
             // dgvAccounts
             // 
@@ -84,16 +86,16 @@
             this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAccounts.BackgroundColor = System.Drawing.Color.SlateBlue;
             this.dgvAccounts.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvAccounts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.dgvAccounts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Thistle;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Plum;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Plum;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Violet;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAccounts.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvAccounts.GridColor = System.Drawing.Color.SlateBlue;
             this.dgvAccounts.Location = new System.Drawing.Point(12, 96);
             this.dgvAccounts.MultiSelect = false;
@@ -104,12 +106,14 @@
             this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAccounts.Size = new System.Drawing.Size(560, 476);
             this.dgvAccounts.TabIndex = 2;
+            this.dgvAccounts.TabStop = false;
             this.dgvAccounts.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccounts_CellEnter);
             // 
             // grpboxAccountDetails
             // 
             this.grpboxAccountDetails.Controls.Add(this.panelBreakdown);
             this.grpboxAccountDetails.Controls.Add(this.lblInterestRate);
+            this.grpboxAccountDetails.Controls.Add(this.label3);
             this.grpboxAccountDetails.Controls.Add(this.lblStatus);
             this.grpboxAccountDetails.Controls.Add(this.lblEntryDate);
             this.grpboxAccountDetails.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -137,6 +141,35 @@
             this.panelBreakdown.Size = new System.Drawing.Size(358, 380);
             this.panelBreakdown.TabIndex = 3;
             // 
+            // dgvPaymentHistory
+            // 
+            this.dgvPaymentHistory.AllowUserToAddRows = false;
+            this.dgvPaymentHistory.AllowUserToDeleteRows = false;
+            this.dgvPaymentHistory.AllowUserToResizeRows = false;
+            this.dgvPaymentHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPaymentHistory.BackgroundColor = System.Drawing.Color.SlateBlue;
+            this.dgvPaymentHistory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvPaymentHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Plum;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Violet;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPaymentHistory.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvPaymentHistory.GridColor = System.Drawing.Color.SlateBlue;
+            this.dgvPaymentHistory.Location = new System.Drawing.Point(3, 209);
+            this.dgvPaymentHistory.MultiSelect = false;
+            this.dgvPaymentHistory.Name = "dgvPaymentHistory";
+            this.dgvPaymentHistory.ReadOnly = true;
+            this.dgvPaymentHistory.RowHeadersVisible = false;
+            this.dgvPaymentHistory.RowTemplate.Height = 24;
+            this.dgvPaymentHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPaymentHistory.Size = new System.Drawing.Size(350, 166);
+            this.dgvPaymentHistory.TabIndex = 4;
+            this.dgvPaymentHistory.TabStop = false;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -155,6 +188,16 @@
             this.lblMoneyLent.Size = new System.Drawing.Size(102, 23);
             this.lblMoneyLent.TabIndex = 0;
             this.lblMoneyLent.Text = "Money Lent:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(89, 177);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(190, 29);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Payment History";
             // 
             // lblAmountRemaining
             // 
@@ -196,20 +239,31 @@
             // lblInterestRate
             // 
             this.lblInterestRate.AutoSize = true;
-            this.lblInterestRate.Location = new System.Drawing.Point(6, 101);
+            this.lblInterestRate.Location = new System.Drawing.Point(6, 78);
             this.lblInterestRate.Name = "lblInterestRate";
             this.lblInterestRate.Size = new System.Drawing.Size(111, 23);
             this.lblInterestRate.TabIndex = 0;
             this.lblInterestRate.Text = "Interest Rate";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 23);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Status: ";
+            // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(4, 78);
+            this.lblStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblStatus.ForeColor = System.Drawing.Color.LimeGreen;
+            this.lblStatus.Location = new System.Drawing.Point(80, 32);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(58, 23);
             this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "Status";
+            this.lblStatus.Text = "status";
             // 
             // lblEntryDate
             // 
@@ -220,42 +274,6 @@
             this.lblEntryDate.TabIndex = 0;
             this.lblEntryDate.Text = "Entry Date";
             // 
-            // dgvPaymentHistory
-            // 
-            this.dgvPaymentHistory.AllowUserToAddRows = false;
-            this.dgvPaymentHistory.AllowUserToDeleteRows = false;
-            this.dgvPaymentHistory.AllowUserToResizeRows = false;
-            this.dgvPaymentHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPaymentHistory.BackgroundColor = System.Drawing.Color.SlateBlue;
-            this.dgvPaymentHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Thistle;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Plum;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPaymentHistory.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvPaymentHistory.GridColor = System.Drawing.Color.SlateBlue;
-            this.dgvPaymentHistory.Location = new System.Drawing.Point(3, 195);
-            this.dgvPaymentHistory.MultiSelect = false;
-            this.dgvPaymentHistory.Name = "dgvPaymentHistory";
-            this.dgvPaymentHistory.ReadOnly = true;
-            this.dgvPaymentHistory.RowHeadersVisible = false;
-            this.dgvPaymentHistory.RowTemplate.Height = 24;
-            this.dgvPaymentHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPaymentHistory.Size = new System.Drawing.Size(350, 180);
-            this.dgvPaymentHistory.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(75, 169);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(134, 23);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Payment History";
-            // 
             // CustomerProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -265,10 +283,11 @@
             this.Controls.Add(this.grpboxAccountDetails);
             this.Controls.Add(this.dgvAccounts);
             this.Controls.Add(this.lblAccount);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblWelcome);
             this.KeyPreview = true;
             this.Name = "CustomerProfile";
             this.Text = "Customer Profile";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CustomerProfile_FormClosing);
             this.Load += new System.EventHandler(this.CustomerProfile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
             this.grpboxAccountDetails.ResumeLayout(false);
@@ -283,7 +302,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Label lblAccount;
         private System.Windows.Forms.DataGridView dgvAccounts;
         private System.Windows.Forms.GroupBox grpboxAccountDetails;
@@ -299,5 +318,6 @@
         private System.Windows.Forms.Label lblAmountPaid;
         private System.Windows.Forms.DataGridView dgvPaymentHistory;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }

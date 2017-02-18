@@ -25,7 +25,7 @@ namespace Customer
                 string[] customer = dh.getCustomerProfile(txtboxLogin.Text);
                 MessageBox.Show("Welcome, " + customer[1]); //gets FirstName
                 this.Hide();
-                CustomerProfile cp = new CustomerProfile(dh.getCustomerID(txtboxLogin.Text));
+                CustomerProfile cp = new CustomerProfile(txtboxLogin.Text);
                 cp.Show();
             }
             else
@@ -61,7 +61,7 @@ namespace Customer
 
         private void txtboxLogin_TextChanged(object sender, EventArgs e)
         {
-
+            btnLogin.Enabled = txtboxLogin.Text.Length == 4;
         }
     }
 }

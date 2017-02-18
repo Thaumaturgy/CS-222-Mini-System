@@ -80,8 +80,23 @@ namespace Customer
 
         private void txtMoneyLent_TextChanged(object sender, EventArgs e)
         {
+            double totalMoneyLent = dh.getTotalMoneyLentOfCustomer(customerID, 1);
 
-            panel1.Enabled = txtMoneyLent.Text.Length > 0;
+
+            double loan = double.Parse(txtMoneyLent.Text);
+
+            if (loan + totalMoneyLent > 20000)
+            {
+                txtMoneyLent.Text = (20000 - totalMoneyLent).ToString("0.00");
+            }
+            else
+            {
+                txtMoneyLent.Text = loan.ToString("0.00");
+            }
+
+            txtMoneyLent.SelectionStart = txtMoneyLent.Text.Length - 3;
+
+            panel1.Enabled = double.Parse(txtMoneyLent.Text) > 0;
             Console.WriteLine("panel1 ENabled: " + (txtMoneyLent.Text.Length > 0));
             updateLoanBreakdown();
             updateAddAccountStatus();
