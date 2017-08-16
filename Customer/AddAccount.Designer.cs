@@ -59,11 +59,13 @@
             // txtMoneyLent
             // 
             this.txtMoneyLent.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMoneyLent.Location = new System.Drawing.Point(77, 43);
+            this.txtMoneyLent.ForeColor = System.Drawing.Color.Indigo;
+            this.txtMoneyLent.Location = new System.Drawing.Point(88, 43);
             this.txtMoneyLent.MaxLength = 9;
             this.txtMoneyLent.Name = "txtMoneyLent";
             this.txtMoneyLent.Size = new System.Drawing.Size(185, 31);
             this.txtMoneyLent.TabIndex = 0;
+            this.txtMoneyLent.Text = "0.00";
             this.txtMoneyLent.TextChanged += new System.EventHandler(this.txtMoneyLent_TextChanged);
             this.txtMoneyLent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMoneyLent_KeyDown);
             // 
@@ -84,7 +86,7 @@
             this.rbtn1Month.Location = new System.Drawing.Point(4, 10);
             this.rbtn1Month.Name = "rbtn1Month";
             this.rbtn1Month.Size = new System.Drawing.Size(81, 22);
-            this.rbtn1Month.TabIndex = 4;
+            this.rbtn1Month.TabIndex = 1;
             this.rbtn1Month.TabStop = true;
             this.rbtn1Month.Text = "1 Month";
             this.rbtn1Month.UseVisualStyleBackColor = true;
@@ -96,7 +98,7 @@
             this.rbtn3Months.Location = new System.Drawing.Point(91, 10);
             this.rbtn3Months.Name = "rbtn3Months";
             this.rbtn3Months.Size = new System.Drawing.Size(87, 22);
-            this.rbtn3Months.TabIndex = 4;
+            this.rbtn3Months.TabIndex = 2;
             this.rbtn3Months.Text = "3 Months";
             this.rbtn3Months.UseVisualStyleBackColor = true;
             this.rbtn3Months.CheckedChanged += new System.EventHandler(this.rbtn3Months_CheckedChanged);
@@ -107,7 +109,7 @@
             this.rbtn6Months.Location = new System.Drawing.Point(186, 10);
             this.rbtn6Months.Name = "rbtn6Months";
             this.rbtn6Months.Size = new System.Drawing.Size(87, 22);
-            this.rbtn6Months.TabIndex = 4;
+            this.rbtn6Months.TabIndex = 3;
             this.rbtn6Months.Text = "6 Months";
             this.rbtn6Months.UseVisualStyleBackColor = true;
             this.rbtn6Months.CheckedChanged += new System.EventHandler(this.rbtn6Months_CheckedChanged);
@@ -183,38 +185,43 @@
             // 
             // btnAddAccount
             // 
+            this.btnAddAccount.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.btnAddAccount.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.btnAddAccount.Enabled = false;
             this.btnAddAccount.Location = new System.Drawing.Point(50, 559);
             this.btnAddAccount.Name = "btnAddAccount";
             this.btnAddAccount.Size = new System.Drawing.Size(106, 48);
-            this.btnAddAccount.TabIndex = 14;
+            this.btnAddAccount.TabIndex = 7;
             this.btnAddAccount.Text = "Add Account";
-            this.btnAddAccount.UseVisualStyleBackColor = true;
+            this.btnAddAccount.UseVisualStyleBackColor = false;
             this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
             // btnCancel
             // 
+            this.btnCancel.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.btnCancel.Location = new System.Drawing.Point(209, 559);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 48);
-            this.btnCancel.TabIndex = 14;
+            this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
             // 
             // txtCardNumber
             // 
+            this.txtCardNumber.ForeColor = System.Drawing.Color.Indigo;
             this.txtCardNumber.Location = new System.Drawing.Point(134, 334);
             this.txtCardNumber.Name = "txtCardNumber";
             this.txtCardNumber.Size = new System.Drawing.Size(102, 23);
-            this.txtCardNumber.TabIndex = 16;
+            this.txtCardNumber.TabIndex = 4;
             this.txtCardNumber.TextChanged += new System.EventHandler(this.txtCardNumber_TextChanged);
             // 
             // txtBank
             // 
+            this.txtBank.ForeColor = System.Drawing.Color.Indigo;
             this.txtBank.Location = new System.Drawing.Point(134, 365);
             this.txtBank.Name = "txtBank";
             this.txtBank.Size = new System.Drawing.Size(102, 23);
-            this.txtBank.TabIndex = 16;
+            this.txtBank.TabIndex = 5;
             this.txtBank.TextChanged += new System.EventHandler(this.txtBank_TextChanged);
             // 
             // label4
@@ -237,13 +244,14 @@
             // 
             // btnAddCard
             // 
+            this.btnAddCard.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.btnAddCard.Enabled = false;
             this.btnAddCard.Location = new System.Drawing.Point(241, 334);
             this.btnAddCard.Name = "btnAddCard";
             this.btnAddCard.Size = new System.Drawing.Size(74, 56);
-            this.btnAddCard.TabIndex = 18;
+            this.btnAddCard.TabIndex = 6;
             this.btnAddCard.Text = "Add Card";
-            this.btnAddCard.UseVisualStyleBackColor = true;
+            this.btnAddCard.UseVisualStyleBackColor = false;
             this.btnAddCard.Click += new System.EventHandler(this.btnAddCard_Click);
             // 
             // dgvCards
@@ -251,6 +259,7 @@
             this.dgvCards.AllowUserToAddRows = false;
             this.dgvCards.AllowUserToDeleteRows = false;
             this.dgvCards.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCards.BackgroundColor = System.Drawing.Color.SlateBlue;
             this.dgvCards.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCards.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -270,6 +279,7 @@
             this.dgvCards.RowTemplate.Height = 24;
             this.dgvCards.Size = new System.Drawing.Size(281, 145);
             this.dgvCards.TabIndex = 19;
+            this.dgvCards.TabStop = false;
             // 
             // Column1
             // 

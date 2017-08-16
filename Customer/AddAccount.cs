@@ -43,7 +43,7 @@ namespace Customer
             else
                 interestRate = 0.07;
 
-            double moneyLent = int.Parse(txtMoneyLent.Text);
+            double moneyLent = double.Parse(txtMoneyLent.Text);
             double totalBalance = dh.getTotalBalanceOfCustomer(customerID);
 
             
@@ -53,7 +53,7 @@ namespace Customer
                 return;
             }
 
-            bool createAccSuccess = dh.addAccount(customerID, int.Parse(txtMoneyLent.Text), DateTime.Now.ToString("yyyy-MM-dd"), "Active", interestRate); //Add account
+            bool createAccSuccess = dh.addAccount(customerID, double.Parse(txtMoneyLent.Text), DateTime.Now.ToString("yyyy-MM-dd"), "Active", interestRate); //Add account
 
             int accountID = dh.getLastInsertedIDOfAccounts();
             
@@ -107,8 +107,8 @@ namespace Customer
         {
             bool isNum = (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9);
             bool isBack = e.KeyCode == Keys.Back;
-
-            if (!(isNum || isBack))
+            bool isPeriod = (e.KeyCode == Keys.OemPeriod) && !(txtMoneyLent.Text.Contains(".")); //ONLY ACCEPTS ONE DECIMAL POINT
+            if (!(isNum || isBack || isPeriod))
                 e.SuppressKeyPress = true;
         }
 

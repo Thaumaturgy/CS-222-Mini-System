@@ -190,14 +190,23 @@ namespace Customer
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Registration regis = new Registration();
-            regis.Show();
+            AddCustomer ac = new AddCustomer();
+            DialogResult dr = ac.ShowDialog();
+
+            if (dr == DialogResult.OK)
+                loadCustomersTable();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            loadSearchCustomer(txtSearchFN.Text, txtSearchLN.Text, rbtnActive.Checked);
+            string fn = txtSearchFN.Text;
+            string ln = txtSearchLN.Text;
+            if (txtSearchFN.Text == "First Name")
+                fn = "";
+            if (txtSearchLN.Text == "Last Name")
+                ln = "";
+
+            loadSearchCustomer(fn, ln, rbtnActive.Checked);
 
 
         }
@@ -275,14 +284,12 @@ namespace Customer
 
         private void txtTelNum_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)) && e.KeyCode != Keys.Back)
-                e.SuppressKeyPress = true;
+
         }
 
         private void txtPNum_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!((e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)) && e.KeyCode != Keys.Back)
-                e.SuppressKeyPress = true;
+
         }
 
         private void checkBoxEditMode_CheckedChanged(object sender, EventArgs e)
@@ -410,7 +417,7 @@ namespace Customer
                 && cBoxCivilStatus.Text == customerProfile[4] && txtHomeAdd.Text == customerProfile[6]
                 && txtJobDesc.Text == customerProfile[7] && txtWorkingAdd.Text == customerProfile[8]
                 && txtTelNum.Text == customerProfile[9] && txtPNum.Text == customerProfile[10]
-                && txtPIN.Text == customerProfile[11] && dtpBdate.Value == dh.getBDate(customerPIN))  && txtPIN.Text.Length == 4;
+                && txtPIN.Text == customerProfile[11] && dtpBdate.Value == dh.getBDate(customerPIN)) && txtPIN.Text.Length == 4; //&& txtTelNum.Text.Length == 7 && txtPNum.Text.Length == 11;
 
             //Returns !(allFieldsTheSame);
         }
@@ -513,6 +520,94 @@ namespace Customer
         {
             Login login = new Login();
             login.Show();
+        }
+
+        private void txtSearchFN_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                btnSearch_Click(sender, e);
+            }
+        }
+
+        private void txtBoxes_Enter(object sender, EventArgs e)
+        {
+
+            TextBox send = (TextBox) sender;
+            send.BackColor = Color.DarkSlateGray;
+        }
+
+        private void txtBoxes_Leave(object sender, EventArgs e)
+        {
+            TextBox send = (TextBox)sender;
+            send.BackColor = Color.SteelBlue;
+        }
+
+        private void cBoxes_Enter(object sender, EventArgs e)
+        {
+            ComboBox send = (ComboBox)sender;
+            send.BackColor = Color.DarkSlateGray;
+        }
+
+        private void cBoxCivilStatus_Leave(object sender, EventArgs e)
+        {
+            ComboBox send = (ComboBox)sender;
+            send.BackColor = Color.SteelBlue;
+        }
+
+        private void lblPIN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblBirthDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSearchFN_Enter(object sender, EventArgs e)
+        {
+            if (txtSearchFN.Text == "First Name")
+            {
+                txtSearchFN.Text = "";
+                txtSearchFN.ForeColor = Color.White;
+            }
+        }
+
+        private void txtSearchLN_Enter(object sender, EventArgs e)
+        {
+            if (txtSearchLN.Text == "Last Name")
+            {
+                txtSearchLN.Text = "";
+                txtSearchLN.ForeColor = Color.White;
+            }
+        }
+
+        private void txtSearchFN_Leave(object sender, EventArgs e)
+        {
+            if (txtSearchFN.Text == "")
+            {
+                txtSearchFN.Text = "First Name";
+                txtSearchFN.ForeColor = Color.LightGray;
+            }
+        }
+
+        private void txtSearchLN_Leave(object sender, EventArgs e)
+        {
+            if (txtSearchLN.Text == "")
+            {
+                txtSearchLN.Text = "Last Name";
+                txtSearchLN.ForeColor = Color.LightGray;
+            }
+        }
+
+        private void txtTelNum_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            bool isNum = (e.KeyCode >= Keys.D0 && e.KeyCode <= Keys.D9) || (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9);
+            bool isBack = e.KeyCode == Keys.Back;
+
+            if (!(isNum || isBack))
+                e.SuppressKeyPress = true;
         }
     }
 }

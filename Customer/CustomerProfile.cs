@@ -77,7 +77,7 @@ namespace Customer
                 panelBreakdown.Visible = true;*/
 
             lblEntryDate.Text = "Entry Date: " + dh.getEntryDate(accountID).ToString("MM-dd-yyyy");
-            lblInterestRate.Text = "Interest Rate: " + accountDetails[5];
+            lblInterestRate.Text = "Interest Rate: " + (double.Parse(accountDetails[5])*100) + "%";
             lblMoneyLent.Text = "Money Lent: " + accountDetails[2];
             lblStatus.Text = accountDetails[4];
             lblInterest.Text = "Interest: " + dh.getInterestAmount(accountID);

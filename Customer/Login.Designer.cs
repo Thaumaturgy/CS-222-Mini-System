@@ -56,7 +56,7 @@
             this.txtboxLogin.Font = new System.Drawing.Font("Trebuchet MS", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtboxLogin.ForeColor = System.Drawing.Color.BlueViolet;
             this.txtboxLogin.Location = new System.Drawing.Point(80, 128);
-            this.txtboxLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtboxLogin.Margin = new System.Windows.Forms.Padding(4);
             this.txtboxLogin.MaxLength = 4;
             this.txtboxLogin.Name = "txtboxLogin";
             this.txtboxLogin.Size = new System.Drawing.Size(189, 43);
@@ -73,7 +73,7 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.ForeColor = System.Drawing.Color.AliceBlue;
             this.btnLogin.Location = new System.Drawing.Point(121, 199);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(94, 43);
             this.btnLogin.TabIndex = 2;
@@ -118,9 +118,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Login";
             this.Opacity = 0.9D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.menuStrip1.ResumeLayout(false);
